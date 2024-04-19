@@ -1,2 +1,2 @@
 # Licenciatura en Informática - Trabajos y actividades varios
-*Creado por _Federico Dobal_ [@fdDbl]*
+*Creado por __Federico Dobal__ [@fdDbl]*
