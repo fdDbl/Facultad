@@ -1,4 +1,4 @@
-program Ejercicio3;
+program uno;
     procedure suma(num1: integer; var num2:integer);
     begin
         num2 := num1 + num2;
