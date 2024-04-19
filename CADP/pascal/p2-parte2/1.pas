@@ -1,5 +1,5 @@
 program Ejercicio3;
-    procedure suma(var num1: integer; var num2:integer);
+    procedure suma(num1: integer; var num2:integer);
     begin
         num2 := num1 + num2;
         num1 := 0;
