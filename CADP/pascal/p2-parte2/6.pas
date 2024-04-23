@@ -1,29 +1,34 @@
 program seis;
+Uses math;
 var
     i:integer;
-    precio:integer;
+    precio:real;
     code:integer;
     tipo:string;
-    max:integer;
-    precioMasB1:integer;
-    precioMasB2:integer;
+    max:real;
+    precioMasB1:real;
+    precioMasB2:real;
     prodCodeMasB1:integer;
     prodCodeMasB2:integer;
     codeMasBarato1:integer;
     codeMasBarato2:integer;
     codePantMasCaro:integer;
-    totalPrecios:integer;
-    cantProd:integer;
+    totalPrecios:real;
+    cantProd:real;
     promedio:real;
 
-    procedure leer(var precio:integer; var code:integer; var tipo:string);
+    procedure leer();
         begin
+            writeln('');
+            writeln('Ingrese el precio del producto ',i,':');
             readln(precio);
+            writeln('Ingrese el codigo del producto ',i,':');
             readln(code);
+            writeln('Ingrese el tipo del producto ',i,' (pantalon, remera, camisa, medias, campera, etc.):');
             readln(tipo);
         end;
 
-    procedure codeMasBaratos(precio:integer; code:integer; var precioMasB1:integer; var precioMasB2:integer;
+    procedure codeMasBaratos(precio:real; code:integer; var precioMasB1:real; var precioMasB2:real;
                             var codeMasBarato1:integer; var codeMasBarato2:integer);
         begin
             if(precio<precioMasB1) then begin
@@ -38,7 +43,7 @@ var
             end;
         end;
 
-    procedure pantMasCaro(var precio:integer; var code:integer; var tipo:string ; var max:integer);
+    procedure pantMasCaro(var precio:real; var code:integer; var tipo:string ; var max:real);
         begin
             if(tipo='pantalon')and(precio>max) then
                 begin
@@ -47,7 +52,7 @@ var
                 end
         end;
 
-    procedure total(precio:integer);
+    procedure total(precio:real);
         begin
             totalPrecios:=totalPrecios+precio;
             cantProd:=cantProd+1;
@@ -55,17 +60,18 @@ var
 
     procedure precioPromedio();
         begin
-            promedio:=totalPrecios DIV cantProd;
+            promedio:=totalPrecios / cantProd;
         end;
     
     procedure informar(codePantMasCaro:integer; prodCodeMasB1:integer; prodCodeMasB2:integer; precioPromedio:real);
         begin
+            writeln('');
             writeln('El codigo del pantalon mas caro es: ',codePantMasCaro);
-            writeln('El codigo de los dos productos mas baratos es: ',prodCodeMasB1,' y ',prodCodeMasB2);
+            writeln('Los codigos de los dos productos mas baratos son: ',prodCodeMasB1,' y ',prodCodeMasB2);
             writeln('El precio promedio es: ',precioPromedio);
         end;    
     procedure repetir();
-        begin
+        begin {INICIALIZACION DE VARIABLES}
             max:=-1;
             precioMasB1:=32767;
             precioMasB2:=32767;
@@ -74,8 +80,8 @@ var
             totalPrecios:=0;
             cantProd:=0;
             promedio:=0;
-            for i:= 1 to 3 do begin
-                leer(precio,code,tipo);
+            for i:= 1 to 100 do begin
+                leer();
                 codeMasBaratos(precio,code,precioMasB1,precioMasB2,codeMasBarato1,codeMasBarato2);
                 pantMasCaro(precio,code,tipo,max);
                 total(precio);
