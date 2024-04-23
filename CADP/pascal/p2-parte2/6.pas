@@ -25,8 +25,7 @@ procedure leer();
             readln(tipo);
         end;
 
-procedure codeMasBaratos(precio:real; code:integer; var precioMasB1:real; var precioMasB2:real;
-                            var codeMasBarato1:integer; var codeMasBarato2:integer);
+procedure codeMasBaratos(precio:real; code:integer; var precioMasB1:real; var precioMasB2:real; var codeMasBarato1:integer; var codeMasBarato2:integer);
         begin
             if(precio<precioMasB1) then begin
                 precioMasB1:=precio;
@@ -38,7 +37,7 @@ procedure codeMasBaratos(precio:real; code:integer; var precioMasB1:real; var pr
             end;
         end;
 
-procedure pantMasCaro(var precio:real; var code:integer; var tipo:string ; var max:real);
+procedure pantMasCaro(var precio:real; var code:integer; var tipo:string; var max:real);
         begin
             if(tipo='pantalon')and(precio>max) then
                 begin
