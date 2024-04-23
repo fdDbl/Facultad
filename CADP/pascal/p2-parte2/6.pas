@@ -1,5 +1,4 @@
 program seis;
-Uses math;
 var
     i:integer;
     precio:real;
@@ -17,7 +16,7 @@ var
     cantProd:real;
     promedio:real;
 
-    procedure leer();
+procedure leer();
         begin
             writeln('');
             writeln('Ingrese el precio del producto ',i,':');
@@ -28,7 +27,7 @@ var
             readln(tipo);
         end;
 
-    procedure codeMasBaratos(precio:real; code:integer; var precioMasB1:real; var precioMasB2:real;
+procedure codeMasBaratos(precio:real; code:integer; var precioMasB1:real; var precioMasB2:real;
                             var codeMasBarato1:integer; var codeMasBarato2:integer);
         begin
             if(precio<precioMasB1) then begin
@@ -43,7 +42,7 @@ var
             end;
         end;
 
-    procedure pantMasCaro(var precio:real; var code:integer; var tipo:string ; var max:real);
+procedure pantMasCaro(var precio:real; var code:integer; var tipo:string ; var max:real);
         begin
             if(tipo='pantalon')and(precio>max) then
                 begin
@@ -52,25 +51,25 @@ var
                 end
         end;
 
-    procedure total(precio:real);
+procedure total(precio:real);
         begin
             totalPrecios:=totalPrecios+precio;
             cantProd:=cantProd+1;
         end;
 
-    procedure precioPromedio();
+procedure precioPromedio();
         begin
             promedio:=totalPrecios / cantProd;
         end;
     
-    procedure informar(codePantMasCaro:integer; prodCodeMasB1:integer; prodCodeMasB2:integer; precioPromedio:real);
+procedure informar(codePantMasCaro:integer; prodCodeMasB1:integer; prodCodeMasB2:integer; precioPromedio:real);
         begin
             writeln('');
             writeln('El codigo del pantalon mas caro es: ',codePantMasCaro);
             writeln('Los codigos de los dos productos mas baratos son: ',prodCodeMasB1,' y ',prodCodeMasB2);
             writeln('El precio promedio es: ',precioPromedio);
         end;    
-    procedure repetir();
+procedure repetir();
         begin {INICIALIZACION DE VARIABLES}
             max:=-1;
             precioMasB1:=32767;
@@ -88,7 +87,7 @@ var
             end;
         end;
 
-    procedure programa();
+procedure programa();
         begin
             repetir();
             precioPromedio();
