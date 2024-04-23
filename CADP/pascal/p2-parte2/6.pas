@@ -7,8 +7,6 @@ var
     max:real;
     precioMasB1:real;
     precioMasB2:real;
-    prodCodeMasB1:integer;
-    prodCodeMasB2:integer;
     codeMasBarato1:integer;
     codeMasBarato2:integer;
     codePantMasCaro:integer;
@@ -33,12 +31,10 @@ procedure codeMasBaratos(precio:real; code:integer; var precioMasB1:real; var pr
             if(precio<precioMasB1) then begin
                 precioMasB1:=precio;
                 codeMasBarato1:=code;  
-                prodCodeMasB1:=codeMasBarato1;
             end
             else if(precio<precioMasB2) then begin
                 precioMasB2:=precio;
                 codeMasBarato2:=code; 
-                prodCodeMasB2:=codeMasBarato2;
             end;
         end;
 
@@ -80,7 +76,7 @@ procedure repetir();
             totalPrecios:=0;
             cantProd:=0;
             promedio:=0;
-            for i:= 1 to 100 do begin
+            for i:= 1 to 3 do begin
                 leer();
                 codeMasBaratos(precio,code,precioMasB1,precioMasB2,codeMasBarato1,codeMasBarato2);
                 pantMasCaro(precio,code,tipo,max);
