@@ -69,6 +69,7 @@ procedure informar(codePantMasCaro:integer; prodCodeMasB1:integer; prodCodeMasB2
             writeln('Los codigos de los dos productos mas baratos son: ',prodCodeMasB1,' y ',prodCodeMasB2);
             writeln('El precio promedio es: ',precioPromedio);
         end;    
+
 procedure repetir();
         begin {INICIALIZACION DE VARIABLES}
             max:=-1;
