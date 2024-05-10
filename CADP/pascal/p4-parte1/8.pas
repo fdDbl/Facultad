@@ -1,5 +1,7 @@
 program ocho;
+
 type
+
     vector1 = array[1 .. 10] of integer;
 var
     nDecimales:vector1;
@@ -7,10 +9,8 @@ var
     i:integer;
     ultDigit:integer;
     maxDigit:integer;
-    maxRepeatedDigit:integre;
+    maxRepeatedDigit:integer;
 begin
-    for i := 1 to 10 do 
-        nDecimales[i] := 0;
 
     write('Ingrese un numero: ');
     readln(num);
@@ -26,9 +26,11 @@ begin
 
     maxRepeatedDigit:=0;
     for i:= 1 to 10 do
-    if(nDecimales[i]>maxDigit) then
+    if(nDecimales[i]>maxRepeatedDigit) then
+        begin
         maxRepeatedDigit:=nDecimales[i];
         maxDigit:=i;
+        end;
 
     for i := 1 to 10 do 
         if(nDecimales[i]<>0) then begin
