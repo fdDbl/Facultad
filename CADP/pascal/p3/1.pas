@@ -22,12 +22,12 @@ end;
 
 procedure leer(var alu : alumno);
 begin
-    writeln('Ingrese el codigo del alumno');
-    read(alu.codigo);
+    write('Ingrese el codigo del alumno: ');
+    readln(alu.codigo);
     if (alu.codigo <> 0) then begin
-        writeln('Ingrese el nombre del alumno');
+        write('Ingrese el nombre del alumno: ');
         readln(alu.nombre);
-        writeln('Ingrese el promedio del alumno');
+        write('Ingrese el promedio del alumno: ');
         readln(alu.promedio);
         analizar(maxPromedio,nombreMaxPromedio);
     end;
