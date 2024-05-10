@@ -7,6 +7,7 @@ var
     i:integer;
     ultDigit:integer;
     maxDigit:integer;
+    maxRepeatedDigit:integre;
 begin
     for i := 1 to 10 do 
         nDecimales[i] := 0;
@@ -23,9 +24,10 @@ begin
         readln(num);
     end;
 
-    maxDigit:=0;
+    maxRepeatedDigit:=0;
     for i:= 1 to 10 do
     if(nDecimales[i]>maxDigit) then
+        maxRepeatedDigit:=nDecimales[i];
         maxDigit:=i;
 
     for i := 1 to 10 do 
