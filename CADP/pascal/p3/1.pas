@@ -1,4 +1,3 @@
-// 1) a.
 program Registros;
 type
         str20 = string[20];
@@ -32,8 +31,6 @@ begin
         analizar(maxPromedio,nombreMaxPromedio);
     end;
 end;
-
-
 begin
     maxPromedio:=0;
     cantA:=0;
