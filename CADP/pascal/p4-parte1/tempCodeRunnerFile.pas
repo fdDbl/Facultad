@@ -1,1 +1,0 @@
-    analizarDatos(galaxia,galaxiaTipo);
