@@ -6,9 +6,10 @@ type
         pais : string;
         codeProyecto : integer;
         proyecto : string;
+        montoProyecto : real;
         codeRol : integer;
         rol : string;
-        horas : real;
+        horas : integer;
         salario : real;
     end;
     vector1 = array[1 .. dimF1] of registro1;
@@ -17,78 +18,140 @@ var
     vEmpleados : vector1;
     i : integer;
     dimL : integer;
-procedure convertir(vectorEmp:vector1);
+    dimP : integer;
+
+procedure convertir(var vectorEmp : vector1);
 begin
     if(vectorEmp[i].codeRol = 1) then begin
-        vectorEmp[i].rol:='Analista funcional';
-        vectorEmp[i].salario:=vectorEmp[i].horas * 35.20;
+        vectorEmp[i].rol := 'Analista funcional';
+        vectorEmp[i].salario := (vectorEmp[i].horas * 35.20);
         end
         else if(vectorEmp[i].codeRol = 2) then begin
-            vectorEmp[i].rol:='Programador';
-            vectorEmp[i].salario:=vectorEmp[i].horas * 27.45;
+            vectorEmp[i].rol := 'Programador';
+            vectorEmp[i].salario := (vectorEmp[i].horas * 27.45);
         end
         else if(vectorEmp[i].codeRol = 3) then begin
-            vectorEmp[i].rol:='Administrador de bases de datos';
-            vectorEmp[i].salario:=vectorEmp[i].horas * 31.03;
+            vectorEmp[i].rol := 'Administrador de bases de datos';
+            vectorEmp[i].salario := (vectorEmp[i].horas * 31.03);
         end
         else if(vectorEmp[i].codeRol = 4) then begin
-            vectorEmp[i].rol:='Arquitecto de software';
-            vectorEmp[i].salario:=vectorEmp[i].horas * 44.28;
+            vectorEmp[i].rol := 'Arquitecto de software';
+            vectorEmp[i].salario := (vectorEmp[i].horas * 44.28);
         end
         else if(vectorEmp[i].codeRol = 5) then begin
-            vectorEmp[i].rol:='Administrador de redes y seguridad';
-            vectorEmp[i].salario:=vectorEmp[i].horas * 39.87;  
+            vectorEmp[i].rol := 'Administrador de redes y seguridad';
+            vectorEmp[i].salario := (vectorEmp[i].horas * 39.87);  
         end;
-        writeln(vectorEmp[i].pais);
-        writeln(vectorEmp[i].codeProyecto);
-        writeln(vectorEmp[i].proyecto);
-        writeln(vectorEmp[i].codeRol);
-        writeln(vectorEmp[i].rol);
-        writeln(vectorEmp[i].horas);
-        writeln(vectorEmp[i].salario);
 end;
 
-procedure leer(vectorEmp:vector1);
+procedure leer(var vectorEmp : vector1);
 var
     ok : boolean;
 begin
     i := 1;
     ok := true;
-    writeln('Por favor, ingrese la información de los desarrolladores de 2017:');
+    writeln('Por favor, ingrese la informacion de los desarrolladores de 2017:');
     while (ok) and (i <= dimF1) do begin
         writeln('Pais de residencia: '); readln(vectorEmp[i].pais);
-        writeln('Codigo de proyecto: '); readln(vectorEmp[i].codeProyecto);
+        writeln('Codigo de proyecto (1 - 1000): '); readln(vectorEmp[i].codeProyecto);
         if(vectorEmp[i].codeProyecto <> -1) then begin
-            ok:=true;
+            ok := true;
+            dimL := i;
             writeln('Nombre de proyecto: '); readln(vectorEmp[i].proyecto);
-            writeln('Codigo de rol: '); readln(vectorEmp[i].codeRol);
+            writeln('Codigo de rol (1 - 5): '); readln(vectorEmp[i].codeRol);
             writeln('Horas trabajadas: '); readln(vectorEmp[i].horas);
             convertir(vectorEmp);
-            dimL := i;
             i := i + 1;
         end
         else
-            ok:=false;
+            ok := false;
         end;
     end;
 
-procedure inversionArg(vectorEmp:vector1);
+function inversionArg(vectorEmp:vector1) : real;
 var
-  cantArg:integer;
-  cantInvert:real;
+  cantInvert : real;
+  pais : string;
 begin
-  cantArg := 0;
-  cantInvert := 0;
-  for i := 1 to dimL do begin
-    if(vectorEmp[i].pais = 'argentina') then begin
-      cantArg := cantArg + 1;
-      cantInvert := cantInvert + vectorEmp[i].salario;
+    pais := 'argentina';
+    cantInvert := 0;
+    for i := 1 to dimL do begin
+        if(vectorEmp[i].pais = pais) then begin
+            cantInvert := (cantInvert + vectorEmp[i].salario);
+        end;
     end;
-  end;
-    writeLn('El monto total invertido en desarrolladores con residencia en Argentina es de: ');
-    writeLn(cantInvert);
+    inversionArg := cantInvert;
 end;
+
+function horasAdmins(vectorEmp : vector1) : integer;
+var
+    cantHoras : integer;
+begin
+    cantHoras := 0;
+    for i := 1 to dimL do begin
+        if(vectorEmp[i].rol = 'Administrador de bases de datos') then
+            cantHoras := cantHoras + vectorEmp[i].horas;
+    end;
+    horasAdmins := cantHoras;
+end;
+
+function menorMonto(vectorEmp : vector1) : integer;
+var
+    min : real;
+    code : integer;
+begin
+    min := 9999999;
+    for i := 1 to dimL do begin
+        if(vectorEmp[i].salario < min) then begin
+            min := vectorEmp[i].salario;
+            code := vectorEmp[i].codeProyecto;
+        end;    
+    end;
+    menorMonto := code;
+end;
+
+procedure arquiProyects(vectorEmp:vector1);
+type
+    vProyectos = array[1 .. 1000] of integer;
+var
+    vectorProyectos : vProyectos;
+    codePActual : integer;
+begin
+    for i := 1 to 1000 do begin
+        vectorProyectos[i] := 0;
+    end;
+    for i := 1 to dimL do begin
+        if(vectorEmp[i].codeRol = 4) then begin
+            codePActual := vectorEmp[i].codeProyecto;
+            vectorProyectos[codePActual] := vectorProyectos[codePActual] + 1;
+        end;
+    end;
+
+    writeLn('La cantidad de Arquitectos de software de cada proyecto es:');
+    for i := 1 to 1000 do begin
+        writeLn('Proyecto ',i,': ',vectorProyectos[i],' arquitecto(s) de software.')
+    end;
+end;
+
+procedure informar(vectorEmp:vector1);
+var
+    funcInvert : real;
+    funcHoras : integer;
+    funcMin : integer;
+begin
+    funcInvert := inversionArg(vectorEmp);
+    writeLn('El monto total invertido en desarrolladores con residencia en Argentina es de: $', funcInvert); writeLn('');
+
+    funcHoras := horasAdmins(vectorEmp);
+    writeLn('La cantidad total de horas trabajadas por Administradores de bases de datos son: ', funcHoras, ' horas'); writeLn('');
+
+    funcMin := menorMonto(vectorEmp);
+    writeLn('El codigo del proyecto con menor monto invertido es: ', funcMin); writeLn('');
+
+    arquiProyects(vectorEmp);
+end;
+
 begin
     leer(vEmpleados);
-    inversionArg(vEmpleados);
+    informar(vEmpleados);
 end.
