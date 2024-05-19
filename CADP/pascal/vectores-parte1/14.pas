@@ -90,5 +90,5 @@ begin
 end;
 begin
     leer(vEmpleados);
-    inversionArg(vEmpleados);
+    inversionArg(vEmpleados); 
 end.
