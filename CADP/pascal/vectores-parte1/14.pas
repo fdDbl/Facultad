@@ -38,6 +38,13 @@ begin
             vectorEmp[i].rol:='Administrador de redes y seguridad';
             vectorEmp[i].salario:=vectorEmp[i].horas * 39.87;
         end;
+        writeln(vectorEmp[i].pais);
+        writeln(vectorEmp[i].codeProyecto);
+        writeln(vectorEmp[i].proyecto);
+        writeln(vectorEmp[i].codeRol);
+        writeln(vectorEmp[i].rol);
+        writeln(vectorEmp[i].horas);
+        writeln(vectorEmp[i].salario);
 end;
 
 procedure leer(vectorEmp:vector1);
