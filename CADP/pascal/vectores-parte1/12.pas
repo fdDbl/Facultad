@@ -9,7 +9,7 @@ program doce;
     c. La cantidad de galaxias no irregulares que se encuentran a menos de 1000 pc.
     d. El nombre de las dos galaxias con mayor masa y el de las dos galaxias con menor masa. }
 const
-    dimF = 53;
+    dimF = 5;
 type
     kg = real;
     pc = real;
