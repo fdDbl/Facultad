@@ -1,6 +1,6 @@
 program catorce;
 const
-    dimF1 = 3;
+    dimF1 = 1000;
 type
     registro1 = record
         pais : string;
@@ -16,6 +16,7 @@ var
     tEmpleados : registro1;
     vEmpleados : vector1;
     i : integer;
+    dimL : integer;
 procedure convertir(vectorEmp:vector1);
 begin
     if(vectorEmp[i].codeRol = 1) then begin
@@ -36,13 +37,19 @@ begin
         end
         else if(vectorEmp[i].codeRol = 5) then begin
             vectorEmp[i].rol:='Administrador de redes y seguridad';
-            vectorEmp[i].salario:=vectorEmp[i].horas * 39.87;
+            vectorEmp[i].salario:=vectorEmp[i].horas * 39.87;  
         end;
+        writeln(vectorEmp[i].pais);
+        writeln(vectorEmp[i].codeProyecto);
+        writeln(vectorEmp[i].proyecto);
+        writeln(vectorEmp[i].codeRol);
+        writeln(vectorEmp[i].rol);
+        writeln(vectorEmp[i].horas);
+        writeln(vectorEmp[i].salario);
 end;
 
 procedure leer(vectorEmp:vector1);
 var
-    i : integer;
     ok : boolean;
 begin
     i := 1;
@@ -57,12 +64,31 @@ begin
             writeln('Codigo de rol: '); readln(vectorEmp[i].codeRol);
             writeln('Horas trabajadas: '); readln(vectorEmp[i].horas);
             convertir(vectorEmp);
+            dimL := i;
             i := i + 1;
         end
         else
             ok:=false;
         end;
     end;
+
+procedure inversionArg(vectorEmp:vector1);
+var
+  cantArg:integer;
+  cantInvert:real;
+begin
+  cantArg := 0;
+  cantInvert := 0;
+  for i := 1 to dimL do begin
+    if(vectorEmp[i].pais = 'argentina') then begin
+      cantArg := cantArg + 1;
+      cantInvert := cantInvert + vectorEmp[i].salario;
+    end;
+  end;
+    writeLn('El monto total invertido en desarrolladores con residencia en Argentina es de: ');
+    writeLn(cantInvert);
+end;
 begin
     leer(vEmpleados);
+    inversionArg(vEmpleados);
 end.
