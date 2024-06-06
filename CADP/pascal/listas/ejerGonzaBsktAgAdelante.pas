@@ -21,7 +21,7 @@ begin
     nue^.sig := L;
     L:=nue;
 end;
-procedure leerDato(var jug:jugador; var seguir:boolean);
+procedure leerDato(var jug:jugador);
 begin
     writeln('DNI del jugador (sin puntos):');
     readln(jug.dni);
@@ -31,18 +31,15 @@ begin
         writeln('Estatura del jugador (cm):');
         readln(jug.altura);
     end
-    else if(jug.dni = 0) then
-        seguir:=false;
 end;
 procedure cargarLista(var L:lista);
 var
     j:jugador;
-    s:boolean;
 begin
-    leerDato(j,s);
-    while(s <> false) do begin
+    leerDato(j);
+    while(j.dni <> 0) do begin
         agregarAdelante(L,j);
-        leerDato(j,s);
+        leerDato(j);
     end;
 end;
 function esPar(n:integer):boolean;
