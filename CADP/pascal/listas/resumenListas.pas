@@ -44,14 +44,14 @@
         nuevo:lista; // variable auxiliar de la lista
     begin
         new(nuevo); // se reserva espacio en memoria dinámica para el auxiliar
-        nuevo^.dato:=r; // el dato del nodo auxiliar es el registro (como siempre)
+        nuevo^.dato:=r; // el dato del nodo auxiliar es el registro
         nuevo^.sig:=nil; // el siguiente del nodo auxiliar es nil
 
         if(L = nil) then // si la lista está vacía...
-            L:=nuevo // ...L toma la dirección del nuevo nodo creado recién
+            L:=nuevo // ...L apunta al nuevo nodo (por ahora, la cabeza de la lista)
         else begin
-            nuevo^.sig:=L; // sino, al nuevo nodo en su dirección siguiente, le escribo el anterior nodo creado
-            L:=nuevo;
+            nuevo^.sig:=L; // sino, el nuevo nodo apunta a donde apunta L (la cabeza)
+            L:=nuevo; // pero como estamos agregando adelante, ahora L va a apuntar al nodo nuevo
         end;
     end;
 
