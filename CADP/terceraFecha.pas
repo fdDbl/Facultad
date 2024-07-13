@@ -2,7 +2,7 @@ program CONMEBOL;
 const
     cantPaises = 1; cPart = 10; cI = 4;
 type
-    sP = 0..cPart+1; sI = 1..cI;
+    sP = 1..cPart; sI = 1..cI;
     participacion = record
         anio : integer;
         instF : sI;
