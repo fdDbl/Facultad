@@ -1,1 +1,0 @@
-program seis; 
