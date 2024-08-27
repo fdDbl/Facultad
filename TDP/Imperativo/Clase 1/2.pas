@@ -82,7 +82,9 @@ begin
     cargarVector(v1,dimL);
     imprimirVector(v1,dimL);
     ordenarInsercion(v1,dimL);
+    writeln('ORDENACION POR INSERCION')
     imprimirVector(v1,dimL);
     ordenarSeleccion(v1,dimL);
+    writeln('ORDENACION POR SELECCION')
     imprimirVector(v1,dimL);
 end.
