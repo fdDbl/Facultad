@@ -74,45 +74,25 @@ begin
     end;
 end;
 
-procedure insertarLISBN(var pI: listaISBN; isbn: integer);
-var
-    nuevo, act, ant: listaISBN;
+procedure insertarLISBN(var L:listaISBN; isbn:integer);
 begin
-    new(nuevo);
-    nuevo^.datoISBN.isbn := isbn;
-    nuevo^.datoISBN.cant := 1;
-    act := pI;
-    ant := pI;
-    while (act <> nil) and (act^.datoISBN.isbn < isbn) do
-    begin
-        ant := act;
-        act := act^.sig;
-    end;
-    if (act <> nil) and (act^.datoISBN.isbn = isbn) then
-    begin
-        act^.datoISBN.cant := act^.datoISBN.cant + 1;
-        dispose(nuevo);
-    end
-    else
-    begin
-        if (act = ant) then
-            pI := nuevo
-        else
-            ant^.sig := nuevo;
-        nuevo^.sig := act;
-    end;
+
 end;
 
 procedure recorrerLista(L1: lista; var L2: listaISBN);
 var
-    maxP : integer; peorDia : sDias; iD : sDias;
+    maxP : integer; peorDia : sDias; iD : sDias; isbnAct : integer;
     vD : vDias; cantPrestamos : integer; cantPCumpleC : integer; promP : real;
 begin
     maxP := 9999; cantPrestamos := 0; cantPCumpleC := 0;
     for iD := 1 to 31 do vD[iD] := 0;
     while (L1 <> nil) do
         begin
-            insertarLISBN(L2, L1^.dato.isbn);
+            isbnAct := L1^.dato.isbn; 
+            while(L1^.dato.isbn = isbnAct) then begin
+                cantISBNAct := cantISBNAct + 1;
+                insertarLISBN(L2, L1^.dato.isbn);
+            end;
             vD[L1^.dato.dia] := vD[L1^.dato.dia] + 1;
             if(L1^.dato.nro MOD 10 <> 0) and (L1^.dato.nroSocio MOD 10 = 0) then cantPCumpleC := cantPCumpleC + 1;
             cantPrestamos := cantPrestamos + 1;
