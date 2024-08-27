@@ -91,10 +91,14 @@ procedure mejorYPeorPunt(v:vMejoresPunt);
 var
     max,min:real; mejorCode,peorCode:integer; puntAct:real; i:sGeneros; vPelis : vPelisXGenero;
 begin
-    max:=999999; min:=-1;
+    max:=999999; min:=-1; encontre:boolean;
     for i := 1 to cantGeneros do begin
-        while(vPelis[i] <> nil) do begin
-                if(vPelis[i].codP = v[i]) then puntAct:= vPelis[i].puntProm
+        encontre:=false;
+        while(vPelis[i] <> nil)and(encontre=false) do begin
+                if(vPelis[i].codP = v[i]) then begin
+                    puntAct:= vPelis[i].puntProm;
+                    encontre:=true;
+                end
                 else vPelis[i] := vPelis[i] + 1;
         end;
         if(puntAct > min) then begin
