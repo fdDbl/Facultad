@@ -38,8 +38,25 @@ begin
  end;
 end;
 
+Procedure busquedaDicotomica (v: vEnteros; pri,ult: integer; dato:integer; var pos: integer);
 var
-	v1:vEnteros; i:integer;
+	medio:integer;
+begin
+	pos:=-1;
+	medio:=(pri+ult) DIV 2;
+	while(pri<=ult)and(dato<>v[medio]) do begin
+		if(dato<v[medio]) then
+			ult:=medio-1 else
+			pri:=medio+1;
+		medio:=(pri+ult) DIV 2;
+	end;
+	if(pri<=ult) then
+		pos:=medio else
+		pos:=-1;
+end;
+
+var
+	v1:vEnteros; i:integer; valor:integer;
 begin
 	Randomize;
 	enterosRandom(v1);
@@ -49,5 +66,9 @@ begin
 	writeln('----- VECTOR ORDENADO -----');
 	for i := 1 to dimF do writeln(v1[i]);
 	
-	{FALTA BUSQUEDA DICOTOMICA}
+	writeln('Ingrese el valor a buscar:');
+	readln(valor);
+	busquedaDicotomica(v1,1,dimF,valor,i);
+	if(i=-1) then writeln('El valor ingreso no se encuentra.') else
+				  writeln('El valor se encuentra en la posicion ',i,' del vector.');
 end.
