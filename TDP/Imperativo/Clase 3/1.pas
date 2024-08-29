@@ -269,10 +269,10 @@ Begin
   randomize;
   GenerarArbol (a);
   InformarSociosOrdenCreciente (a);
-  InformarSociosOrdenDecreciente (a); {HECHO}
+  InformarSociosOrdenDecreciente (a); {COMPLETADO}
   InformarNumeroSocioConMasEdad (a);
   AumentarEdadNumeroImpar (a);
-  InformarExistenciaNombreSocio (a); {HECHO}
-  InformarCantidadSocios (a); {HECHO}
-  InformarPromedioDeEdad (a); {HECHO} 
+  InformarExistenciaNombreSocio (a); {COMPLETADO}
+  InformarCantidadSocios (a); {COMPLETADO}
+  InformarPromedioDeEdad (a); {COMPLETADO} 
 End.
