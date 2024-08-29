@@ -55,9 +55,9 @@ aleatoriamente. }
            a^.HI:= nil; 
            a^.HD:= nil;
          end
-    else if (elem.numero <= a^.dato.numero) 
+    else if (elem.numero <= a^.dato.numero)
          then InsertarElemento(a^.HI, elem)
-         else InsertarElemento(a^.HD, elem); 
+         else InsertarElemento(a^.HD, elem);
   End;
 
 var unSocio: socio;  
@@ -189,16 +189,82 @@ begin
   writeln;
 end;
 
-procedure InformarExistenciaNombreSocio(a:arbol;n:string);
+procedure InformarExistenciaNombreSocio(a:arbol);
+	
+	function buscarSocio(a:arbol;n:string):boolean;
+	var
+		encontre:boolean;
+    begin
+		encontre:=false;
+		if(a<>nil) then begin
+			if(a^.dato.nombre = n) then encontre := true
+			else if(buscarSocio(a^.HI,n)) or (buscarSocio(a^.HD,n)) then encontre := true;
+		end;
+		buscarSocio:=encontre;
+    end;
 var
-    nom:string;
+	nom:string; ok:boolean;
 begin
-    readln(n);
-    
-    procedure buscarSocio(a:arbol;n:string);
+	writeln();
+	writeln('Ingrese el nombre de socio a buscar:');
+	readln(nom);
+	ok:=buscarSocio(a,nom);
+	
+	if(ok) then begin
+			writeln('Nombre encontrado');
+			writeln;
+			writeln;
+			writeln ('//////////////////////////////////////////////////////////');
+			writeln;
+		end
+		else begin
+			writeln('Nombre no encontrado');
+			writeln;
+			writeln;
+			writeln ('//////////////////////////////////////////////////////////');
+			writeln;
+		end;
 end;
 
-var a: arbol; 
+function TotalSocios(a:arbol):integer;
+begin
+	if(a=nil) then TotalSocios:=0
+	else
+		TotalSocios:= 1 + TotalSocios(a^.HI) + TotalSocios(a^.HD);
+end;
+
+procedure InformarCantidadSocios(a:arbol);
+begin
+	writeln;
+	writeLn('Cantidad de socios: ',TotalSocios(a));
+	writeln;
+    writeln;
+    writeln ('//////////////////////////////////////////////////////////');
+    writeln;
+end;
+
+procedure InformarPromedioDeEdad(a:arbol);
+
+	function TotalEdad(a:arbol):integer;
+	begin
+		if(a=nil) then TotalEdad := 0
+		else
+			TotalEdad := a^.dato.edad + TotalEdad(a^.HI) + TotalEdad(a^.HD);
+	end;
+
+var
+	prom:real;
+begin
+	prom := (TotalSocios(a) / TotalEdad(a));
+	writeln;
+	writeLn('Promedio de edad: ',prom);
+	writeln;
+    writeln;
+    writeln ('//////////////////////////////////////////////////////////');
+    writeln;
+end;
+
+var a: arbol;
 Begin
   randomize;
   GenerarArbol (a);
@@ -206,8 +272,7 @@ Begin
   InformarSociosOrdenDecreciente (a); {HECHO}
   InformarNumeroSocioConMasEdad (a);
   AumentarEdadNumeroImpar (a);
-  InformarExistenciaNombreSocio (a); {COMPLETAR}
-  { InformarCantidadSocios (a); COMPLETAR
-    InformarPromedioDeEdad (a); COMPLETAR
-  }   
+  InformarExistenciaNombreSocio (a); {HECHO}
+  InformarCantidadSocios (a); {HECHO}
+  InformarPromedioDeEdad (a); {HECHO} 
 End.
