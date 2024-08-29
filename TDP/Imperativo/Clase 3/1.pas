@@ -189,7 +189,14 @@ begin
   writeln;
 end;
 
-procedure InformarExistenciaNombreSocio(a:arbol);
+procedure InformarExistenciaNombreSocio(a:arbol;n:string);
+var
+    nom:string;
+begin
+    readln(n);
+    
+    procedure buscarSocio(a:arbol;n:string);
+end;
 
 var a: arbol; 
 Begin
@@ -199,8 +206,8 @@ Begin
   InformarSociosOrdenDecreciente (a); {HECHO}
   InformarNumeroSocioConMasEdad (a);
   AumentarEdadNumeroImpar (a);
-  { InformarExistenciaNombreSocio (a); COMPLETAR
-    InformarCantidadSocios (a); COMPLETAR
+  InformarExistenciaNombreSocio (a); {COMPLETAR}
+  { InformarCantidadSocios (a); COMPLETAR
     InformarPromedioDeEdad (a); COMPLETAR
   }   
 End.
