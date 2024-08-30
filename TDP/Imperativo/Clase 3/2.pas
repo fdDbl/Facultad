@@ -209,34 +209,31 @@ begin
         contarProductos := contarProductos(a^.HI, f) + contarProductos(a^.HD, f);
 end;
 
-function obtenerProductoMasVendido(a: arbol2): integer;
-
-	procedure productoMasVendido(a: arbol2; var maxCodigo: integer; var maxUnidades: integer);
-	begin
-		if (a <> nil) then
-		begin
-			if (a^.dato.cantV > maxUnidades) then
-			begin
-				maxUnidades := a^.dato.cantV;
-				maxCodigo := a^.dato.code;
-			end;
-			productoMasVendido(a^.HI, maxCodigo, maxUnidades);
-			productoMasVendido(a^.HD, maxCodigo, maxUnidades);
-		end;
-	end;
-
+function ProductoMasVendido(a: arbol2): integer;
 var
-    maxCodigo, maxUnidades: integer;
+    maxCodigo: integer;
+    maxCantidad: integer;
+
+    procedure BuscarMayor(a: arbol2; var maxc:integer);
+    begin
+        if a <> nil then
+        begin
+            if a^.dato.cantV > maxCantidad then
+            begin
+                maxc := maxCantidad + a^.dato.cantV;
+                maxCodigo := a^.dato.code;
+            end;
+            BuscarMayor(a^.HI,maxc);
+            BuscarMayor(a^.HD,maxc);
+        end;
+    end;
+
 begin
-    maxUnidades := -1;  
-    maxCodigo := -1;     
-    
-    productoMasVendido(a, maxCodigo, maxUnidades);
-    
-    obtenerProductoMasVendido := maxCodigo;
+    maxCantidad := -1;
+    maxCodigo := -1;
+    BuscarMayor(A,maxCantidad);
+    ProductoMasVendido := maxCodigo;
 end;
-
-
 
 var
 	arb1 : arbol1; arb2 : arbol2; arb3 : arbol3;
@@ -274,6 +271,8 @@ begin
 	write('Mes (1-12): '); readln(fecB.mes);
 	write('Año: '); readln(fecB.anio);
 	writeln('Cantidad de productos vendidos el día ',fecB.dia,'/',fecB.mes,'/',fecB.anio,': ',contarProductos(arb1,fecB));
+	writeln;
 	
-	writeln(obtenerProductoMasVendido(arb2)); {CORREGIR}
+	writeln('////////// CODIGO DE PRODUCTO DEL ARBOL 2 CON MÁS VENTAS //////////');
+	writeln(ProductoMasVendido(arb2)); {CORREGIR}
 end.
