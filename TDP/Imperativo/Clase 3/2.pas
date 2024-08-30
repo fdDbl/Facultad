@@ -76,7 +76,7 @@ procedure generarVentasCompletas(var a : arbol1);
 var
 	v : ventaCompleta;
 begin
-	v.code := random(50);
+	v.code := random(100);
 	while(v.code <> 0) do begin
 
 		v.date.dia := random(31)+1;
@@ -84,7 +84,7 @@ begin
 		v.date.anio := 1900 + random(124) +1;
 		v.cantV := random(100)+1;
 		InsertarNodo(a,v);
-		v.code := random(50);
+		v.code := random(100);
 	end;
 end;
 
@@ -117,11 +117,11 @@ procedure GenerarVentasSinFecha(var a:arbol2);
 var
 	v : ventaSinFecha;
 begin
-	v.code := random(50);
+	v.code := random(10);
 	while(v.code <> 0) do begin
 		v.cantV := random(100)+1;
 		InsertarNodo(a,v);
-		v.code := random(50);
+		v.code := random(10);
 	end;
 end;
 
@@ -198,8 +198,49 @@ begin
 	end;	
 end;
 
+function contarProductos(a:arbol1;f:fecha):integer;
+begin
+	if(a=nil) then contarProductos:=0
+	else if (a^.dato.date.dia = f.dia) and 
+			(a^.dato.date.mes = f.mes) and
+			(a^.dato.date.anio = f.anio) then
+				contarProductos := 1 + contarProductos(a^.HI,f) + contarProductos(a^.HD,f)
+	else
+        contarProductos := contarProductos(a^.HI, f) + contarProductos(a^.HD, f);
+end;
+
+function obtenerProductoMasVendido(a: arbol2): integer;
+
+	procedure productoMasVendido(a: arbol2; var maxCodigo: integer; var maxUnidades: integer);
+	begin
+		if (a <> nil) then
+		begin
+			if (a^.dato.cantV > maxUnidades) then
+			begin
+				maxUnidades := a^.dato.cantV;
+				maxCodigo := a^.dato.code;
+			end;
+			productoMasVendido(a^.HI, maxCodigo, maxUnidades);
+			productoMasVendido(a^.HD, maxCodigo, maxUnidades);
+		end;
+	end;
+
+var
+    maxCodigo, maxUnidades: integer;
+begin
+    maxUnidades := -1;  
+    maxCodigo := -1;     
+    
+    productoMasVendido(a, maxCodigo, maxUnidades);
+    
+    obtenerProductoMasVendido := maxCodigo;
+end;
+
+
+
 var
 	arb1 : arbol1; arb2 : arbol2; arb3 : arbol3;
+	fecB : fecha;
 begin
 	Randomize;
 	
@@ -210,6 +251,7 @@ begin
 	arb1 := nil;
 	generarVentasCompletas(arb1);
 	retornarArbol1(arb1);
+	
 	
 	writeln;
 	writeln;
@@ -226,4 +268,12 @@ begin
 	arb3 := nil;
 	generarVentasConListas(arb3);
 	retornarArbol3(arb3);
+	
+	writeln('////////// Fecha de retorno de cantidad de productos: //////////');
+	write('Dia (1-31): '); readln(fecB.dia);
+	write('Mes (1-12): '); readln(fecB.mes);
+	write('Año: '); readln(fecB.anio);
+	writeln('Cantidad de productos vendidos el día ',fecB.dia,'/',fecB.mes,'/',fecB.anio,': ',contarProductos(arb1,fecB));
+	
+	writeln(obtenerProductoMasVendido(arb2)); {CORREGIR}
 end.
