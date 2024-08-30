@@ -3,7 +3,7 @@ program comercio;
 type
 	sDias = 1..31;
 	sMeses = 1..12;
-	sAnio = 1..2024;
+	sAnio = 1900..2024;
 	
 	fecha = record
 		dia : sDias;
@@ -76,19 +76,29 @@ procedure generarVentasCompletas(var a : arbol1);
 var
 	v : ventaCompleta;
 begin
-	v.code := random(100);
+	v.code := random(50);
 	while(v.code <> 0) do begin
-		writeln('----- VENTA #',v.code,' -----');
+
 		v.date.dia := random(31)+1;
 		v.date.mes := random(12)+1;
-		v.date.anio := random(2024)+1;
-		writeln('Fecha: ',v.date.dia,'/',v.date.mes,'/',v.date.anio);
+		v.date.anio := 1900 + random(124) +1;
 		v.cantV := random(100)+1;
-		writeln('Cantidad de ventas: ',v.cantV);
 		InsertarNodo(a,v);
-		v.code := random(100);
+		v.code := random(50);
 	end;
 end;
+
+procedure retornarArbol1(a:arbol1);
+begin
+	if (a <> nil) then begin
+		retornarArbol1(a^.HI);
+		writeln('----- PRODUCTO #',a^.dato.code,' -----');
+		writeln('Fecha: ',a^.dato.date.dia,'/',a^.dato.date.mes,'/',a^.dato.date.anio);
+		writeln('Unidades vendidas: ',a^.dato.cantV);
+		retornarArbol1(a^.HD);	
+	end;	
+end;
+
 
 procedure GenerarVentasSinFecha(var a:arbol2);
 
@@ -107,12 +117,22 @@ procedure GenerarVentasSinFecha(var a:arbol2);
 var
 	v : ventaSinFecha;
 begin
-	v.code := random(100);
-	if(v.code <> 0) then begin
+	v.code := random(50);
+	while(v.code <> 0) do begin
 		v.cantV := random(100)+1;
 		InsertarNodo(a,v);
-		generarVentasSinFecha(a);
+		v.code := random(50);
 	end;
+end;
+
+procedure retornarArbol2(a:arbol2);
+begin
+	if (a <> nil) then begin
+		retornarArbol2(a^.HI);
+		writeln('----- PRODUCTO #',a^.dato.code,' -----');
+		writeln('Unidades vendidas: ',a^.dato.cantV);
+		retornarArbol2(a^.HD);	
+	end;	
 end;
 
 procedure generarVentasConListas(var a:arbol3);
@@ -127,7 +147,7 @@ procedure generarVentasConListas(var a:arbol3);
 		nue^.sig:=L;
 		L:=nue;
 	end;
-
+	
 	procedure InsertarNodo(var a:arbol3; L:lista; v:ventaCompleta);
 	begin
 		if(a = nil) then begin
@@ -147,15 +167,35 @@ var
 	v : ventaCompleta; L : lista;
 begin
 	L := nil;
-	v.code := random(100);
+	v.code := random(50);
 	while(v.code <> 0) do begin
 		v.date.dia := random(31)+1;
 		v.date.mes := random(12)+1;
-		v.date.anio := random(2024)+1;
+		v.date.anio := 1900 + random(124) +1;
 		v.cantV := random(100)+1;
 		insertarNodo(a,L,v);
-		v.code := random(100);
+		v.code := random(50);
 	end;
+end;
+
+procedure retornarArbol3(a:arbol3);
+var
+	L:lista; i:integer;
+begin
+	if (a <> nil) then begin
+		retornarArbol3(a^.HI);
+		writeln('----- PRODUCTO #',a^.dato.code,' -----');
+		L:=a^.dato.listaVendidos; i:=0;
+		while(L<>nil) do begin
+			i := i + 1;
+			writeln('--- VENTA ',i,' ---');
+			writeln('Fecha: ',L^.dato.date.dia,'/',L^.dato.date.mes,'/',L^.dato.date.anio);
+			writeln('Unidades vendidas: ',L^.dato.cantV);
+			L:=L^.sig;
+		end;
+		writeln();
+		retornarArbol3(a^.HD);	
+	end;	
 end;
 
 var
@@ -163,14 +203,27 @@ var
 begin
 	Randomize;
 	
-	writeln('---------- ARBOL CON VENTAS COMPLETAS ----------');
+	writeln;
+	writeln;
+	writeln('////////// ARBOL CON VENTAS COMPLETAS //////////');
+	writeln;
 	arb1 := nil;
 	generarVentasCompletas(arb1);
+	retornarArbol1(arb1);
 	
-	writeln('---------- ARBOL CON VENTAS SIN FECHA ----------');
+	writeln;
+	writeln;
+	writeln('////////// ARBOL CON VENTAS SIN FECHA //////////');
+	writeln;
 	arb2 := nil;
 	generarVentasSinFecha(arb2);
+	retornarArbol2(arb2);
 	
+	writeln;
+	writeln;
+	writeln('////////// ARBOL CON VENTAS Y VENTAS DE CADA PRODUCTO //////////');
+	writeln;
 	arb3 := nil;
 	generarVentasConListas(arb3);
+	retornarArbol3(arb3);
 end.
