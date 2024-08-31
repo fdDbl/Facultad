@@ -78,7 +78,6 @@ var
 begin
 	v.code := random(100);
 	while(v.code <> 0) do begin
-
 		v.date.dia := random(31)+1;
 		v.date.mes := random(12)+1;
 		v.date.anio := 1900 + random(124) +1;
@@ -100,7 +99,7 @@ begin
 end;
 
 
-procedure GenerarVentasSinFecha(var a:arbol2);
+procedure GenerarVentasSinFecha(var a2:arbol2; a1:arbol1);
 
 	procedure InsertarNodo(var a:arbol2; v:ventaSinFecha);
 	begin
@@ -117,11 +116,12 @@ procedure GenerarVentasSinFecha(var a:arbol2);
 var
 	v : ventaSinFecha;
 begin
-	v.code := random(10);
-	while(v.code <> 0) do begin
-		v.cantV := random(100)+1;
-		InsertarNodo(a,v);
-		v.code := random(10);
+	if(a1 <> nil) then begin
+		GenerarVentasSinFecha(a2,a1^.HI);
+		v.code := a1^.dato.code;
+		v.cantV := a1^.dato.cantV;;
+		InsertarNodo(a2,v);
+		GenerarVentasSinFecha(a2,a1^.HD);
 	end;
 end;
 
@@ -135,7 +135,7 @@ begin
 	end;	
 end;
 
-procedure generarVentasConListas(var a:arbol3);
+procedure generarVentasConListas(var a3:arbol3; a1:arbol1);
 
 	procedure agregarAdelante(var L:lista; f:fecha; cantV:integer);
 	var
@@ -167,14 +167,16 @@ var
 	v : ventaCompleta; L : lista;
 begin
 	L := nil;
-	v.code := random(50);
-	while(v.code <> 0) do begin
-		v.date.dia := random(31)+1;
-		v.date.mes := random(12)+1;
-		v.date.anio := 1900 + random(124) +1;
-		v.cantV := random(100)+1;
-		insertarNodo(a,L,v);
-		v.code := random(50);
+
+	if(a1 <> nil) then begin
+		generarVentasConListas(a3,a1^.HI);
+		v.code := a1^.dato.code;
+		v.date.dia := a1^.dato.date.dia;
+		v.date.mes := a1^.dato.date.mes;
+		v.date.anio := a1^.dato.date.anio;
+		v.cantV := a1^.dato.cantV;;
+		insertarNodo(a3,L,v);
+		generarVentasConListas(a3,a1^.HD);
 	end;
 end;
 
@@ -204,36 +206,40 @@ begin
 	else if (a^.dato.date.dia = f.dia) and 
 			(a^.dato.date.mes = f.mes) and
 			(a^.dato.date.anio = f.anio) then
-				contarProductos := 1 + contarProductos(a^.HI,f) + contarProductos(a^.HD,f)
+				contarProductos := a^.dato.cantV
 	else
         contarProductos := contarProductos(a^.HI, f) + contarProductos(a^.HD, f);
 end;
 
-function ProductoMasVendido(a: arbol2): integer;
+
+function ProductoMayorCantidad(a: arbol2): integer;
 var
-    maxCodigo: integer;
+    maxCod: integer;
     maxCantidad: integer;
 
-    procedure BuscarMayor(a: arbol2; var maxc:integer);
+    procedure RecorrerArbol(a: arbol2);
     begin
         if a <> nil then
         begin
+            // Si la cantidad total en el nodo actual es mayor que el máximo registrado, actualizamos
             if a^.dato.cantV > maxCantidad then
             begin
-                maxc := maxCantidad + a^.dato.cantV;
-                maxCodigo := a^.dato.code;
+                maxCantidad := a^.dato.cantV;
+                maxCod := a^.dato.code;
             end;
-            BuscarMayor(a^.HI,maxc);
-            BuscarMayor(a^.HD,maxc);
+            // Recorrer subárbol izquierdo y derecho
+            RecorrerArbol(a^.HI);
+            RecorrerArbol(a^.HD);
         end;
     end;
 
 begin
-    maxCantidad := -1;
-    maxCodigo := -1;
-    BuscarMayor(A,maxCantidad);
-    ProductoMasVendido := maxCodigo;
+    maxCantidad := -1;  // Inicializamos la cantidad máxima con un valor muy bajo
+    maxCod := -1;       // Inicializamos el código con un valor inválido
+    RecorrerArbol(a);   // Llamamos al procedimiento que recorre el árbol
+    ProductoMayorCantidad := maxCod;  // Retornamos el código del producto con mayor cantidad vendida
 end;
+
 
 var
 	arb1 : arbol1; arb2 : arbol2; arb3 : arbol3;
@@ -249,13 +255,12 @@ begin
 	generarVentasCompletas(arb1);
 	retornarArbol1(arb1);
 	
-	
 	writeln;
 	writeln;
 	writeln('////////// ARBOL CON VENTAS SIN FECHA //////////');
 	writeln;
 	arb2 := nil;
-	generarVentasSinFecha(arb2);
+	generarVentasSinFecha(arb2,arb1);
 	retornarArbol2(arb2);
 	
 	writeln;
@@ -263,7 +268,7 @@ begin
 	writeln('////////// ARBOL CON VENTAS Y VENTAS DE CADA PRODUCTO //////////');
 	writeln;
 	arb3 := nil;
-	generarVentasConListas(arb3);
+	generarVentasConListas(arb3,arb1);
 	retornarArbol3(arb3);
 	
 	writeln('////////// Fecha de retorno de cantidad de productos: //////////');
@@ -274,5 +279,5 @@ begin
 	writeln;
 	
 	writeln('////////// CODIGO DE PRODUCTO DEL ARBOL 2 CON MÁS VENTAS //////////');
-	writeln(ProductoMasVendido(arb2)); {CORREGIR}
+	writeln(ProductoMayorCantidad(arb2));
 end.
