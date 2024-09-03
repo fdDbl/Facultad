@@ -43,7 +43,7 @@ procedure cargarVentas(var a:arbol; var l:lista);
 		nue^.dato := p;
 		act := L;
 		ant := L;
-		while(act <> nil)and(p.code < act^.dato.code) do
+		while(act <> nil)and(p.code > act^.dato.code) do
 		begin
 			ant := act;
 			act:= act^.sig;
@@ -107,25 +107,26 @@ end;
 procedure ProductoConMasUnidadesVendidas(L:lista);
 var
 	max,codeAct,cantTotal,mejorCode:integer;
+	aux:lista;
 begin
 	max:=-1;
-	codeAct:=-1;
 	while(L<>nil) do begin
+		aux := L;
 		codeAct:=L^.dato.code;
 		cantTotal:=0;
-		while(L<>nil) and (codeAct = L^.dato.code)do begin
-			cantTotal:=cantTotal+L^.dato.cantUV;
-			L:=L^.sig;
+        while (aux <> nil) and (codeAct = aux^.dato.code) do begin
+            cantTotal := cantTotal + aux^.dato.cantUV;
+            aux := aux^.sig;
 		end;
 		if(cantTotal > max) then begin
 			max := cantTotal;
 			mejorCode := codeAct;
 		end;
+		L := L^.sig;
 	end;
 	writeln('<----- CODIGO DEL PRODUCTO CON MAS UNIDADES VENDIDAS ----->');
 	writeln(mejorCode);
 	writeln();
-	
 end;
 
 var
