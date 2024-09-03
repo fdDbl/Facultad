@@ -204,6 +204,45 @@ begin
 	writeln (SocioMasChico);
 end;
 
+procedure InformarSiExiste(a:arbol);
+
+    function buscar(a:arbol; num:integer):boolean;
+    Begin
+        if(a=nil) then buscar := false
+        else if(a^.dato.numero = num) then buscar := true
+        else if(num > a^.dato.numero) then buscar := buscar(a^.HD,num)
+        else buscar := buscar(a^.HI,num);
+    end;
+
+var
+    numSocioABuscar:integer; ok:boolean;
+Begin
+    writeln ('----- Numero de socio a buscar: ----->');
+    readln(numSocioABuscar);
+	ok := buscar(a,numSocioABuscar);
+	if(ok) then writeln('EXISTE') else writeln('NO EXISTE');
+end;
+
+procedure InformarCantEntreValores(a:arbol);
+
+    function contar(a:arbol;c1,c2:integer):integer;
+    Begin
+        if a = nil then contar := 0
+        else if(a^.dato.numero <= c1) then contar := contar(a^.HD,c1,c2)
+        else if(a^.dato.numero >= c2) then contar := contar(a^.HI,c1,c2)
+        else contar := 1 + contar(a^.HI,c1,c2) + contar(a^.HD,c1,c2);
+    end;
+var
+    codigo1,codigo2:integer;
+Begin
+    writeln ('----- Contar cantidad de socios desde el numero: ----->');
+    readln(codigo1);
+    writeln ('----- Hasta: ----->');
+    readln(codigo2);
+    writeln ('Cantidad de socios en ese rango:');
+    writeln(contar(a,codigo1,codigo2));
+end;
+
 var a: arbol; 
 Begin
   randomize;
@@ -211,6 +250,8 @@ Begin
   InformarSociosOrdenCreciente (a);
   InformarNumeroSocioConMasEdad (a);
   AumentarEdadNumeroImpar (a);
-	InformarNumSocioMasGrande(a);
-	InformarNumSocioMasChico(a);
+  InformarNumSocioMasGrande(a);
+  InformarNumSocioMasChico(a);
+  InformarSiExiste(a);
+  InformarCantEntreValores(a);
 End.
