@@ -109,8 +109,9 @@ procedure GenerarVentasSinFecha(var a2:arbol2; a1:arbol1);
 			a^.HI := nil;
 			a^.HD := nil;
 		end
-		else if(v.code >= a^.dato.code) then
-			InsertarNodo(a^.HD,v) else InsertarNodo(a^.HI,v);
+		else if(v.code > a^.dato.code) then
+			InsertarNodo(a^.HD,v) else if(v.code < a^.dato.code)then InsertarNodo(a^.HI,v)
+			else a^.dato.cantV := a^.dato.cantV + v.cantV;
 	end;
 
 var
@@ -232,13 +233,14 @@ var
             RecorrerArbol(a^.HD);
         end;
     end;
-
+  
 begin
     maxCantidad := -1;  // Inicializamos la cantidad máxima con un valor muy bajo
     maxCod := -1;       // Inicializamos el código con un valor inválido
     RecorrerArbol(a);   // Llamamos al procedimiento que recorre el árbol
     ProductoMayorCantidad := maxCod;  // Retornamos el código del producto con mayor cantidad vendida
 end;
+
 
 
 var
