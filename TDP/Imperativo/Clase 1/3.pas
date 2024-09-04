@@ -104,8 +104,11 @@ begin
         if(puntAct > min) then begin
             mejorCode:=v[i];
             min:=puntAct;
-        end;
-        { ? }
+        end
+        else if(puntAct < max) then begin
+	    peorCode:=v[i];
+            max:=puntAct;
+	end;
     end;
 end;
 
