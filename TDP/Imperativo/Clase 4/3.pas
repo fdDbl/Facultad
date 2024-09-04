@@ -148,6 +148,25 @@ begin
 	writeln;
 end;
 
+procedure MontoTotalEntreDosCodigos(L:lista);
+var
+	code1,code2:integer; montoTotal:real;
+begin
+	writeln('<----- MONTO TOTAL ENTRE DOS CODIGOS DE PRODUCTO ----->');
+	writeln('Codigo 1:');
+	readln(code1);
+	writeln('Codigo 2:');
+	readln(code2);
+	montoTotal := 0;
+	
+	while(L <> nil)and(L^.dato.code < code2) do begin
+		if(L^.dato.code > code1) then
+			montoTotal := montoTotal + L^.dato.montoT;
+		L:=L^.sig
+	end;
+	writeln('Resultado: ',montoTotal);
+end;
+
 var
 	a:arbol; L:lista;
 begin
@@ -158,4 +177,5 @@ begin
 	ImprimirArbol(a);
 	ProductoConMasUnidadesVendidas(L);
 	CantCodigosMenoresQueValor(a);
+	MontoTotalEntreDosCodigos(L);
 end.
