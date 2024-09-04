@@ -126,7 +126,26 @@ begin
 	end;
 	writeln('<----- CODIGO DEL PRODUCTO CON MAS UNIDADES VENDIDAS ----->');
 	writeln(mejorCode);
-	writeln();
+	writeln;
+end;
+
+procedure CantCodigosMenoresQueValor(a:arbol);
+
+	function calcular(a:arbol;val:integer):integer;
+	begin
+		if(a=nil) then calcular := 0
+		else if(a^.dato.code < val) then calcular := 1 + calcular(a^.HI,val) + calcular(a^.HD,val)
+		else calcular := calcular(a^.HI,val);
+	end;
+
+var
+	valor:integer;
+begin
+	writeln('<----- CANTIDAD DE CODIGOS DE VENTA MENORES QUE UN VALOR ----->');
+	writeln('Ingrese el valor:');
+	readln(valor);
+	writeln('Resultado: ',calcular(a,valor));
+	writeln;
 end;
 
 var
@@ -138,4 +157,5 @@ begin
 	writeln('<---------- RECORRIDO DEL ARBOL ---------->');
 	ImprimirArbol(a);
 	ProductoConMasUnidadesVendidas(L);
+	CantCodigosMenoresQueValor(a);
 end.
