@@ -1,17 +1,20 @@
 program biblioteca;
 type
+	sDias = 1..31;
+ 	sMeses = 1..12;
+  
 	prestamoCompleto = record
 		ISBN : integer;
 		nroSocio : integer;
-		dia : integer;
-		mes : integer;
+		dia : sDias;
+		mes : sMeses;
 		cantDiasP : integer;
 	end;
 	
 	prestSinISBN = record
 		nroSocio : integer;
-		dia : 1..31;
-		mes : 1..12;
+		dia : sDias;
+		mes : sMeses;
 		cantDiasP : integer;
 	end;
 	
@@ -38,7 +41,7 @@ type
 		HI , HD : arbol2;
 	end;
 
-procedure cargarPrestamos(var a1:arbol1; var a2:arbol2);
+procedure cargarPrestamos(var a1:arbol1; var a2:arbol2; var L:lista);
 
 	procedure leerPrestamo(var p:prestamoCompleto);
 	begin
@@ -64,7 +67,7 @@ procedure cargarPrestamos(var a1:arbol1; var a2:arbol2);
 		else agregarArbol1(a^.HI,p);
 	end;
 	
-	procedure agregarAdelante(var L:lista; nSocio,dia,mes,cantDiasP:integer);
+	procedure agregarAdelante(var L:lista; nSocio:integer; dia:sDias; mes:sMeses; cantDiasP:integer);
 	var
 		nue:lista;
 	begin
@@ -99,6 +102,7 @@ procedure cargarPrestamos(var a1:arbol1; var a2:arbol2);
 var
 	p1:prestamoCompleto; i:integer;
 begin
+	L:=nil;
 	i:=1;
 	writeln('<---------- LECTURA DE PRESTAMOS ---------->');
 	writeln('<----- PRESTAMO ',i,' ----->');
@@ -117,6 +121,6 @@ var
 begin
 	arb1 := nil;
 	arb2 := nil;
-	L:=nil;
-	cargarPrestamos(arb1,arb2);
+	
+	cargarPrestamos(arb1,arb2,L);
 end.
