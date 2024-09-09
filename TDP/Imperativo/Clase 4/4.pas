@@ -18,6 +18,11 @@ type
 		cantDiasP : integer;
 	end;
 	
+	cantXISBN = record
+		ISBN : integer;
+		cant : integer;
+	end;
+	
 	lista = ^nodo0;
 	nodo0 = record
 		dato : prestSinISBN;
@@ -28,15 +33,11 @@ type
 	nodoLista2 = record
 		dato : cantXISBN;
 		sig : lista2;
-
+	end;
+	
 	prestamosXISBN = record
 		ISBN : integer;
 		prest : lista;
-	end;
-
-	cantXISBN = record
-		ISBN : integer;
-		cant : integer;
 	end;
 
 	arbol1 = ^nodo1;
@@ -205,20 +206,127 @@ begin
 	writeln('Prestamos efectuados al socio numero ',nroIngresado,': ',contarNodos(a,nroIngresado));
 end;
 
-procedure PuntoF(a:arbol1);
+procedure PuntoF(a: arbol1);
 
-	procedure cargarNodos(a:arbol1; var L:lista2);
+    procedure insertarOActualizar(var L: lista2; ISBN: integer);
+    var
+        actual, anterior, nuevo: lista2;
+    begin
+        actual := L;
+        anterior := nil;
+        while (actual <> nil) and (actual^.dato.ISBN < ISBN) do begin
+            anterior := actual;
+            actual := actual^.sig;
+        end;
+
+        // Si el ISBN ya existe en la lista, incrementamos el contador.
+        if (actual <> nil) and (actual^.dato.ISBN = ISBN) then
+            actual^.dato.cant := actual^.dato.cant + 1
+        else begin
+            // Si no existe, insertamos un nuevo nodo en su posición correcta.
+            new(nuevo);
+            nuevo^.dato.ISBN := ISBN;
+            nuevo^.dato.cant := 1;
+            nuevo^.sig := actual;
+            
+            if anterior = nil then
+                L := nuevo
+            else
+                anterior^.sig := nuevo;
+        end;
+    end;
+
+    procedure recorrerArbol(a: arbol1; var L: lista2);
+    begin
+        if a <> nil then begin
+            insertarOActualizar(L, a^.dato.ISBN);
+            recorrerArbol(a^.HI, L);
+            recorrerArbol(a^.HD, L);
+        end;
+    end;
+	
+	procedure recorrerLista(L:lista2);
 	var
-		r:cantXISBN;
+		i:integer;
 	begin
+		writeln('<---------- LISTA 1 DE ISBN CON LA CANTIDAD DE VECES QUE SE PRESTARON ---------->');
+		i:=0;
+		while(L<>nil) do begin
+			i:=i+1;
+			writeln('<----- NODO ',i,' ----->');
+			writeln('ISBN: ',L^.dato.ISBN);
+			writeln('Cantidad de veces que fue prestado: ',L^.dato.cant);
+			L:=L^.sig;
+		end;
+	end;
+var
+    L: lista2;
+begin
+    L := nil;
+    recorrerArbol(a, L);
+    recorrerLista(L);
+end;
+
+procedure PuntoG(a:arbol2);
+
+	procedure insertarEnLista(var L:lista2; isbn:integer; L2:lista);
+	var
+		nue,act,ant:lista2; cantAct:integer;
+	begin
+		cantAct := 0;
+		while(L2 <> nil) do begin
+			cantAct := cantAct + 1;
+			L2 := L2^.sig;
+		end;
 		
+		new(nue); // Ya que cada ISBN que entra acá, va a tener su propio nodo (no cómo en el arbol 1), directamente creamos uno nuevo;
+		nue^.dato.isbn := isbn;
+		nue^.dato.cant := cantAct;
+		nue^.sig := nil;
+		
+		act:=L; ant:=nil;
+		
+		while(act <> nil) and (act^.dato.isbn < isbn) do begin
+			ant := act;
+			act := act^.sig;
+		end;
+			
+		if ant = nil then
+			L := nue
+		else
+			ant^.sig := nue;
+		
+		nue^.sig:=act;
+	end;
+
+	procedure recorrerArbol(a:arbol2; var L:lista2);
+	begin
+		if(a <> nil) then begin
+			insertarEnLista(L,a^.dato.ISBN,a^.dato.prest);
+			recorrerArbol(a^.HI,L);
+			recorrerArbol(a^.HD,L);
+		end;
+	end;
+
+	procedure recorrerLista(L:lista2;i:integer);
+	begin
+		if(L<>nil) then begin
+			i:=i+1;
+			writeln('<----- NODO ',i,' ----->');
+			writeln('ISBN: ',L^.dato.ISBN);
+			writeln('Cantidad de veces que fue prestado: ',L^.dato.cant);
+			recorrerLista(L^.sig,i);
+		end;
 	end;
 
 var
-	L:lista2;
+	L:lista2; i:integer;
 begin
-	L := nil;
-	cargarNodos(a,L);
+	L:=nil;
+	recorrerArbol(a, L);
+	i:=0;
+	writeln('<---------- LISTA 2 DE ISBN CON LA CANTIDAD DE VECES QUE SE PRESTARON ---------->');
+	recorrerLista(L,i);
 end;
 
 var
@@ -238,4 +346,8 @@ begin
 	CantPrestamosDeSocio2(arb2);
 	writeln;
 	PuntoF(arb1);
+	writeln;
+	PuntoG(arb2);
+	writeln();
+	{ DIRECTAMENTE SALTEÉ A LA PRÁCTICA }
 end.
