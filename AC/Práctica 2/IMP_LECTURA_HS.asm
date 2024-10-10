@@ -1,0 +1,23 @@
+DATO EQU 40H
+ESTADO EQU 41H
+
+ORG 1000H
+CAR DB ?
+
+ORG 2000H
+IN AL, ESTADO
+AND AL, 01111111B ; Como quiero hacerlo por CONSULTA DE ESTADO, coloco el bit de interrupción en 0 (queda 0xxxxxxx)
+OUT ESTADO, AL
+
+MOV BX, OFFSET CAR
+MOV AH, 1
+POLL: INT 6
+IN AL, ESTADO
+AND AL, 1
+JNZ POLL
+MOV AL, [BX]
+OUT DATO, AL
+JMP POLL
+
+INT 0
+END
