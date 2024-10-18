@@ -8,7 +8,7 @@ C:  .word 0
     LD $t1, B($zero)
 
     BEQ $t0, $zero, SALTO1
-        SLT $t3, $t0, $t1
+        SLT $t3, $t1, $t0
         BEQZ $t3, SALTO2
             DADD $t2, $t1, $zero
             SD $t2, C($zero)
