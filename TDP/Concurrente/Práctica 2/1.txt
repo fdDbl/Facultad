@@ -1,0 +1,47 @@
+programa uno
+procesos
+  proceso RecolectarRecorrer(ES cant:numero)
+  comenzar
+    repetir 9
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cant := cant + 1
+      mover
+  fin
+  proceso InformarGanador(E misFlores: numero; E susFlores: numero)
+  comenzar
+    si(misFlores < susFlores)
+      Informar('Diferencia: ', misFlores - susFlores)
+  fin
+areas
+  ciudad: AreaC (1,1,100,100)
+robots
+  robot tipo1
+  variables
+    cantFlores1 : numero
+  comenzar
+    cantFlores1:=0
+    RecolectarRecorrer(cantFlores1)
+    EnviarMensaje(cantFlores1, robot1)
+    RecibirMensaje(cantFlores2, robot2)
+    InformarGanador(cantFlores1,cantFlores2)
+  fin
+  robot tipo2
+  variables
+    cantFlores2 : numero
+  comenzar
+    cantFlores2:=0
+    RecolectarRecorrer(cantFlores2)
+    EnviarMensaje(cantFlores2, robot1)
+    RecibirMensaje(cantFlores1, robot1)
+    InformarGanador(cantFlores2,cantFlores1)
+  fin
+variables
+  robot1: tipo1
+  robot2: tipo2
+comenzar
+  AsignarArea(robot1, ciudad)
+  AsignarArea(robot2, ciudad)
+  Iniciar(robot1, 1, 1)
+  Iniciar(robot2, 2, 11)
+fin
