@@ -7,11 +7,14 @@ procesos
         tomarFlor
         cant := cant + 1
       mover
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant := cant + 1
   fin
   proceso InformarGanador(E misFlores: numero; E susFlores: numero)
   comenzar
-    si(misFlores < susFlores)
-      Informar('Diferencia: ', misFlores - susFlores)
+    si(misFlores > susFlores)
+      Informar("La diferencia es de ", misFlores - susFlores)
   fin
 areas
   ciudad: AreaC (1,1,100,100)
@@ -19,15 +22,17 @@ robots
   robot tipo1
   variables
     cantFlores1 : numero
+    cantFlores2 : numero
   comenzar
     cantFlores1:=0
     RecolectarRecorrer(cantFlores1)
-    EnviarMensaje(cantFlores1, robot1)
+    EnviarMensaje(cantFlores1, robot2)
     RecibirMensaje(cantFlores2, robot2)
     InformarGanador(cantFlores1,cantFlores2)
   fin
   robot tipo2
   variables
+    cantFlores1 : numero
     cantFlores2 : numero
   comenzar
     cantFlores2:=0
