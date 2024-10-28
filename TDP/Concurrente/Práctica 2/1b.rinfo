@@ -1,15 +1,15 @@
 programa uno
 procesos
-  proceso RecolectarRecorrer(ES cant:numero)
+  proceso RecolectarRecorrer(ES f:numero)
   comenzar
     repetir 9
       mientras(HayFlorEnLaEsquina)
         tomarFlor
-        cant := cant + 1
+        f := f + 1
       mover
-    mientras(HayFlorEnLaEsquina)
-      tomarFlor
-      cant := cant + 1
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        f := f + 1
   fin
   proceso InformarGanador(E flores1: numero; E flores2: numero)
   comenzar
@@ -23,33 +23,25 @@ areas
 robots
   robot tipo1
   variables
-    cantFlores1 : numero
+    cantFlores : numero
   comenzar
-    cantFlores1:=0
-    RecolectarRecorrer(cantFlores1)
-    EnviarMensaje(cantFlores1, fiscalizador)
+    cantFlores := 0
+    RecolectarRecorrer(cantFlores)
+    EnviarMensaje(cantFlores, fiscalizador)
   fin
   robot tipo2
-  variables
-    cantFlores2 : numero
-  comenzar
-    cantFlores2:=0
-    RecolectarRecorrer(cantFlores2)
-    EnviarMensaje(cantFlores2, fiscalizador)
-  fin
-  robot tipo3
   variables
     cantFlores1:numero
     cantFlores2:numero
   comenzar
-    RecibirMensaje(cantFlores1, robot1)
-    RecibirMensaje(cantFlores2, robot2)
+    RecibirMensaje(cantFlores1, *)
+    RecibirMensaje(cantFlores2, *)
     InformarGanador(cantFlores1, cantFlores2)
   fin
 variables
   robot1: tipo1
-  robot2: tipo2
-  fiscalizador: tipo3
+  robot2: tipo1
+  fiscalizador: tipo2
 comenzar
   AsignarArea(robot1, ciudad)
   AsignarArea(robot2, ciudad)
