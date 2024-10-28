@@ -1,0 +1,70 @@
+programa uno
+procesos
+  proceso RecolectarRecorrer(ES f:numero)
+  comenzar
+    repetir 9
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        f := f + 1
+      mover
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        f := f + 1
+  fin
+  proceso InformarGanador(E best:numero)
+  comenzar
+    Informar(best)
+  fin
+areas
+  area1: AreaP(1,1,1,10)
+  area2: AreaP(2,11,2,20)
+  area3: AreaP(3,21,3,30)
+  area4: AreaP(4,31,4,40)
+  area5: AreaP(5,41,5,50)
+  area6: AreaP(6,51,6,60)
+  areaF: AreaP(2,1,2,1)
+robots
+  robot tipo1
+  variables
+    cantFlores : numero
+  comenzar
+    cantFlores := 0
+    RecolectarRecorrer(cantFlores)
+    EnviarMensaje(cantFlores, fiscalizador)
+  fin
+  robot tipo2
+  variables
+    cantFlores:numero
+    mejorCantidad:numero
+  comenzar
+    mejorCantidad := -1
+    repetir 6
+      RecibirMensaje(cantFlores, *)
+      si(cantFlores > mejorCantidad)
+        mejorCantidad := cantFlores
+    InformarGanador(mejorCantidad)
+  fin
+variables
+  robot1: tipo1
+  robot2: tipo1
+  robot3: tipo1
+  robot4: tipo1
+  robot5: tipo1
+  robot6: tipo1
+  fiscalizador: tipo2
+comenzar
+  AsignarArea(robot1, area1)
+  AsignarArea(robot2, area2)
+  AsignarArea(robot3, area3)
+  AsignarArea(robot4, area4)
+  AsignarArea(robot5, area5)
+  AsignarArea(robot6, area6)
+  AsignarArea(fiscalizador, areaF)
+  Iniciar(robot1, 1, 1)
+  Iniciar(robot2, 2, 11)
+  Iniciar(robot3, 3, 21)
+  Iniciar(robot4, 4, 31)
+  Iniciar(robot5, 5, 41)
+  Iniciar(robot6, 6, 51)
+  Iniciar(fiscalizador, 2, 1)
+fin
