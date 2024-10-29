@@ -1,0 +1,96 @@
+programa uno
+procesos
+  proceso juntarFlores(ES cant:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant := cant+1
+  fin
+  proceso juntarPapeles(ES cant:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant := cant+1
+  fin
+  proceso IrA1010(E cant:numero; E avO:numero; E caO:numero)
+  comenzar
+    BloquearEsquina(10,10)
+    Pos(10,10)
+    repetir cant
+      si(HayFlorEnLaBolsa)
+        depositarFlor
+      si(HayPapelEnLaBolsa)
+        depositarPapel
+    Pos(avO,caO)
+    LiberarEsquina(10,10)
+  fin
+areas
+  aF: AreaP(1,1,5,10)
+  aP: AreaP(6,1,10,9)
+  aFinal: AreaP(10,10,10,10)
+robots
+  robot florero
+  variables
+    totalIntentos:numero
+    avOrigin:numero
+    caOrigin:numero
+    av:numero
+    ca:numero
+    cantFlores:numero
+  comenzar
+    totalIntentos:=5
+    cantFlores:=0
+    avOrigin:=PosAv
+    caOrigin:=PosCa
+    repetir totalIntentos
+      Random(av,1,5)
+      Random(ca,1,10)
+      BloquearEsquina(av,ca)
+      Pos(av,ca)
+      juntarFlores(cantFlores)
+      Pos(avOrigin,caOrigin)
+      LiberarEsquina(av,ca)
+    IrA1010(cantFlores,avOrigin,caOrigin)
+  fin
+  robot papelero
+  variables
+    avOrigin:numero
+    caOrigin:numero
+    av:numero
+    ca:numero
+    totalIntentos:numero
+    cantPapeles:numero
+  comenzar
+    totalIntentos:=3
+    cantPapeles:=0
+    avOrigin:=PosAv
+    caOrigin:=PosCa
+    repetir totalIntentos
+      Random(av,6,10)
+      Random(ca,1,9)
+      BloquearEsquina(av,ca)
+      Pos(av,ca)
+      juntarPapeles(cantPapeles)
+      Pos(avOrigin,caOrigin)
+      LiberarEsquina(av,ca)
+    IrA1010(cantPapeles,avOrigin,caOrigin)
+  fin
+variables
+  r1F: florero
+  r2F: florero
+  r1P: papelero
+  r2P: papelero
+comenzar
+  AsignarArea(r1F,aF)
+  AsignarArea(r1F,aFinal)
+  AsignarArea(r2F,aF)
+  AsignarArea(r2F,aFinal)
+  AsignarArea(r1P,aP)
+  AsignarArea(r1P,aFinal)
+  AsignarArea(r2P,aP)
+  AsignarArea(r2P,aFinal)
+  Iniciar(r1F,4,10)
+  Iniciar(r2F,5,10)
+  Iniciar(r1P,8,9)
+  Iniciar(r2P,9,9)
+fin
