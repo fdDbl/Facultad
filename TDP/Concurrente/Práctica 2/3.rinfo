@@ -1,0 +1,72 @@
+programa dos
+procesos
+  proceso juntarFlores(ES cant:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant := cant+1
+  fin
+  proceso juntarPapeles(ES cant:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant := cant+1
+  fin
+areas
+  a1: AreaP(1,1,20,1)
+  a2: AreaP(1,5,20,5)
+robots
+  robot robots1
+  variables
+    cantPapeles:numero
+    cantFlores:numero
+  comenzar
+    cantPapeles:=0
+    cantFlores:=0
+    derecha
+    mientras(PosAv<10)
+      juntarPapeles(cantPapeles)
+      juntarFlores(cantFlores)
+      mover
+    juntarPapeles(cantPapeles)
+    juntarFlores(cantFlores)
+
+    EnviarMensaje(cantPapeles,r2A)
+    EnviarMensaje(cantFlores,r2B)
+  fin
+  robot robots2
+  variables
+    cantPapeles:numero
+    cantFlores:numero
+  comenzar
+    RecibirMensaje(cantPapeles,r1A)
+    RecibirMensaje(cantFlores,r1B)
+    derecha
+    mientras(PosAv<20)
+      juntarPapeles(cantPapeles)
+      juntarFlores(cantFlores)
+      mover
+    juntarPapeles(cantPapeles)
+    juntarFlores(cantFlores)
+
+    si(PosCa=1)
+      Informar("La cantidad de papeles es ", cantPapeles)
+    sino
+      si(PosCa=5)
+        Informar("La cantidad de flores es ", cantFlores)
+  fin
+variables
+  r1A: robots1
+  r2A: robots2
+  r1B: robots1
+  r2B: robots2
+comenzar
+  AsignarArea(r1A,a1)
+  AsignarArea(r2A,a1)
+  AsignarArea(r1B,a2)
+  AsignarArea(r2B,a2)
+  Iniciar(r1A,1,1)
+  Iniciar(r2A,11,1)
+  Iniciar(r1B,1,5)
+  Iniciar(r2B,11,5)
+fin
