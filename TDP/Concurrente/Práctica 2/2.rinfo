@@ -1,0 +1,72 @@
+programa dos
+procesos
+  proceso juntarFloresyPapeles(ES f:numero; ES p:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      f := f+1
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      p := p+1
+  fin
+  proceso recorrerEscalon(ES cantF:numero; ES cantP: numero)
+  variables
+    altoActual:numero
+  comenzar
+    cantF:=0
+    cantP:=0
+    Random(altoActual,1,5)
+    repetir altoActual
+      juntarFloresyPapeles(cantF,cantP)
+      mover
+    juntarFloresyPapeles(cantF,cantP)
+    derecha
+    mover
+    repetir 3
+      derecha
+  fin
+areas
+  a1: AreaP(2,1,6,20)
+  a2: AreaP(7,1,11,20)
+  a3: AreaP(12,1,16,20)
+  aJ: AreaP(1,1,1,1)
+robots
+  robot rNormal
+  variables
+    cantFloresEscalon:numero
+    cantPapelesEscalon:numero
+    cantEscalonesMasFloresQuePapeles:numero
+  comenzar
+    cantEscalonesMasFloresQuePapeles := 0
+    repetir 4
+      recorrerEscalon(cantFloresEscalon,cantPapelesEscalon)
+      si(cantFloresEscalon>cantPapelesEscalon)
+        cantEscalonesMasFloresQuePapeles := cantEscalonesMasFloresQuePapeles + 1
+    EnviarMensaje(cantEscalonesMasFloresQuePapeles,rJ)
+  fin
+  robot rJefe
+  variables
+    cantFP:numero
+    totalSuma:numero
+  comenzar
+    totalSuma:=0
+    repetir 3
+      RecibirMensaje(cantFP,*)
+      totalSuma:=totalSuma+cantFP
+    Informar(totalSuma)
+  fin
+variables
+  r1: rNormal
+  r2: rNormal
+  r3: rNormal
+  rJ: rJefe
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r3,a3)
+  AsignarArea(rJ,aJ)
+  Iniciar(r1,2,1)
+  Iniciar(r2,7,1)
+  Iniciar(r3,12,1)
+  Iniciar(rJ,1,1)
+fin
