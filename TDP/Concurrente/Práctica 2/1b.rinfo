@@ -1,4 +1,4 @@
-programa uno
+programa rinfo
 procesos
   proceso RecolectarRecorrer(ES f:numero)
   comenzar

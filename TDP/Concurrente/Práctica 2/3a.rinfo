@@ -1,4 +1,4 @@
-programa dos
+programa rinfo
 procesos
   proceso juntarFlores(ES cant:numero)
   comenzar
