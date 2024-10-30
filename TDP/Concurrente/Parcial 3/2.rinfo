@@ -1,0 +1,136 @@
+programa uno
+procesos
+  proceso juntarFlores(ES cant:numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant := cant+1
+  fin
+  proceso juntarPapeles(ES cant:numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      cant := cant+1
+  fin
+  proceso escalon1(E id:numero; ES ladoAct:numero; ES cantFlores:numero; ES cantPapeles:numero)
+  comenzar
+    repetir ladoAct
+      mover
+    si(id=1)
+      juntarFlores(cantFlores)
+      derecha
+    sino
+      juntarPapeles(cantPapeles)
+      repetir 3
+        derecha
+    repetir ladoAct
+      mover
+    si(id=1)
+      juntarFlores(cantFlores)
+      repetir 3
+        derecha
+    sino
+      juntarPapeles(cantPapeles)
+      derecha
+    ladoAct := ladoAct-1
+  fin
+  proceso escalon2(E id:numero; ES ladoAct:numero; ES cantFlores:numero; ES cantPapeles:numero)
+  comenzar
+    repetir ladoAct
+      mover
+    si(id=1)
+      juntarFlores(cantFlores)
+      derecha
+    sino
+      juntarPapeles(cantPapeles)
+      repetir 3
+        derecha
+    repetir ladoAct
+      mover
+    si(id=1)
+      juntarFlores(cantFlores)
+      repetir 3
+        derecha
+    sino
+      juntarPapeles(cantPapeles)
+      derecha
+    ladoAct:=ladoAct+1
+  fin
+  proceso escalonEspecial(E id:numero; ES cantFlores:numero; ES cantPapeles:numero)
+  comenzar
+    mover
+    BloquearEsquina(16,16)
+    si(id=1)
+      juntarFlores(cantFlores)
+      derecha
+      mover
+      juntarFlores(cantFlores)
+      repetir 2
+        derecha
+      mover
+      LiberarEsquina(16,16)
+    sino
+      juntarPapeles(cantPapeles)
+      repetir 3
+        derecha
+      mover
+      juntarPapeles(cantPapeles)
+      repetir 2
+        derecha
+      mover
+      LiberarEsquina(16,16)
+  fin
+  proceso hacerEscalones(E id:numero; ES cantFlores:numero; ES cantPapeles:numero; ES ladoAct:numero)
+  comenzar
+    repetir 4
+      escalon1(id,ladoAct,cantFlores,cantPapeles)
+
+    escalonEspecial(id,cantFlores,cantPapeles)
+    ladoAct := ladoAct+1
+
+    repetir 4
+      escalon2(id,ladoAct,cantFlores,cantPapeles)
+  fin
+areas
+  a1: AreaP(1,1,31,31)
+robots
+  robot rinfo
+  variables
+    cFlores:numero
+    cPapeles:numero
+    tamañoLado:numero
+    id:numero
+  comenzar
+    cFlores:=0
+    cPapeles:=0
+    tamañoLado:=5
+    si(PosAv<16)
+      id:=1
+    sino
+      id:=2
+    hacerEscalones(id,cFlores,cPapeles,tamañoLado)
+    EnviarMensaje(id,rJ)
+    si(id=1)
+      Informar(cFlores)
+    sino
+      Informar(cPapeles)
+  fin
+  robot jefe
+  variables
+    idGanador:numero
+  comenzar
+    RecibirMensaje(idGanador,*)
+    Informar(idGanador)
+  fin
+variables
+  r1: rinfo
+  r2: rinfo
+  rJ: jefe
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a1)
+  AsignarArea(rJ,a1)
+  Iniciar(r1,1,1)
+  Iniciar(r2,31,1)
+  Iniciar(rJ,15,1)
+fin
