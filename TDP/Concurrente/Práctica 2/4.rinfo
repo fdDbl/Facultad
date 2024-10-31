@@ -1,0 +1,187 @@
+programa Practica2Ej4
+procesos
+  proceso inicializarContador(ES tot1:numero;ES tot2:numero;ES tot3:numero;ES tot4:numero)
+  comenzar
+    tot1:=0
+    tot2:=0
+    tot3:=0
+    tot4:=0
+  fin
+  
+  proceso sacarmaximo(ES idMax:numero;E tot1:numero;E tot2:numero;E tot3:numero;E tot4:numero)
+  comenzar
+    si(tot1>tot2)&(tot1>tot3)&(tot1>tot4)
+      idMax:=1
+    sino
+      si(tot2>tot1)&(tot2>tot3)&(tot2>tot4)
+        idMax:=2 
+      sino
+        si(tot3>tot1)&(tot3>tot2)&(tot3>tot4)
+          idMax:=3
+        sino
+          idMax:=4
+  fin
+  
+  proceso parar
+  comenzar
+    EnviarMensaje(F, A1)
+    EnviarMensaje(F, A2)
+    EnviarMensaje(F, A3)
+    EnviarMensaje(F, A4)
+  fin
+    
+  proceso juntarPapel(ES papel: numero)
+  comenzar
+    mientras(HayPapelEnLaEsquina)
+      tomarPapel
+      papel:= papel +1
+  fin
+  
+  proceso juntarFlor(ES flor: numero)
+  comenzar
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      flor:= flor +1
+  fin
+  
+  proceso juntarObjetos(ES total: numero)
+  comenzar
+    juntarFlor(total)
+    juntarPapel(total)
+  fin
+  
+  proceso asignarPosiciones
+  comenzar
+    EnviarMensaje(1,A1)
+    EnviarMensaje(2,A2)
+    EnviarMensaje(3,A3)
+    EnviarMensaje(4,A4)
+  fin
+  
+  proceso asignarTareas(ES tot1:numero;ES tot2:numero;ES tot3:numero;ES tot4:numero)
+  variables
+    aux:numero
+    R:numero
+  comenzar
+    repetir 10
+      Random(R,1,4)
+      si(R=1)
+        EnviarMensaje(V,A1)
+        RecibirMensaje(aux,A1)
+        tot1:=tot1+aux
+      sino
+        si(R=2)
+          EnviarMensaje(V,A2)  
+          RecibirMensaje(aux,A2)
+          tot2:=tot2+aux
+        sino
+          si(R=3)
+            EnviarMensaje(V,A3) 
+            RecibirMensaje(aux,A3)
+            tot3:=tot3+aux
+          sino
+            EnviarMensaje(V,A4)     
+            RecibirMensaje(aux,A4)
+            tot4:=tot4+aux
+  fin
+  
+  proceso asignarGanador(E idMax:numero)
+  comenzar
+    si(idMax=1)
+      EnviarMensaje(V,A1)
+      EnviarMensaje(F,A2)
+      EnviarMensaje(F,A3)
+      EnviarMensaje(F,A4)
+    sino
+      si(idMax=2)
+        EnviarMensaje(F,A1)
+        EnviarMensaje(V,A2)
+        EnviarMensaje(F,A3)
+        EnviarMensaje(F,A4)
+      sino
+        si(idMax=3)
+          EnviarMensaje(F,A1)
+          EnviarMensaje(F,A2)
+          EnviarMensaje(V,A3)
+          EnviarMensaje(F,A4)    
+        sino         
+          EnviarMensaje(F,A1)
+          EnviarMensaje(F,A2)
+          EnviarMensaje(F,A3)
+          EnviarMensaje(V,A4)  
+  fin
+  
+areas
+  area:AreaPC(25,25,75,75)
+  inicio:AreaPC(1,1,100,2)
+  
+robots
+  robot recolector
+  variables
+    total:numero
+    comienzo:boolean
+    id:numero
+    ca:numero
+    av:numero
+    gane:boolean
+    avOrigin:numero
+    caOrigin:numero
+  comenzar
+    RecibirMensaje(id,fiscalizador)
+    comienzo:=F
+    RecibirMensaje(comienzo,fiscalizador)
+    avOrigin:=PosAv
+    caOrigin:=PosCa
+    mientras(comienzo)
+      total:=0
+      Random(av,25,75)
+      Random(ca,25,75)
+      Pos(av,ca)
+      juntarObjetos(total)
+      Pos(avOrigin,caOrigin)
+      EnviarMensaje(total,fiscalizador)
+      RecibirMensaje(comienzo,fiscalizador)
+    RecibirMensaje(gane,fiscalizador)
+    si(gane)
+      Pos(50,50)
+  fin
+
+  robot fiscalizador
+  variables
+    tot1: numero
+    tot2: numero
+    tot3: numero
+    tot4: numero
+    idMax: numero
+  comenzar
+    inicializarContador(tot1,tot2,tot3,tot4)
+    asignarPosiciones
+    asignarTareas(tot1,tot2,tot3,tot4)
+    parar
+    sacarmaximo(idMax,tot1,tot2,tot3,tot4)
+    asignarGanador(idMax)
+    Informar(idMax)
+  fin
+          
+variables
+  A1: recolector
+  A2: recolector
+  A3: recolector
+  A4: recolector
+  fiscalizador: fiscalizador
+comenzar
+  AsignarArea(A1, inicio)
+  AsignarArea(A2, inicio)
+  AsignarArea(A3, inicio)
+  AsignarArea(A4, inicio)
+  AsignarArea(fiscalizador, inicio)
+  AsignarArea(A1, area)
+  AsignarArea(A2, area)
+  AsignarArea(A3, area)
+  AsignarArea(A4, area)
+  Iniciar(A1, 25,1)
+  Iniciar(A2, 30,1)
+  Iniciar(A3, 35,1)
+  Iniciar(A4, 40,1)
+  Iniciar(fiscalizador, 1,1)
+fin
