@@ -1,0 +1,94 @@
+programa rinfo
+procesos
+  proceso juntarFloresDeAUna(ES cant:numero; ES hay:boolean)
+  comenzar
+    si(HayFlorEnLaEsquina)
+      hay := V
+      tomarFlor
+      cant:=cant+1
+    sino
+      hay := F
+  fin
+  proceso depositarFloresDeAUna
+  comenzar
+    si(HayFlorEnLaBolsa)
+      depositarFlor
+  fin
+areas
+  a1: AreaP(9,9,9,9)
+  a2: AreaP(9,10,9,10)
+  a3: AreaP(9,11,9,11)
+  a4: AreaP(9,12,9,12)
+  aJ: AreaP(1,1,1,1)
+  cuadrante: AreaP(10,10,11,11)
+robots
+  robot florero
+  variables
+    av10,av11,ca10,ca11,avOrigin,caOrigin,cantFlores,id:numero
+    seguir:boolean
+  comenzar
+    cantFlores:=0
+    RecibirMensaje(id,rJ)
+    av10:=10
+    ca10:=10
+    av11:=11
+    ca11:=11
+    avOrigin:=PosAv
+    caOrigin:=PosCa
+    seguir:=V
+    mientras(seguir)
+      BloquearEsquina(av10,ca10)
+      Pos(av10,ca10)
+      juntarFloresDeAUna(cantFlores,seguir)
+      Pos(avOrigin,caOrigin)
+      LiberarEsquina(av10,ca10)
+      BloquearEsquina(av11,ca11)
+      Pos(av11,ca11)
+      depositarFloresDeAUna
+      Pos(avOrigin,caOrigin)
+      LiberarEsquina(av11,ca11)
+
+    EnviarMensaje(id,rJ)
+  fin
+  robot jefe
+  variables
+    cantF,maxFlores,id,bestID,ult:numero
+  comenzar
+    id:=1
+    EnviarMensaje(id,r1)
+    id:=id+1
+    EnviarMensaje(id,r2)
+    id:=id+1
+    EnviarMensaje(id,r3)
+    id:=id+1
+    EnviarMensaje(id,r4)
+
+    repetir 4
+      RecibirMensaje(id,*)
+      ult:=id
+    Informar(ult)
+
+    Pos(11,11)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+  fin
+variables
+  r1,r2,r3,r4:florero
+  rJ:jefe
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r1,cuadrante)
+  AsignarArea(r2,a2)
+  AsignarArea(r2,cuadrante)
+  AsignarArea(r3,a3)
+  AsignarArea(r3,cuadrante)
+  AsignarArea(r4,a4)
+  AsignarArea(r4,cuadrante)
+  AsignarArea(rJ,aJ)
+  AsignarArea(rJ,cuadrante)
+  Iniciar(r1,9,9)
+  Iniciar(r2,9,10)
+  Iniciar(r3,9,11)
+  Iniciar(r4,9,12)
+  Iniciar(rJ,1,1)
+fin
