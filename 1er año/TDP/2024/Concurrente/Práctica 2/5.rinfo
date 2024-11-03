@@ -1,0 +1,99 @@
+programa rinfo
+procesos
+  proceso JuntarPapel
+  comenzar
+    si(HayPapelEnLaEsquina)
+      tomarPapel
+  fin
+  proceso BuscarPapel(ES ok:boolean)
+  variables
+    avActual,caActual:numero
+  comenzar
+    avActual:=PosAv
+    caActual:=PosCa
+    BloquearEsquina(11,11)
+    Pos(11,11)
+    si(HayPapelEnLaEsquina)
+      JuntarPapel
+    sino
+      ok:=F
+    Pos(avActual,caActual)
+    LiberarEsquina(11,11)
+  fin
+  proceso Avanzar(ES cant:numero)
+  comenzar
+    mover
+    cant:=cant+1
+  fin
+areas
+  aF: AreaP(11,11,11,11)
+  a1: AreaP(4,1,4,100)
+  a2: AreaP(6,1,6,100)
+  a3: AreaP(8,1,8,100)
+  a4: AreaP(10,1,10,100)
+  aC: AreaP(7,1,7,1)
+robots
+  robot corredor
+  variables
+    esqAvanzadas:numero
+    id:numero
+    seguir:boolean
+  comenzar
+    si(PosAv=4)
+      id:=1
+    sino
+      si(PosAv=6)
+        id:=2
+      sino
+        si(PosAv=8)
+          id:=3
+        sino
+          si(PosAv=10)
+            id:=4
+    esqAvanzadas:=0
+    seguir:=V
+
+    mientras(seguir)&(PosCa<100)
+      BuscarPapel(seguir)
+      si(seguir)
+        Avanzar(esqAvanzadas)
+    si(PosCa=100)
+      BuscarPapel(seguir)
+    EnviarMensaje(id,rC)
+    EnviarMensaje(esqAvanzadas,rC)
+  fin
+  robot coordinador
+  variables
+    id,cantEsq,bestID,bestEsq:numero
+  comenzar
+    bestEsq:=-1
+    repetir 4
+      RecibirMensaje(id,*)
+      RecibirMensaje(cantEsq,*)
+      si(cantEsq>bestEsq)
+        bestID := id
+        bestEsq := cantEsq
+    Informar(bestID)
+  fin
+variables
+  r1: corredor
+  r2: corredor
+  r3: corredor
+  r4: corredor
+  rC: coordinador
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r3,a3)
+  AsignarArea(r4,a4)
+  AsignarArea(rC,aC)
+  AsignarArea(r1,aF)
+  AsignarArea(r2,aF)
+  AsignarArea(r3,aF)
+  AsignarArea(r4,aF)
+  Iniciar(r1,4,1)
+  Iniciar(r2,6,1)
+  Iniciar(r3,8,1)
+  Iniciar(r4,10,1)
+  Iniciar(rC,7,1)
+fin
