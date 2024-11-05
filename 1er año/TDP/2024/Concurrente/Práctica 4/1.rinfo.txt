@@ -1,0 +1,122 @@
+programa rinfo
+procesos
+  proceso JuntarFlores(E cant:numero)
+  comenzar
+    repetir cant
+      tomarFlor
+  fin
+  
+  proceso AvanzarDejando(E cant:numero)
+  comenzar
+    mientras(PosCa<100)&(cant<>0)
+      depositarFlor
+      mover
+      cant:=cant-1
+    si(PosCa=100)
+      depositarFlor
+  fin
+  
+  proceso DepositarFlores(E cant:numero)
+  comenzar
+    repetir cant
+      depositarFlor
+  fin
+  
+  proceso identificarRobots
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)    
+  fin
+
+areas
+  a1: AreaP(1,1,1,100)
+  a2: AreaP(2,1,2,100)
+  a3: AreaP(3,1,3,100)
+  aS: AreaP(100,100,100,100)
+
+robots
+  robot cliente
+  variables
+    cantFlores,id,av,ca: numero
+    ack: boolean
+  comenzar
+    RecibirMensaje(id,rS)
+    mientras(PosCa < 100)
+      Random(cantFlores,1,4)
+      EnviarMensaje(id,rS)
+      EnviarMensaje(cantFlores,rS)
+      av:= PosAv
+      ca:= PosCa + 1
+      EnviarMensaje(av,rS)
+      EnviarMensaje(ca,rS)
+      RecibirMensaje(ack,rS)
+      mover
+      JuntarFlores(cantFlores)
+      Pos(av,ca-1)
+      AvanzarDejando(cantFlores)
+    EnviarMensaje(id,rS)
+    cantFlores:= 0
+    EnviarMensaje(cantFlores,rS)
+  fin
+
+  robot servidor
+  variables
+    cantF,av,ca,id,cantFinish: numero
+    ok: boolean
+  comenzar
+    cantFinish:= 0
+    ok:= V
+    identificarRobots
+    mientras(cantFinish < 3)
+      RecibirMensaje(id,*)
+      si(id = 1)
+        RecibirMensaje(cantF,r1)
+      sino
+        si(id = 2)
+          RecibirMensaje(cantF,r2)
+        sino
+          RecibirMensaje(cantF,r3)
+      si(cantF <> 0)
+        si(id = 1)
+          RecibirMensaje(av,r1)
+          RecibirMensaje(ca,r1)
+        sino
+          si(id = 2)
+            RecibirMensaje(av,r2)
+            RecibirMensaje(ca,r2)
+          sino
+            RecibirMensaje(av,r3)
+            RecibirMensaje(ca,r3)
+        JuntarFlores(cantF)
+        Pos(av,ca)
+        DepositarFlores(cantF)
+        Pos(100,100)
+        si(id = 1)
+          EnviarMensaje(ok,r1)
+        sino
+          si(id = 2)
+            EnviarMensaje(ok,r2)
+          sino
+            EnviarMensaje(ok,r3)
+      sino
+        cantFinish:= cantFinish + 1
+  fin
+variables
+  r1: cliente
+  r2: cliente
+  r3: cliente
+  rS: servidor
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r2,a2)
+  AsignarArea(r3,a3)
+  AsignarArea(rS,aS)
+  AsignarArea(rS,a1)
+  AsignarArea(rS,a2)
+  AsignarArea(rS,a3)
+  Iniciar(r1,1,1)
+  Iniciar(r2,2,1)
+  Iniciar(r3,3,1)
+  Iniciar(rS,100,100)
+fin
