@@ -1,0 +1,92 @@
+programa rinfo
+procesos
+  proceso identificarRobots
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,a1)
+    EnviarMensaje(4,a2)
+  fin
+areas
+  aRoja: AreaP(2,1,3,100)
+  aAzul: AreaP(98,1,99,100)
+  aFisc: AreaP(1,1,1,1)
+robots
+  robot rojo
+  variables
+    cantFlores,id:numero
+  comenzar
+    RecibirMensaje(id,f)
+    cantFlores:=0
+
+    repetir 99
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cantFlores:=cantFlores+1
+      mover
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores:=cantFlores+1
+
+    EnviarMensaje(id,f)
+    EnviarMensaje(cantFlores,f)
+  fin
+  robot azul
+  variables
+    cantFlores,id:numero
+  comenzar
+    RecibirMensaje(id,f)
+    cantFlores:=0
+
+    repetir 99
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cantFlores:=cantFlores+1
+      mover
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cantFlores:=cantFlores+1
+
+    EnviarMensaje(id,f)
+    EnviarMensaje(cantFlores,f)
+  fin
+  robot fiscalizador
+  variables
+    cfRojo,cfAzul,cantFlores,id:numero
+  comenzar
+    identificarRobots
+    cfRojo:=0
+    cfAzul:=0
+
+    repetir 4
+      RecibirMensaje(id,*)
+      RecibirMensaje(cantFlores,*)
+      si(id=1)|(id=2)
+        cfRojo:=cfRojo+cantFlores
+      sino
+        si(id=3)|(id=4)
+          cfAzul:=cfAzul+cantFlores
+
+    si(cfRojo>cfAzul)
+      Informar(1)
+    sino
+      Informar(2)
+  fin
+variables
+  r1:rojo
+  r2:rojo
+  a1:azul
+  a2:azul
+  f:fiscalizador
+comenzar
+  AsignarArea(r1,aRoja)
+  AsignarArea(r2,aRoja)
+  AsignarArea(a1,aAzul)
+  AsignarArea(a2,aAzul)
+  AsignarArea(f,aFisc)
+  Iniciar(r1,2,1)
+  Iniciar(r2,3,1)
+  Iniciar(a1,98,1)
+  Iniciar(a2,99,1)
+  Iniciar(f,1,1)
+fin
