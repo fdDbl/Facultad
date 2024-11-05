@@ -1,0 +1,110 @@
+programa rinfo
+procesos
+  proceso depo1010(E cant:numero; E av:numero; E ca:numero)
+  {Este proceso se encarga de depositar un número determinado de flores (cant) en una posición específica (av, ca)}
+  comenzar
+    BloquearEsquina(10,10) {Bloquea la esquina (10,10) para evitar que otros robots la utilicen}
+    Pos(10,10) {Se mueve a la posición (10,10)}
+    repetir cant
+      depositarFlor {Deposita una flor}
+    Pos(av,ca) {Se mueve a la posición (av, ca)}
+    LiberarEsquina(10,10) {Libera la esquina (10,10) para que otros robots puedan utilizarla}
+  fin
+
+  proceso juntar1010(E cant:numero)
+  {Este proceso se encarga de recoger un número determinado de flores (cant) de la posición (10,10)}
+  comenzar
+    BloquearEsquina(10,10) {Bloquea la esquina (10,10) para evitar que otros robots la utilicen}
+    Pos(10,10) {Se mueve a la posición (10,10)}
+    repetir cant
+      tomarFlor {Recoge una flor}
+    Pos(1,5) {Se mueve a la posición (1,5)}
+    LiberarEsquina(10,10) {Libera la esquina (10,10) para que otros robots puedan utilizarla}
+  fin
+
+  proceso identificar
+  {Este proceso envía mensajes a los robots recolector y cosechador para identificarlos}
+  comenzar
+    EnviarMensaje(1,r1) {Envía un mensaje al robot recolector (r1)}
+    EnviarMensaje(2,r2) {Envía un mensaje al robot recolector (r2)}
+  fin
+
+areas
+  a1: AreaP(1,3,100,3) {Área de recolección para el robot recolector (r1)}
+  a2: AreaP(1,4,100,4) {Área de recolección para el robot recolector (r2)}
+  aC: AreaP(1,5,1,5) {Área de recolección para el robot cosechador (rC)}
+  a10: AreaC(10,10,10,10) {Área central donde se depositan y recogen las flores}
+
+robots
+  robot recolector
+  variables
+    cantFlores,cantEsquinas,id:numero {Variables para contar flores y esquinas, y almacenar el ID del robot}
+    ok,program:boolean {Variables de control para el programa}
+  comenzar
+    derecha {Gira a la derecha}
+    cantFlores:=0 {Inicializa el contador de flores a 0}
+    cantEsquinas:=0 {Inicializa el contador de esquinas a 0}
+    program:=V {Inicializa la variable de control del programa a verdadero}
+    RecibirMensaje(id,rC) {Recibe un mensaje del robot cosechador (rC) para identificarse}
+    mientras(PosAv<>100) {Mientras no se haya alcanzado la posición 100 en el eje X}
+      si(cantFlores<10)&(cantEsquinas<15) {Si el contador de flores es menor a 10 y el contador de esquinas es menor a 15}
+        si(HayFlorEnLaEsquina) {Si hay una flor en la esquina actual}
+          tomarFlor {Recoge la flor}
+          cantFlores:=cantFlores+1 {Incrementa el contador de flores}
+        cantEsquinas:=cantEsquinas+1 {Incrementa el contador de esquinas}
+        mover {Se mueve a la siguiente esquina}
+      sino {Si se alcanzó el límite de flores o esquinas}
+        depo1010(cantFlores,PosAv,PosCa) {Llama al proceso depo1010 para depositar las flores recogidas}
+        EnviarMensaje(id,rC) {Envía un mensaje al robot cosechador (rC) para identificarse}
+        EnviarMensaje(program,rC) {Envía un mensaje al robot cosechador (rC) con el estado del programa}
+        EnviarMensaje(cantFlores,rC) {Envía un mensaje al robot cosechador (rC) con la cantidad de flores recogidas}
+        cantFlores:=0 {Reinicia el contador de flores a 0}
+        cantEsquinas:=0 {Reinicia el contador de esquinas a 0}
+    program:=F {Establece el estado del programa a falso}
+    EnviarMensaje(id,rC) {Envía un mensaje al robot cosechador (rC) para identificarse}
+    EnviarMensaje(program,rC) {Envía un mensaje al robot cosechador (rC) con el estado del programa}
+  fin
+
+  robot cosechador
+  variables
+    cant,cantTotal,id:numero {Variables para almacenar la cantidad de flores recogidas, el total de flores y el ID del robot}
+    ok1,ok2,program:boolean {Variables de control para el programa}
+  comenzar
+    cantTotal:=0 {Inicializa el contador total de flores a 0}
+    identificar {Llama al proceso identificar para identificar a los robots recolectores}
+    ok1:=V {Inicializa la variable de control ok1 a verdadero}
+    ok2:=V {Inicializa la variable de control ok2 a verdadero}
+    mientras(ok1)|(ok2) {Mientras ok1 o ok2 sean verdaderos}
+      RecibirMensaje(id,*) {Recibe un mensaje de cualquier robot}
+      si(id=1) {Si el ID del robot que envió el mensaje es 1 (robot recolector 1)}
+        RecibirMensaje(ok1,r1) {Recibe un mensaje del robot recolector 1 con el valor de ok1}
+        si(ok1) {Si ok1 es verdadero}
+          RecibirMensaje(cant,r1) {Recibe un mensaje del robot recolector 1 con la cantidad de flores recogidas}
+          juntar1010(cant) {Llama al proceso juntar1010 para recoger las flores}
+          cantTotal:=cantTotal+cant {Incrementa el contador total de flores}
+      sino {Si el ID del robot que envió el mensaje no es 1}
+        si(id=2) {Si el ID del robot que envió el mensaje es 2 (robot recolector 2)}
+          RecibirMensaje(ok2,r2) {Recibe un mensaje del robot recolector 2 con el valor de ok2}
+          si(ok2) {Si ok2 es verdadero}
+            RecibirMensaje(cant,r2) {Recibe un mensaje del robot recolector 2 con la cantidad de flores recogidas}
+            juntar1010(cant) {Llama al proceso juntar1010 para recoger las flores}
+            cantTotal:=cantTotal+cant {Incrementa el contador total de flores}
+    Informar(cantTotal) {Informa el total de flores recogidas}
+  fin
+
+variables
+  r1:recolector {Variable que representa al robot recolector 1}
+  r2:recolector {Variable que representa al robot recolector 2}
+  rC:cosechador {Variable que representa al robot cosechador}
+
+comenzar
+  AsignarArea(r1,a1) {Asigna el área a1 al robot recolector 1}
+  AsignarArea(r1,a10) {Asigna el área a10 al robot recolector 1}
+  AsignarArea(r2,a2) {Asigna el área a2 al robot recolector 2}
+  AsignarArea(r2,a10) {Asigna el área a10 al robot recolector 2}
+  AsignarArea(rC,aC) {Asigna el área aC al robot cosechador}
+  AsignarArea(rC,a10) {Asigna el área a10 al robot cosechador}
+  Iniciar(r1,1,3) {Inicia el robot recolector 1 en la posición (1,3)}
+  Iniciar(r2,1,4) {Inicia el robot recolector 2 en la posición (1,4)}
+  Iniciar(rC,1,5) {Inicia el robot cosechador en la posición (1,5)}
+fin
