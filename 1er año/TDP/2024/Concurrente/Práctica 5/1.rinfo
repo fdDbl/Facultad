@@ -8,8 +8,8 @@ procesos
     EnviarMensaje(4,a2)
   fin
 areas
-  aRoja: AreaP(2,1,3,100)
-  aAzul: AreaP(98,1,99,100)
+  aRoja: AreaPC(2,1,3,100)
+  aAzul: AreaPC(98,1,99,100)
   aFisc: AreaP(1,1,1,1)
 robots
   robot rojo
