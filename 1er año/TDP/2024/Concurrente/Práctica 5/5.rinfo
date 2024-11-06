@@ -1,0 +1,107 @@
+programa rinfo
+procesos
+  proceso identificarClientes
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+  fin
+  proceso juntarDeA1(E cant:numero; E av:numero)
+  comenzar
+    repetir cant
+      BloquearEsquina(100,1)
+      Pos(100,1)
+      tomarPapel
+      Pos(av,1)
+      LiberarEsquina(100,1)
+  fin
+  proceso llevarPapeles(ES cant:numero)
+  comenzar
+    BloquearEsquina(100,1)
+    Pos(100,1)
+    repetir cant
+      depositarPapel
+    Pos(13,1)
+    LiberarEsquina(100,1)
+  fin
+areas
+  a1: AreaP(10,1,10,1)
+  a2: AreaP(11,1,11,1)
+  a3: AreaP(12,1,12,1)
+  aS: AreaP(13,1,13,1)
+  a1001: AreaC(100,1,100,1)
+robots
+  robot cliente
+  variables
+    id,cantP:numero
+    aviso,ack,program:boolean
+  comenzar
+    program:=V
+    RecibirMensaje(id,rS)
+    repetir 4
+      EnviarMensaje(id,rS)
+      EnviarMensaje(program,rS)
+      EnviarMensaje(aviso,rS)
+      RecibirMensaje(cantP,rS)
+      juntarDeA1(cantP,PosAv)
+    program:=F
+    EnviarMensaje(id,rS)
+    EnviarMensaje(program,rS)
+  fin
+  
+  robot servidor
+  variables
+    cantP,id:numero
+    aviso,program1,program2,program3:boolean
+  comenzar
+    mientras(HayPapelEnLaEsquina) {Esto es para que el servidor si o si tenga papeles en la bolsa (habiendo puesto la cantidad suficiente de papeles en la esquina (13,1) manualmente) y el programa pueda funcionar por sí solo. Sin embargo, la consigna dice "Asuma que el servidor tiene los papeles suficientes" así que en este caso también se puede introducir una cantidad suficiente de papeles manualmente mediante la ventana "ROBOTS" en el servidor mismo. Cualquier método es válido.}
+      tomarPapel
+    
+    identificarClientes
+    program1:=V
+    program2:=V
+    program3:=V
+    
+    mientras(program1|program2|program3)
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(program1,r1)
+        si(program1)
+          RecibirMensaje(aviso,r1)
+          Random(cantP,1,5)
+          llevarPapeles(cantP)
+          EnviarMensaje(cantP,r1)
+      sino
+        si(id=2)
+          RecibirMensaje(program2,r2)
+          si(program2)
+            RecibirMensaje(aviso,r2)
+            Random(cantP,1,5)
+            llevarPapeles(cantP)
+            EnviarMensaje(cantP,r2)
+        sino
+          RecibirMensaje(program3,r3)
+          si(program3)
+            RecibirMensaje(aviso,r3)
+            Random(cantP,1,5)
+            llevarPapeles(cantP)
+            EnviarMensaje(cantP,r3)
+    Informar(0)
+  fin
+variables
+  r1,r2,r3:cliente
+  rS:servidor
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r1,a1001)
+  AsignarArea(r2,a2)
+  AsignarArea(r2,a1001)
+  AsignarArea(r3,a3)
+  AsignarArea(r3,a1001)
+  AsignarArea(rS,aS)
+  AsignarArea(rS,a1001)
+  Iniciar(r1,10,1)
+  Iniciar(r2,11,1)
+  Iniciar(r3,12,1)
+  Iniciar(rS,13,1)
+fin
