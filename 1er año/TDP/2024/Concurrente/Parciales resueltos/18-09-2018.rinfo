@@ -1,0 +1,164 @@
+programa parcial
+procesos
+  proceso identificarRobots
+  comenzar
+    EnviarMensaje(1,r1)
+    EnviarMensaje(2,r2)
+    EnviarMensaje(3,r3)
+    EnviarMensaje(4,r4)
+  fin
+  proceso irAvCa(E av:numero; E ca:numero)
+  variables
+    junteFlor,juntePapel:boolean
+  comenzar
+    BloquearEsquina(av,ca)
+    Pos(av,ca)
+    mientras(HayFlorEnLaEsquina)
+      junteFlor:=V
+      EnviarMensaje(junteFlor,rJ)
+      tomarFlor
+    junteFlor:=F
+    EnviarMensaje(junteFlor,rJ)
+    mientras(HayPapelEnLaEsquina)
+      juntePapel:=V
+      EnviarMensaje(juntePapel,rJ)
+      tomarPapel
+    juntePapel:=F
+    EnviarMensaje(juntePapel,rJ)
+  fin
+areas
+  a1: AreaP(10,10,10,10)
+  a2: AreaP(11,10,11,10)
+  a3: AreaP(12,10,12,10)
+  a4: AreaP(13,10,13,10)
+  aJ: AreaP(1,1,1,1)
+  aC: AreaPC(45,48,62,69)
+robots
+  robot recolector
+  variables
+    avOrigin,caOrigin,av,ca,rGanador,id:numero
+    program:boolean
+  comenzar
+    RecibirMensaje(id,rJ)
+    avOrigin:=PosAv
+    caOrigin:=PosCa
+    program:=V
+    repetir 5
+      Random(av,45,62)
+      Random(ca,48,69)
+      EnviarMensaje(id,rJ)
+      EnviarMensaje(program,rJ)
+      irAvCa(av,ca)
+      Pos(avOrigin,caOrigin)
+      LiberarEsquina(av,ca)
+    program:=F
+    EnviarMensaje(id,rJ)
+    EnviarMensaje(program,rJ)
+    
+    RecibirMensaje(rGanador,rJ)
+    si(rGanador=id)
+      mientras(HayFlorEnLaBolsa)
+        depositarFlor
+      mientras(HayPapelEnLaBolsa)
+        depositarPapel
+      Informar(rGanador)
+  fin
+  robot jefe
+  variables
+    id,rGanador,fp1,fp2,fp3,fp4,fpMax:numero
+    program1,program2,program3,program4,juntaFlor,juntaPapel:boolean
+  comenzar
+    fpMax:=-1
+    fp1:=0
+    fp2:=0
+    fp3:=0
+    fp4:=0
+    program1:=V
+    program2:=V
+    program3:=V
+    program4:=V
+    identificarRobots
+    mientras(program1|program2|program3|program4)
+      RecibirMensaje(id,*)
+      si(id=1)
+        RecibirMensaje(program1,r1)
+        si(program1)
+          RecibirMensaje(juntaFlor,r1)
+          mientras(juntaFlor)
+            fp1:=fp1+1
+            RecibirMensaje(juntaFlor,r1)
+          RecibirMensaje(juntaPapel,r1)
+          mientras(juntaPapel)
+            fp1:=fp1+1
+            RecibirMensaje(juntaPapel,r1)
+        si(fp1>fpMax)
+          fpMax:=fp1
+          rGanador:=id
+      sino
+        si(id=2)
+          RecibirMensaje(program2,r2)
+          si(program2)
+            RecibirMensaje(juntaFlor,r2)
+            mientras(juntaFlor)
+              fp2:=fp2+1
+              RecibirMensaje(juntaFlor,r2)
+            RecibirMensaje(juntaPapel,r2)
+            mientras(juntaPapel)
+              fp2:=fp2+1
+              RecibirMensaje(juntaPapel,r2)
+          si(fp2>fpMax)
+            fpMax:=fp2
+            rGanador:=id
+        sino
+          si(id=3)
+            RecibirMensaje(program3,r3)
+            si(program3)
+              RecibirMensaje(juntaFlor,r3)
+              mientras(juntaFlor)
+                fp3:=fp3+1
+                RecibirMensaje(juntaFlor,r3)
+              RecibirMensaje(juntaPapel,r3)
+              mientras(juntaPapel)
+                fp3:=fp3+1
+                RecibirMensaje(juntaPapel,r3)
+            si(fp3>fpMax)
+              fpMax:=fp3
+              rGanador:=id
+          sino
+            RecibirMensaje(program4,r4)
+            si(program4)
+              RecibirMensaje(juntaFlor,r4)
+              mientras(juntaFlor)
+                fp4:=fp4+1
+                RecibirMensaje(juntaFlor,r4)
+              RecibirMensaje(juntaPapel,r4)
+              mientras(juntaPapel)
+                fp4:=fp4+1
+                RecibirMensaje(juntaPapel,r4)
+            si(fp4>fpMax)
+              fpMax:=fp4
+              rGanador:=id
+    EnviarMensaje(rGanador,r1)
+    EnviarMensaje(rGanador,r2)
+    EnviarMensaje(rGanador,r3)
+    EnviarMensaje(rGanador,r4)
+  fin
+variables
+  r1,r2,r3,r4:recolector
+  rJ:jefe
+comenzar
+  AsignarArea(r1,a1)
+  AsignarArea(r1,aC)
+  AsignarArea(r2,a2)
+  AsignarArea(r2,aC)
+  AsignarArea(r3,a3)
+  AsignarArea(r3,aC)
+  AsignarArea(r4,a4)
+  AsignarArea(r4,aC)
+  AsignarArea(rJ,aJ)
+  Iniciar(r1,10,10)
+  Iniciar(r2,11,10)
+  Iniciar(r3,12,10)
+  Iniciar(r4,13,10)
+  Iniciar(rJ,1,1)
+fin
