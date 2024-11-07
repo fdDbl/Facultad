@@ -7,7 +7,7 @@ procesos
     EnviarMensaje(3,r3)
     EnviarMensaje(4,r4)
   fin
-  proceso irAvCa(E av:numero; E ca:numero)
+  proceso irAvCa(E av:numero; E ca:numero; E avO:numero; E caO:numero)
   variables
     junteFlor,juntePapel:boolean
   comenzar
@@ -25,6 +25,22 @@ procesos
       tomarPapel
     juntePapel:=F
     EnviarMensaje(juntePapel,rJ)
+    Pos(avO,caO)
+    LiberarEsquina(av,ca)
+  fin
+  proceso finIntentos(E p:boolean; E id:numero)
+  comenzar
+    p:=F
+    EnviarMensaje(id,rJ)
+    EnviarMensaje(p,rJ)
+  fin
+  proceso depositarGanador(E rG:numero; E id:numero)
+  comenzar
+    si(rG=id)
+      mientras(HayFlorEnLaBolsa)
+        depositarFlor
+      mientras(HayPapelEnLaBolsa)
+        depositarPapel
   fin
 areas
   a1: AreaP(10,10,10,10)
@@ -48,20 +64,10 @@ robots
       Random(ca,48,69)
       EnviarMensaje(id,rJ)
       EnviarMensaje(program,rJ)
-      irAvCa(av,ca)
-      Pos(avOrigin,caOrigin)
-      LiberarEsquina(av,ca)
-    program:=F
-    EnviarMensaje(id,rJ)
-    EnviarMensaje(program,rJ)
-    
+      irAvCa(av,ca,avOrigin,caOrigin)
+    finIntentos(program,id)
     RecibirMensaje(rGanador,rJ)
-    si(rGanador=id)
-      mientras(HayFlorEnLaBolsa)
-        depositarFlor
-      mientras(HayPapelEnLaBolsa)
-        depositarPapel
-      Informar(rGanador)
+    depositarGanador(rGanador,id)
   fin
   robot jefe
   variables
@@ -137,11 +143,16 @@ robots
                 RecibirMensaje(juntaPapel,r4)
             si(fp4>fpMax)
               fpMax:=fp4
-              rGanador:=id
+              rGanador:=id    
+    Informar(fp1)
+    Informar(fp2)
+    Informar(fp3)
+    Informar(fp4)
     EnviarMensaje(rGanador,r1)
     EnviarMensaje(rGanador,r2)
     EnviarMensaje(rGanador,r3)
     EnviarMensaje(rGanador,r4)
+    Informar(rGanador)
   fin
 variables
   r1,r2,r3,r4:recolector
