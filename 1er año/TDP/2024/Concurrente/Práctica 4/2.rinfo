@@ -1,0 +1,80 @@
+programa rinfo
+procesos
+  proceso depo5050
+  comenzar
+    BloquearEsquina(50,50)
+    Pos(50,50)
+    repetir 5
+      depositarPapel
+  fin
+areas
+  aP1: AreaP(5,1,5,100)
+  aP2: AreaP(10,1,10,100)
+  aC: AreaPC(11,1,12,1)
+  a50: AreaC(50,50,50,50)
+robots
+  robot productor
+  variables
+    cantP,avO,caO:numero
+  comenzar
+    cantP:=0
+    repetir 99
+      avO:=PosAv
+      caO:=PosCa
+      mientras(HayPapelEnLaEsquina)
+        tomarPapel
+        cantP:=cantP+1
+        si(cantP=5)
+          depo5050
+          cantP:=0
+          Pos(avO,caO)
+          LiberarEsquina(50,50)
+      mover
+    mientras(HayPapelEnLaEsquina)
+      avO:=PosAv
+      caO:=PosCa
+      tomarPapel
+      cantP:=cantP+1
+      si(cantP=5)
+        depo5050
+        cantP:=0
+        Pos(avO,caO)
+        LiberarEsquina(50,50)
+  fin
+  robot consumidor
+  variables
+    cantP,intentos,avO:numero
+  comenzar
+    intentos:=0
+    avO:=PosAv
+    mientras(intentos<8)
+      Random(cantP,2,5)
+      BloquearEsquina(50,50)
+      Pos(50,50)
+      mientras(HayPapelEnLaEsquina)&(cantP<>0)
+        tomarPapel
+        cantP:=cantP-1
+      Pos(avO,1)
+      LiberarEsquina(50,50)
+      si(cantP>0)
+        intentos:=intentos+1
+      sino
+        intentos:=0
+  fin
+variables
+  p1,p2:productor
+  c1,c2:consumidor
+comenzar
+  AsignarArea(p1,aP1)
+  AsignarArea(p2,aP2)
+  AsignarArea(c1,aC)
+  AsignarArea(c2,aC)
+  AsignarArea(p1,a50)
+  AsignarArea(p2,a50)
+  AsignarArea(c1,a50)
+  AsignarArea(c2,a50)
+  Iniciar(p1,5,1)
+  Iniciar(p2,10,1)
+  Iniciar(c1,11,1)
+  Iniciar(c2,12,1)
+fin

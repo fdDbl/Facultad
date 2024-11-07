@@ -1,0 +1,136 @@
+programa parcial
+procesos
+  proceso identificar
+  comenzar
+    EnviarMensaje(11,rA1)
+    EnviarMensaje(22,rB1)
+    EnviarMensaje(11,rA2)
+    EnviarMensaje(22,rB2)
+  fin
+  proceso depo2020(E avO:numero; E caO:numero)
+  comenzar
+    BloquearEsquina(20,20)
+    Pos(20,20)
+    depositarFlor
+    Pos(avO,caO)
+    LiberarEsquina(20,20)
+  fin
+areas
+  cA: AreaPC(1,1,11,11)
+  cB: AreaPC(13,1,23,11)
+  aF: AreaP(30,1,30,1)
+  a2020: AreaPC(20,20,20,20)
+robots
+  robot r1
+  variables
+    equipo,cantF,av,ca:numero
+    ack:boolean
+  comenzar
+    RecibirMensaje(equipo,f)
+    cantF:=0
+    ack:=V
+    repetir 2
+      repetir 10
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cantF:=cantF+1
+        mover
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cantF:=cantF+1
+      derecha
+    av:=PosAv
+    ca:=PosCa
+    EnviarMensaje(1,f)
+    EnviarMensaje(equipo,f)
+    EnviarMensaje(cantF,f)
+    Informar(cantF)
+    si(equipo=11)
+      EnviarMensaje(ack,rA2)
+    sino
+      EnviarMensaje(ack,rB2)
+    repetir cantF
+      depo2020(av,ca)
+  fin
+  robot r2
+  variables
+    equipo,cantF,av,ca:numero
+    ack:boolean
+  comenzar
+    RecibirMensaje(equipo,f)
+    cantF:=0
+    repetir 2
+      derecha
+    si(equipo=11)
+      RecibirMensaje(ack,rA1)
+    sino
+      RecibirMensaje(ack,rB1)
+    repetir 2
+      repetir 9
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cantF:=cantF+1
+        mover
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cantF:=cantF+1
+      derecha
+    av:=PosAv
+    ca:=PosCa
+    EnviarMensaje(2,f)
+    EnviarMensaje(equipo,f)
+    EnviarMensaje(cantF,f)
+    Informar(cantF)
+    repetir cantF
+      depo2020(av,ca)
+  fin
+  robot fiscalizador
+  variables
+    equipo,cantFA,cantFB,cant,bot,rG:numero
+  comenzar
+    cantFA:=0
+    cantFB:=0
+    identificar
+    repetir 4
+      RecibirMensaje(bot,*)
+      RecibirMensaje(equipo,*)
+      si(bot=1)&(equipo=11)
+        RecibirMensaje(cant,rA1)
+        cantFA:=cantFA+cant
+      sino
+        si(bot=2)&(equipo=11)
+          RecibirMensaje(cant,rA2)
+          cantFA:=cantFA+cant
+        sino
+          si(bot=1)&(equipo=22)
+            RecibirMensaje(cant,rB1)
+            cantFB:=cantFB+cant
+          sino
+            RecibirMensaje(cant,rB2)
+            cantFB:=cantFB+cant
+    si(cantFA>cantFB)
+      rG:=11
+    sino
+      rG:=22
+    Informar(rG)
+  fin
+variables
+  rA1,rB1:r1
+  rA2,rB2:r2
+  f:fiscalizador
+comenzar
+  AsignarArea(rA1,cA)
+  AsignarArea(rA2,cA)
+  AsignarArea(rB1,cB)
+  AsignarArea(rB2,cB)
+  AsignarArea(rA1,a2020)
+  AsignarArea(rA2,a2020)
+  AsignarArea(rB1,a2020)
+  AsignarArea(rB2,a2020)
+  AsignarArea(f,aF)
+  Iniciar(rA1,1,1)
+  Iniciar(rA2,11,10)
+  Iniciar(rB1,13,1)
+  Iniciar(rB2,23,10)
+  Iniciar(f,30,1)
+fin

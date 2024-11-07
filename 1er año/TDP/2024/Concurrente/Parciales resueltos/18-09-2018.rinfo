@@ -7,24 +7,18 @@ procesos
     EnviarMensaje(3,r3)
     EnviarMensaje(4,r4)
   fin
-  proceso irAvCa(E av:numero; E ca:numero; E avO:numero; E caO:numero)
-  variables
-    junteFlor,juntePapel:boolean
+  proceso irAvCa(E id:numero; E p:boolean; E av:numero; E ca:numero; E avO:numero; E caO:numero)
   comenzar
     BloquearEsquina(av,ca)
     Pos(av,ca)
     mientras(HayFlorEnLaEsquina)
-      junteFlor:=V
-      EnviarMensaje(junteFlor,rJ)
+      EnviarMensaje(id,rJ)
+      EnviarMensaje(p,rJ)
       tomarFlor
-    junteFlor:=F
-    EnviarMensaje(junteFlor,rJ)
     mientras(HayPapelEnLaEsquina)
-      juntePapel:=V
-      EnviarMensaje(juntePapel,rJ)
+      EnviarMensaje(id,rJ)
+      EnviarMensaje(p,rJ)
       tomarPapel
-    juntePapel:=F
-    EnviarMensaje(juntePapel,rJ)
     Pos(avO,caO)
     LiberarEsquina(av,ca)
   fin
@@ -32,7 +26,7 @@ procesos
   comenzar
     p:=F
     EnviarMensaje(id,rJ)
-    EnviarMensaje(p,rJ)
+    EnviarMensaje(F,rJ)
   fin
   proceso depositarGanador(E rG:numero; E id:numero)
   comenzar
@@ -41,6 +35,24 @@ procesos
         depositarFlor
       mientras(HayPapelEnLaBolsa)
         depositarPapel
+  fin
+  proceso calcularGanador(E fp1:numero; E fp2:numero; E fp3:numero; E fp4:numero; ES rG:numero)
+  variables
+    fpMax:numero
+  comenzar
+    fpMax:=-1
+    si(fp1>fpMax)
+      fpMax:=fp1
+      rG:=1
+    si(fp2>fpMax)
+      fpMax:=fp2
+      rG:=2
+    si(fp3>fpMax)
+      fpMax:=fp3
+      rG:=3
+    si(fp4>fpMax)
+      fpMax:=fp4
+      rG:=4
   fin
 areas
   a1: AreaP(10,10,10,10)
@@ -62,19 +74,16 @@ robots
     repetir 5
       Random(av,45,62)
       Random(ca,48,69)
-      EnviarMensaje(id,rJ)
-      EnviarMensaje(program,rJ)
-      irAvCa(av,ca,avOrigin,caOrigin)
+      irAvCa(id,program,av,ca,avOrigin,caOrigin)
     finIntentos(program,id)
     RecibirMensaje(rGanador,rJ)
     depositarGanador(rGanador,id)
   fin
   robot jefe
   variables
-    id,rGanador,fp1,fp2,fp3,fp4,fpMax:numero
-    program1,program2,program3,program4,juntaFlor,juntaPapel:boolean
+    id,rGanador,fp1,fp2,fp3,fp4:numero
+    program1,program2,program3,program4:boolean
   comenzar
-    fpMax:=-1
     fp1:=0
     fp2:=0
     fp3:=0
@@ -84,66 +93,28 @@ robots
     program3:=V
     program4:=V
     identificarRobots
-    mientras(program1|program2|program3|program4)
+    mientras(program1)|(program2)|(program3)|(program4)
       RecibirMensaje(id,*)
       si(id=1)
         RecibirMensaje(program1,r1)
         si(program1)
-          RecibirMensaje(juntaFlor,r1)
-          mientras(juntaFlor)
-            fp1:=fp1+1
-            RecibirMensaje(juntaFlor,r1)
-          RecibirMensaje(juntaPapel,r1)
-          mientras(juntaPapel)
-            fp1:=fp1+1
-            RecibirMensaje(juntaPapel,r1)
-        si(fp1>fpMax)
-          fpMax:=fp1
-          rGanador:=id
+          fp1:=fp1+1
       sino
         si(id=2)
           RecibirMensaje(program2,r2)
           si(program2)
-            RecibirMensaje(juntaFlor,r2)
-            mientras(juntaFlor)
-              fp2:=fp2+1
-              RecibirMensaje(juntaFlor,r2)
-            RecibirMensaje(juntaPapel,r2)
-            mientras(juntaPapel)
-              fp2:=fp2+1
-              RecibirMensaje(juntaPapel,r2)
-          si(fp2>fpMax)
-            fpMax:=fp2
-            rGanador:=id
+            fp2:=fp2+1
         sino
           si(id=3)
             RecibirMensaje(program3,r3)
             si(program3)
-              RecibirMensaje(juntaFlor,r3)
-              mientras(juntaFlor)
-                fp3:=fp3+1
-                RecibirMensaje(juntaFlor,r3)
-              RecibirMensaje(juntaPapel,r3)
-              mientras(juntaPapel)
-                fp3:=fp3+1
-                RecibirMensaje(juntaPapel,r3)
-            si(fp3>fpMax)
-              fpMax:=fp3
-              rGanador:=id
+              fp3:=fp3+1
           sino
             RecibirMensaje(program4,r4)
             si(program4)
-              RecibirMensaje(juntaFlor,r4)
-              mientras(juntaFlor)
-                fp4:=fp4+1
-                RecibirMensaje(juntaFlor,r4)
-              RecibirMensaje(juntaPapel,r4)
-              mientras(juntaPapel)
-                fp4:=fp4+1
-                RecibirMensaje(juntaPapel,r4)
-            si(fp4>fpMax)
-              fpMax:=fp4
-              rGanador:=id    
+              fp4:=fp4+1
+
+    calcularGanador(fp1,fp2,fp3,fp4,rGanador)
     Informar(fp1)
     Informar(fp2)
     Informar(fp3)
