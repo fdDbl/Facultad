@@ -4,7 +4,7 @@ procesos
   comenzar
     EnviarMensaje(1,rA1)
     EnviarMensaje(1,rA2)
-    EnviarMensaje(2,rB1)
+    EnviarMensaje(2,rB1) 
     EnviarMensaje(2,rB2)
   fin
   proceso hacerEtapa(ES cf:numero)
