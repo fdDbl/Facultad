@@ -1,4 +1,4 @@
-.data
+.data 
 cadena: .asciiz "Hola"  # Define una cadena en la sección de datos con el texto "Hola"
 .code
 ; iniciar SP
