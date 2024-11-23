@@ -1,0 +1,117 @@
+programa parcial
+procesos
+  proceso identificarEquipos
+  comenzar
+    EnviarMensaje(1,rA1)
+    EnviarMensaje(1,rA2)
+    EnviarMensaje(2,rB1) 
+    EnviarMensaje(2,rB2)
+  fin
+  proceso hacerEtapa(ES cf:numero)
+  comenzar
+    repetir 2
+      repetir 10
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cf:=cf+1
+        mover
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cf:=cf+1
+      derecha
+  fin
+  proceso hacerEtapa2(ES cf:numero)
+  comenzar
+    repetir 2
+      repetir 9
+        mientras(HayFlorEnLaEsquina)
+          tomarFlor
+          cf:=cf+1
+        mover
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+        cf:=cf+1
+      derecha
+  fin
+  proceso depo2020
+  variables
+    av,ca:numero
+  comenzar
+    av:=PosAv
+    ca:=PosCa
+    mientras(HayFlorEnLaBolsa)
+      BloquearEsquina(20,20)
+      Pos(20,20)
+      depositarFlor
+      Pos(av,ca)
+      LiberarEsquina(20,20)
+  fin
+areas
+  areaA: AreaPC(1,1,11,11)
+  areaB: AreaPC(13,1,23,11)
+  a2020: AreaPC(20,20,20,20)
+  aF: AreaP(30,1,30,1)
+robots
+  robot robot1
+  variables
+    ok:boolean
+    id,cantF:numero
+  comenzar
+    RecibirMensaje(id,rF)
+    cantF:=0
+    hacerEtapa(cantF)
+    si(id=1)
+      EnviarMensaje(cantF,rA2)
+    sino
+      EnviarMensaje(cantF,rB2)
+    depo2020
+  fin
+  robot robot2
+  variables
+    id,cantF:numero
+  comenzar
+    RecibirMensaje(id,rF)
+    RecibirMensaje(cantF,*)
+    repetir 2
+      derecha
+    hacerEtapa2(cantF)
+    depo2020
+    EnviarMensaje(id,rF)
+    EnviarMensaje(cantF,rF)
+  fin
+  robot fiscalizador
+  variables
+    idEquipo,cfA,cfB:numero
+  comenzar
+    identificarEquipos
+    repetir 2
+      RecibirMensaje(idEquipo,*)
+      si(idEquipo=1)
+        RecibirMensaje(cfA,rA2)
+      sino
+        RecibirMensaje(cfB,rB2)
+    si(cfA>cfB)
+      Informar(cfA)
+    sino
+      Informar(cfB)
+  fin
+variables
+  rA1,rB1:robot1
+  rA2,rB2:robot2
+  rF:fiscalizador
+comenzar
+  AsignarArea(rA1,areaA)
+  AsignarArea(rA2,areaA)
+  AsignarArea(rB1,areaB)
+  AsignarArea(rB2,areaB)
+  AsignarArea(rA1,a2020)
+  AsignarArea(rA2,a2020)
+  AsignarArea(rB1,a2020)
+  AsignarArea(rB2,a2020)
+  AsignarArea(rF,aF)
+  Iniciar(rA1,1,1)
+  Iniciar(rA2,11,10)
+  Iniciar(rB1,13,1)
+  Iniciar(rB2,23,10)
+  Iniciar(rF,30,1)
+fin
