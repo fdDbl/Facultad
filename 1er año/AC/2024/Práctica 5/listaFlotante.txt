@@ -33,3 +33,9 @@
     c.eq.d f1,f2 = pone FP en 1 si f1 = f2
     bc1t <etiqueta> = salta a <etiqueta> si FP = 1
     bc1f <etiqueta> = salta a <etiqueta> si FP = 0
+
+- Conversión de punto fijo a flotante:
+	Copiar bits desde registro r a registro f con la instrucción mtc1
+		ej.: mtc1 r4, f3
+	Convertir bits de fijo a flotante con la instrucción cvt.d.l
+		ej.: cvt.d.l f2, f3
