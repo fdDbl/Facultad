@@ -1,13 +1,13 @@
 - 32 registros de punto flotante:
     f0,f1,f2,f3,...,f31
 
-- nuevas instrucciones:
+- Nuevas instrucciones:
     l.d en vez de ld
     s.d en vez de sd
     add.d en lugar de dadd
         sub.d, mul.d, div.d
 
-- no existen instrucciones con inmediatos
+- No existen instrucciones con inmediatos
 
     Ejemplo: calcular (5.2 + A) * B
     y guardar en C:
