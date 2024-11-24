@@ -8,7 +8,6 @@
         sub.d, mul.d, div.d
 
 - No existen instrucciones con inmediatos
-
     Ejemplo: calcular (5.2 + A) * B
     y guardar en C:
 
