@@ -1,0 +1,35 @@
+- 32 registros de punto flotante:
+    f0,f1,f2,f3,...,f31
+
+- nuevas instrucciones:
+    l.d en vez de ld
+    s.d en vez de sd
+    add.d en lugar de dadd
+        sub.d, mul.d, div.d
+
+- no existen instrucciones con inmediatos
+
+    Ejemplo: calcular (5.2 + A) * B
+    y guardar en C:
+
+    .data
+        A: .double 4.5
+        B: .double 3.2
+        C: .double 0
+        valor: .double 5.2
+    .code
+        l.d f1, A($0)
+        l.d f2, B($0)
+        l.d f4, valor($0)
+        add.d f3,f1,f4
+        mul.d f3,f3,f2
+
+        s.d f3, C($0)
+    halt
+
+- No hay versión PF de slt y slti, pero existe el flag FP
+    c.lt.d f1,f2 = pone FP en 1 si f1 < f2
+    c.le.d f1,f2 = pone FP en 1 si f1 <= f2
+    c.eq.d f1,f2 = pone FP en 1 si f1 = f2
+    bc1t <etiqueta> = salta a <etiqueta> si FP = 1
+    bc1f <etiqueta> = salta a <etiqueta> si FP = 0
