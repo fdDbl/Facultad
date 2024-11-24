@@ -61,6 +61,7 @@ terminar:
         ld      $s4, 40($sp)
         daddi   $sp, $sp, 48        # Restaura el stack pointer
         jr      $ra                 # Retorna
+		
 # Función que verifica si una palabra es palíndromo
 es_palindromo:
         dadd    $v0, $0, $0         # Inicializa resultado como falso (0)
