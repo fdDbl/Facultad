@@ -1,8 +1,10 @@
 	.data
-outputIngrese: .asciiz "Ingrese una clave de 4 caracteres: "
+outputIngrese: .asciiz "Ingrese una clave de 4 caracteres: ("
+outputIntentos: .word 5
+outputIngrese2: .asciiz " intentos restantes)\n"
 inputClave: .asciiz "...."
 outputCorrecta: .asciiz "Clave correcta"
-outputIncorrecta: .asciiz "Clave incorrecta"
+outputIncorrecta: .asciiz "Clave incorrecta\n\n"
 clave: .asciiz "fede"
 DIR_CONTROL: .word 0x10000
 DIR_DATA: .word 0x10008
@@ -11,7 +13,15 @@ DIR_DATA: .word 0x10008
 ld $t6, DIR_CONTROL($0)
 ld $t7, DIR_DATA($0)
 
-daddi $t0, $0, outputIngrese
+ingresar: daddi $t0, $0, outputIngrese
+sd $t0, 0($t7)
+daddi $t0, $0, 4
+sd $t0, 0($t6)
+ld $t0, 0(outputIntentos)
+sd $t0, 0($t7)
+daddi $t0, $0, 1
+sd $t0, 0($t6)
+daddi $t0, $0, outputIngrese2
 sd $t0, 0($t7)
 daddi $t0, $0, 4
 sd $t0, 0($t6)
@@ -44,4 +54,6 @@ incorrecta: daddi $t0, $0, outputIncorrecta
 sd $t0, 0($t7)
 daddi $t0, $0, 4
 sd $t0, 0($t6)
+j ingresar
+
 fin: halt
