@@ -42,7 +42,7 @@ begin
         a^.dato:=alu;
         a^.HI:=nil; a^.HD:=nil;
     end else
-    if(alu.dni <= a^.dato.dni) then
+    if(alu.tiempo <= a^.dato.tiempo) then
         agregarArbol(a^.HI, alu)
     else agregarArbol(a^.HD, alu);
 end;
@@ -86,8 +86,7 @@ function alumnosEnRango(a:arbol;r1,r2:real):lista;
 	
 	procedure recorrerArbolYCargarLista(var L:lista;a:arbol;r1,r2:real);
 	begin
-		if(a<>nil) then begin
-			recorrerArbolYCargarLista(L,a^HI,r1,r2);
+		if(a<>nil)and(a^.dato.) then begin
 			if(a^.dato.tiempo > r1)and(a^.dato.tiempo < r2) then
 				insertarOrdenado(L,a^.dato);
 			recorrerArbolYCargarLista(L,a^HD,r1,r2);
