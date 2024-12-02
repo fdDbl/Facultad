@@ -73,7 +73,8 @@ function alumnosEnRango(a:arbol;r1,r2:real):lista;
 		new(nue);
 		nue^.dato:=alu;
 		act:=L;
-		while(act<>nil)and(alu.tiempo < act^.dato) do begin
+		ant:=nil;
+		while(act<>nil)and(act^.dato.tiempo < alu.tiempo) do begin
 			ant:=act;
 			act:=act^.sig;
 		end;
@@ -86,14 +87,37 @@ function alumnosEnRango(a:arbol;r1,r2:real):lista;
 	
 	procedure recorrerArbolYCargarLista(var L:lista;a:arbol;r1,r2:real);
 	begin
-		if(a<>nil)and(a^.dato.) then begin
-			if(a^.dato.tiempo > r1)and(a^.dato.tiempo < r2) then
-				insertarOrdenado(L,a^.dato);
-			recorrerArbolYCargarLista(L,a^HD,r1,r2);
+		if(a<>nil) then begin
+			recorrerArbolYCargarLista(L,a^.HD,r1,r2);
+			if(r1 < a^.dato.tiempo)and(a^.dato.tiempo < r2) then insertarOrdenado(L,a^.dato);
+			recorrerArbolYCargarLista(L,a^.HI,r1,r2);
 		end;
 	end;
+var
+	L:lista;
+begin
+	L:=nil;
+	recorrerArbolYCargarLista(L,a,r1,r2);
+	alumnosEnRango:=L;
+end;
+
+function alumnoMasRapido(a:arbol):alumnoRapido;
+	function calcular(a:arbol):arbol;
+	begin
+		if(a=nil) then calcular := nil
+		else if(a^.HI = nil) then calcular := a
+		else calcular := calcular(a^.HI);
+	end;
+var
+	nodoConMasRapido : arbol;
+	alu : alumnoRapido;
+begin
+	nodoConMasRapido := calcular(a);
 	
-{		PRUEBA
+	alu.nombre := nodoConMasRapido^.dato.nombre;
+	alu.dni := nodoConMasRapido^.dato.dni;
+	alumnoMasRapido := alu;
+end;
 	procedure imprimirLista(L:lista);
 	begin
 		while(L <> nil) do begin
@@ -101,29 +125,9 @@ function alumnosEnRango(a:arbol;r1,r2:real):lista;
 			L:=L^.sig;
 		end;
 	end;
-}
-	
-var
-	L:lista;
-begin
-	L:=nil;
-	recorrerArbolYCargarLista(L,a,r1,r2);
-	imprimirLista(L);
-	
-	alumnosEnRango:=L;
-end;
-
-function alumnoMasRapido(a:arbol):alumnoRapido;
-var
-	min:real;
-begin
-	min:=999999;
-	
-end;
-
 var
     a : arbol; L : lista;
-    aMR : alumnoMasRapido;
+    aMR : alumnoRapido;
     rango1,rango2:real;
 begin
     a := nil;
@@ -133,6 +137,10 @@ begin
     writeln('----- MAXIMO DEL RANGO -----');
     readln(rango2);
     L := alumnosEnRango(a,rango1,rango2);	// PUNTO B
+    imprimirLista(L);	// DEBUG
     
     aMR := alumnoMasRapido(a);	// PUNTO C
+    writeln;
+    writeln(aMR.nombre);
+    writeln(aMR.dni);
 end.
