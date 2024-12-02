@@ -14,7 +14,7 @@ halt
 
     ; a) Los registros $t0 y $t1 tienen las direcciones de CONTROL y DATA respectivamente.
     ; b) Modificación:
-                    .data
+            .data
         texto: .asciiz "Hola, Mundo!"   ; El mensaje a mostrar
         CONTROL: .word 0x10000
         DATA: .word 0x10008
