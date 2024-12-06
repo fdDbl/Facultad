@@ -69,7 +69,7 @@ public abstract class Cuenta {
     
     public String resumenMovimientos() {
         String aux = "";
-                for(int i = 0; i < this.cantMovimientos; i++) {
+                for(int i = 0; i < getCantMovimientos(); i++) {
                     aux += "      MOVIMIENTO " + (i+1) + ": \n" +
                            this.movimientos[i].getTipo() + " de $" + this.movimientos[i].getMonto() + "\n";
                 }
@@ -77,7 +77,7 @@ public abstract class Cuenta {
     }
     
     public void nuevoMovimiento(String tipo, double unMonto) {
-        if(this.cantMovimientos < 20)
+        if(getCantMovimientos() < 20)
             this.movimientos[cantMovimientos++] = new Movimiento(tipo,unMonto);
     }
     
