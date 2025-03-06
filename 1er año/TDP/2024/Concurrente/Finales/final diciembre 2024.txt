@@ -1,0 +1,84 @@
+programa p
+procesos
+  proceso depositar2020
+  variables
+    avAct,caAct:numero
+  comenzar
+    avAct:=PosAv
+    caAct:=PosCa
+    mientras(HayFlorEnLaBolsa)
+      BloquearEsquina(20,20)
+      Pos(20,20)
+      depositarFlor
+      Pos(avAct,caAct)
+      LiberarEsquina(20,20)
+  fin
+areas
+  aVAzul:AreaPC(19,21,19,29)
+  aVVerde:AreaPC(21,21,21,29)
+  aHAzul:AreaPC(9,20,19,20)
+  aHVerde:AreaPC(21,20,31,20)
+  a2020:AreaC(20,20,20,20)
+robots
+  robot horizontal
+  variables
+    ack:boolean
+  comenzar
+    si(PosAv = 9)
+      derecha
+      RecibirMensaje(ack,rVAzul)
+    sino
+      repetir 3
+        derecha
+      RecibirMensaje(ack,rVVerde)
+
+    repetir 10
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+      mover
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+    depositar2020
+  fin
+  
+  robot vertical
+  variables
+    ack:boolean
+  comenzar
+    repetir 2
+      derecha
+    repetir 9
+      mientras(HayFlorEnLaEsquina)
+        tomarFlor
+      mover
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+    mientras(HayFlorEnLaBolsa)
+      depositarFlor
+    repetir 2
+      derecha
+    mover
+    si(PosAv = 19)
+      EnviarMensaje(ack,rHAzul)
+    sino
+      EnviarMensaje(ack,rHVerde)
+  fin
+variables
+  rVAzul:vertical
+  rVVerde:vertical
+  rHAzul:horizontal
+  rHVerde:horizontal
+comenzar
+  AsignarArea(rVAzul,aVAzul)
+  AsignarArea(rVAzul,aHAzul)
+  AsignarArea(rVVerde,aVVerde)
+  AsignarArea(rVVerde,aHVerde)
+  AsignarArea(rHAzul,aHAzul)
+  AsignarArea(rHAzul,a2020)
+  AsignarArea(rHVerde,aHVerde)
+  AsignarArea(rHVerde,a2020)
+  Iniciar(rVAzul,19,29)
+  Iniciar(rVVerde,21,29)
+  Iniciar(rHAzul,9,20)
+  Iniciar(rHVerde,31,20)
+fin
