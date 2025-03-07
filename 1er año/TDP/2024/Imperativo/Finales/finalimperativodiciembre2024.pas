@@ -80,15 +80,37 @@ begin
             cargarListaMenorDNI(a^.HI,L,dni);
     end;
 end;
+procedure imprimirArbol(a: arbol);
+begin
+    if (a <> nil) then begin
+        imprimirArbol(a^.HI);
+        writeln('Patente: ', a^.dato.patente, ' - Marca: ', a^.dato.marca, 
+                ' - Año: ', a^.dato.anioF, ' - Color: ', a^.dato.colorP, 
+                ' - DNI: ', a^.dato.dniP);
+        imprimirArbol(a^.HD);
+    end;
+end;
+
+procedure imprimirLista(L: lista);
+begin
+    while (L <> nil) do begin
+        writeln('Patente: ', L^.dato.patente, ' - Marca: ', L^.dato.marca, 
+                ' - Año: ', L^.dato.anioF, ' - Color: ', L^.dato.colorP, 
+                ' - DNI: ', L^.dato.dniP);
+        L := L^.sig;
+    end;
+end;
 var
     a:arbol; anio1,anio2:integer; dni:integer; L:lista;
 begin
     a:=nil;
     cargarVehiculos(a);
+    imprimirArbol(a);
     readln(anio1);
     readln(anio2);
     writeln('La cantidad de vehiculos fabricados entre ',anio1,' y ',anio2,' es de: ',cantVEnAnios(a,anio1,anio2));
     readln(dni);
     L:=nil;
     cargarListaMenorDNI(a,L,dni);
+    imprimirLista(L);
 end.
