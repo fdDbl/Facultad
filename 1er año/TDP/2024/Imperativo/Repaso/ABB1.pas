@@ -30,14 +30,28 @@ begin
 		cargar(a,v[i]);
 end;
 
-procedure imprimirArbol(a:arbol);
+procedure enOrden(a:arbol);
 begin
 	if(a<>nil) then begin
-		
-		imprimirArbol(a^.HI);
+		enOrden(a^.HI);
 		writeln(a^.dato);
-		imprimirArbol(a^.HD);
-		
+		enOrden(a^.HD);
+	end;
+end;
+procedure preOrden(a:arbol);
+begin
+	if(a<>nil) then begin
+		writeln(a^.dato);
+		preOrden(a^.HI);
+		preOrden(a^.HD);
+	end;
+end;
+procedure postOrden(a:arbol);
+begin
+	if(a<>nil) then begin
+		postOrden(a^.HI);
+		postOrden(a^.HD);
+		writeln(a^.dato);
 	end;
 end;
 
@@ -46,5 +60,5 @@ var
 begin
 	a:=nil;
 	llenarArbol(a,v);
-	imprimirArbol(a);
+	enOrden(a);
 end.
