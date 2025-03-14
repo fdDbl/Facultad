@@ -52,10 +52,9 @@ string palabras = Console.ReadLine();
 int pri;
 int ult = palabras.Length-1;
 bool simetricas = true;
-if(palabras[palabras.Length/2] != ' ') {
+if(!string.IsNullOrEmpty(palabras) && palabras[palabras.Length/2] != ' ') {
     simetricas=false;
-}
-else {
+} else {
     for (pri=0; pri<(palabras.Length / 2); pri++, ult--) {
         if(palabras[pri] != palabras[ult]) {
             simetricas = false;
@@ -67,8 +66,8 @@ else {
 Console.WriteLine(simetricas ? "Son simétricas" : "No son simétricas");
 
 Console.WriteLine("\n--------- Punto 10 ---------");
-int n = 17;
-int m = 29;
+const int n = 17;
+const int m = 29;
 Console.WriteLine("Múltiplos de 17 o 29 entre 1 y 1000:");
 for(int i=1; i<1000; i++) {
     if(i % n == 0 || i % m == 0) // Para que no se repitan los múltiplos
@@ -92,8 +91,9 @@ sin declarar una variable resultado, sino simplemente imprimiendo la operación)
 
 Console.WriteLine("\n--------- Punto 12 ---------");
 Console.WriteLine("Ingrese el entero para ver sus divisores:");
-int ent = int.Parse(Console.ReadLine());
-if(ent != 0) {
+string entString = Console.ReadLine();
+if(!string.IsNullOrWhiteSpace(entString)) {
+    int ent = int.Parse(entString);
     for(int i = 1; i<=ent; i++)
         if(ent % i == 0)
             Console.WriteLine(i);
