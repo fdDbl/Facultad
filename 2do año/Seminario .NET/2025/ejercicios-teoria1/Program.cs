@@ -1,7 +1,7 @@
 ﻿Console.WriteLine("--------- Punto 1 ---------");
 /* La principal diferencia entre Write() y WriteLine() de System.Console es que el primero
-permite a la siguiente salida en consola continuar en la misma línea, mientras que WriteLine()
-establece un salto de línea (\n) implícito. 
+    permite a la siguiente salida en consola continuar en la misma línea, mientras que WriteLine()
+    establece un salto de línea (\n) implícito. 
     El método Console.ReadKey() obtiene la tecla que va a presionar el usuario una vez invocado 
     dicho método. */
 while(Console.ReadKey().Key != ConsoleKey.Enter) {} // Espera a que presione enter...
