@@ -47,17 +47,21 @@ Una vez guardado el valor, Console.WriteLine() imprime el valor que se le asign�
 
 Console.WriteLine("\n--------- Punto 9 ---------");
 Console.WriteLine("-- SIMETRÍA DE PALABRAS --");
-Console.WriteLine("Palabra 1:");
-string palabra1 = Console.ReadLine();
-Console.WriteLine("Palabra 2:");
-string palabra2 = Console.ReadLine();
+Console.WriteLine("Palabras:");
+string palabras = Console.ReadLine();
+int pri;
+int ult = palabras.Length-1;
 bool simetricas = true;
-if(palabra1.Length == palabra2.Length) {
-    for (int i=0; i<palabra1.Length; i++) {
-        if(palabra1[i] != palabra2[palabra2.Length - 1 - i]) {
+if(palabras[palabras.Length/2] != ' ') {
+    simetricas=false;
+}
+else {
+    for (pri=0; pri<(palabras.Length / 2); pri++, ult--) {
+        if(palabras[pri] != palabras[ult]) {
             simetricas = false;
             break;
-        }
+        } else if(char.IsWhiteSpace(palabras[pri]))
+            break;
     }
 }
 Console.WriteLine(simetricas ? "Son simétricas" : "No son simétricas");
