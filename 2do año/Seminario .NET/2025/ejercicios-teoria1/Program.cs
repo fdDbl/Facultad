@@ -87,5 +87,47 @@ sin declarar una variable resultado, sino simplemente imprimiendo la operación)
 // Cuando se usa el operador + entre un string y un dato numérico, se produce una conversión implícita del número a cadena y luego se realiza una concatenación.
 
 Console.WriteLine("\n--------- Punto 12 ---------");
+Console.WriteLine("Ingrese el entero para ver sus divisores:");
+int ent = int.Parse(Console.ReadLine());
+if(ent != 0) {
+    for(int i = 1; i<=ent; i++)
+        if(ent % i == 0)
+            Console.WriteLine(i);
+}
+
+Console.WriteLine("\n--------- Punto 13 ---------");
+int aa = 50;
+int bb = 0;
+// El problema es que si usamos & para evaluar la condicion, sí o sí se va a evaluar aunque b = 0 y
+// automáticamente se evaluaría una división por cero, cosa que da error. Se debe reemplazar el & por
+// && (AND en cortocircuito) para que si la primera condición es falsa, no se tenga que evaluar la otra.
+if ((bb != 0) && /* <- acá */ (aa/bb > 5))
+    Console.WriteLine(aa/bb);
+
+Console.WriteLine("\n--------- Punto 14 ---------");
+int aaa = 10;
+int bbb = 20;
+int menor = (aaa < bbb) ? aaa : bbb;
+Console.WriteLine($"El menor valor es: {menor}");
+
+Console.WriteLine("\n--------- Punto 15 ---------");
+/* int i = 0; */ // El error es que hay una variable i ya declarada cuando el bloque for intenta declarar otra más.
+for (int i = 1; i <= 10;) // Se soluciona declarando i solo una vez.
+{
+    Console.WriteLine(i++);
+}
+
+Console.WriteLine("\n--------- Punto 16 ---------");
+int j = 1;
+if (--j == 0)
+{
+Console.WriteLine("cero");
+}
+if (j++ == 0)
+{
+Console.WriteLine("cero");
+}
+Console.WriteLine(j);
+
 
 Console.ReadKey();
