@@ -28,7 +28,7 @@ var
 begin
     assign(a2,'libros.txt');
     reset(a1);
-    rewrite(a2);
+    rewrite(a2); reset(a2);
     while(not eof(a1)) do begin
         read(a1,l);
         writeln(a2,'ISBN: ',l.ISBN,'  Autor: ',l.autor,'  Título: ',l.titulo,'  Fecha de publicación: ',l.fecha,'  Stock: ',l.stock,'  Disponible: ',l.dispo);

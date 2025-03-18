@@ -20,8 +20,12 @@ begin
 end;
 procedure cargarArchivo(var aE:archivoEmpleados);
 var
-    e:empleado;
+    e:empleado; nomArc: string;
 begin
+    writeln('----- NUEVO ARCHIVO -----');
+    write('Ingrese el nombre del archivo: '); readln(nomArc);
+    assign(aE,nomArc);
+    rewrite(aE);
     reset(aE);
     leer(e);
     while(e.apellido <> 'fin') do begin
@@ -36,15 +40,15 @@ begin
 end;
 procedure listarNomAp(var aE:archivoEmpleados);
 var
-    nom,ap:string; e:empleado;
+    nomap:string; e:empleado;
 begin
-    writeln('Ingrese un nombre y apellido:');
-    readln(nom); readln(ap);
+    writeln('Ingrese un nombre o apellido:');
+    readln(nomap);
     reset(aE);
     writeln('Empleados con ese nombre o apellido:');
     while(not EOF(aE)) do begin
         read(aE,e);
-        if(e.nombre = nom) or (e.apellido = ap) then
+        if(e.nombre = nomap) or (e.apellido = nomap) then
             imprimirEmpleado(e);
     end;
     close(aE);
@@ -74,14 +78,53 @@ begin
     end;
     close(aE);
 end;
+function menu1():integer;
 var
-    aE:archivoEmpleados; nomArc:string;
+    opt:integer;
 begin
-    write('Ingrese el nombre del archivo: '); readln(nomArc);
+    writeln('----- MENU DE OPCIONES -----');
+    writeln('1. Nuevo archivo');
+    writeln('2. Abrir archivo');
+    readln(opt);
+    menu1:= opt;
+end;
+function menu2():integer;
+var
+    opt:integer;
+begin
+    writeln('----- ABRIR ARCHIVO -----');
+    writeln('1. Listar empleados con determinado nombre o apellido');
+    writeln('2. Listar todos los empleados');
+    writeln('3. Listar empleados mayores de 70');
+    readln(opt);
+    menu2:= opt;
+end;
+procedure abrirArchivo(var aE:archivoEmpleados);
+var
+    nomArc:string;
+begin
+    write('Ingrese el nombre del archivo a abrir (con su extension): '); readln(nomArc);
     assign(aE,nomArc);
-    rewrite(aE);
-    cargarArchivo(aE);
-    listarNomAp(aE);
-    listarDeAUno(aE);
-    listarMayores70(aE);
+    case menu2() of
+        1: listarNomAp(aE);
+        2: listarDeAUno(aE);
+        3: listarMayores70(aE);
+    else
+        writeln('Opcion incorrecta.');
+    end;
+end;
+procedure menuPrincipal(var aE:archivoEmpleados);
+begin
+    while(true) do
+        case menu1() of
+            1: cargarArchivo(aE);
+            2: abrirArchivo(aE);
+        else
+            writeln('Opcion incorrecta.');
+        end;
+end;
+var
+    aE:archivoEmpleados;
+begin
+    menuPrincipal(aE);
 end.
