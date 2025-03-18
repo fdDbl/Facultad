@@ -26,7 +26,6 @@ begin
     write('Ingrese el nombre del archivo: '); readln(nomArc);
     assign(aE,nomArc);
     rewrite(aE);
-    reset(aE);
     leer(e);
     while(e.apellido <> 'fin') do begin
         write(aE,e);
@@ -79,18 +78,13 @@ begin
     close(aE);
 end;
 function menu1():integer;
-var
-    opt:integer;
 begin
     writeln('----- MENU DE OPCIONES -----');
     writeln('1. Nuevo archivo');
     writeln('2. Abrir archivo');
-    readln(opt);
-    menu1:= opt;
+    readln(menu1);
 end;
 function menu2():integer;
-var
-    opt:integer;
 begin
     writeln('----- ABRIR ARCHIVO -----');
     writeln('1. Listar empleados con determinado nombre o apellido');
@@ -100,21 +94,20 @@ begin
     writeln('5. Modificar edad de un empleado');
     writeln('6. Exportar todos los empleados a un archivo de texto');
     writeln('7. Exportar empleados con DNI distinto de 00');
-    readln(opt);
-    menu2:= opt;
+    readln(menu2);
 end;
 function existe(var aE:archivoEmpleados; nro:integer): boolean;
 var
     e:empleado; ok:boolean;
 begin
     ok:=false;
-    reset(aE);
+    seek(aE,0);
     while(not EOF(aE))and(not ok) do begin
         read(aE,e);
         if(e.nro = nro) then
             ok:=true;
     end;
-    close(aE);
+    seek(aE,0);
     existe:=ok;
 end;
 procedure agregarAtras(var aE:archivoEmpleados);
@@ -123,17 +116,17 @@ var
 begin
     writeln('----- AGREGAR EMPLEADO/S AL FINAL DEL ARCHIVO -----');
     write('¿Cuantos empleados desea agregar?: '); readln(cant);
+    reset(aE);
     for i:= 1 to cant do begin
         leer(e);
         while(existe(aE,e.nro)) do begin
             writeln('ERROR: nro de empleado ya existente. Intente con otro');
             leer(e);
         end;
-        reset(aE);
         seek(aE,filesize(aE));
         write(aE,e);
-        close(aE);
     end;
+    close(aE);
 end;
 procedure modificarEdad(var aE:archivoEmpleados);
 var
@@ -177,12 +170,13 @@ var
 begin
     assign(aSinDNI,'faltaDNIEmpleado.txt');
     rewrite(aSinDNI);
-    reset(aE); reset(aSinDNI);
+    reset(aE);
     while(not EOF(aE)) do begin
         read(aE,e);
         if(e.dni = 00) then
             write(aSinDNI,'NRO: ',e.nro,', Nombre: ',e.nombre,', Apellido: ',e.apellido,', Edad: ',e.edad,', DNI: ',e.dni,'.');
     end;
+    close(aE); close(aSinDNI);
 end;
 procedure abrirArchivo(var aE:archivoEmpleados);
 var
