@@ -1,0 +1,11 @@
+﻿int i = 0;
+Console.WriteLine("--- PUNTO " + ++i + " ---");
+Uno.Resolver();
+Console.WriteLine("--- PUNTO " + ++i + " ---");
+Dos.Resolver();
+Console.WriteLine("--- PUNTO " + ++i + " ---");
+Tres.Resolver();
+Console.WriteLine("--- PUNTO " + ++i + " ---");
+Cuatro.Resolver();
+Console.WriteLine("--- PUNTO " + ++i + " ---");
+Cinco.Resolver();
