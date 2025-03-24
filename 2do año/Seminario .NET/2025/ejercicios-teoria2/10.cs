@@ -9,49 +9,51 @@ class Diez {
         (v[5] as StringBuilder).Insert(0, "Framework .");
         foreach (StringBuilder s in v)
             Console.WriteLine(s);
-        //dibujar el estado de la pila y la mem. heap
-        //en este punto de la ejecución
 
         /* PILA: 
-            // 0x[direccionVector] //
-        */
+            // v[0] -> StringBuilder("Framework.Net") //
+            // v[1] -> StringBuilder("Framework.Net") //
+            // v[2] -> StringBuilder("Framework.Net") //
+            // v[3] -> StringBuilder("Framework.Net") //
+            // v[4] -> StringBuilder("Framework.Net") //
+            // v[5] -> StringBuilder("Framework.Net") //
+            // v[6] -> StringBuilder("Framework.Net") //
+            // v[7] -> StringBuilder("Framework.Net") //
+            // v[8] -> StringBuilder("Framework.Net") //
+            // v[9] -> StringBuilder("Framework.Net") //
+            // v[10] -> StringBuilder("Framework.Net") //
 
+            TODOS apuntan a StringBuilder("Framework.Net") ya que v[5] tiene la misma referencia
+            que todos los elementos del vector.
+        */
         /* MEMORIA HEAP:
-            // v[0] //
-            // v[1] //
-            // v[2] //
-            // v[3] //
-            // v[4] //
-            // v[5] //
-            // v[6] //
-            // v[7] //
-            // v[8] //
-            // v[9] //
-            // v[10] //
+            // -> StringBuilder("Framework.Net") //
         */
 
         v[5] = new StringBuilder("CSharp");
         foreach (StringBuilder s in v)
             Console.WriteLine(s);
-        //dibujar el estado de la pila y la mem. heap
-        //en este punto de la ejecución
 
         /* PILA: 
-            // 0x[direccionVector] //
+            // v[0] -> StringBuilder("Framework.Net") //
+            // v[1] -> StringBuilder("Framework.Net") //
+            // v[2] -> StringBuilder("Framework.Net") //
+            // v[3] -> StringBuilder("Framework.Net") //
+            // v[4] -> StringBuilder("Framework.Net") //
+            // v[5] -> StringBuilder("CSharp") //
+            // v[6] -> StringBuilder("Framework.Net") //
+            // v[7] -> StringBuilder("Framework.Net") //
+            // v[8] -> StringBuilder("Framework.Net") //
+            // v[9] -> StringBuilder("Framework.Net") //
+            // v[10] -> StringBuilder("Framework.Net") //
+
+            TODOS apuntan a StringBuilder("Framework.Net") excepto v[5] porque este ahora apunta
+            a una nueva referencia desde que se hizo v[5] = new StringBuilder("CSharp");
         */
 
         /* MEMORIA HEAP:
-            // v[0] //
-            // v[1] //
-            // v[2] //
-            // v[3] //
-            // v[4] //
-            // v[5] apunta a una nueva dirección diferente a la de todos los demás elementos //
-            // v[6] //
-            // v[7] //
-            // v[8] //
-            // v[9] //
-            // v[10] //
+            // -> StringBuilder("Framework.Net") //
+            // -> StringBuilder("CSharp") // nueva referencia de objeto
         */
     }
 }
