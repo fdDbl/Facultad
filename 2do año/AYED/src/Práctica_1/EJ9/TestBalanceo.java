@@ -1,6 +1,5 @@
 package Práctica_1.EJ9;
 import java.util.Stack;
-
 /**
  *
  * @author Federico Dobal
