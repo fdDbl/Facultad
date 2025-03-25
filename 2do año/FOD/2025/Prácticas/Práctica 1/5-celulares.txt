@@ -5,5 +5,14 @@ Samsung_Galaxy_S23
 15 3 Teléfono premium con iOS y chip A16 Bionic
 iPhone_14
 103 299.99 Xiaomi
-25 5 Celular económico con gran batería
+300 5 Celular económico con gran batería
 Xiaomi_Redmi_Note_12
+159 59.99 Samsung
+6 2 Hermoso
+SamsungGalaxy2
+879 15.00 Huawei
+2 1 Blanco
+Huawei
+759 100.00 Samsung
+0 6 Dorado
+Samsung Galaxy S7 Edge
