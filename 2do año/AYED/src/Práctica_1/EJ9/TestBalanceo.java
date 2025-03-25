@@ -8,7 +8,7 @@ public class TestBalanceo {
 
     public static boolean esBalanceado(String S) {
         Stack<Character> pila = new Stack<>();
-
+        
         for (char c : S.toCharArray()) {
             if (c == '(' || c == '[' || c == '{') {
                 pila.push(c);
