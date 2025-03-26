@@ -1,2 +1,0 @@
-Codigo: 1, Nombre: Fede, Comision: 700.00
-Codigo: 2, Nombre: Juani, Comision: 1500.00

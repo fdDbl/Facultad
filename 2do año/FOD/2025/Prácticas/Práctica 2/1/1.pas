@@ -16,22 +16,22 @@ begin
     else
         e.code := VALOR_ALTO;
 end;
-procedure cargarDetalles(var aD:a1);
-var
-    e:empleado;
-begin
-    assign(aD,'archivoDetalle');
-    rewrite(aD);
-    readln(e.code);
-    while(e.code <> -1) do begin
-        readln(e.nombre);
-        readln(e.comision);
-        write(aD,e);
+// procedure cargarDetalles(var aD:a1);
+// var
+//     e:empleado;
+// begin
+//     assign(aD,'archivoDetalle');
+//     rewrite(aD);
+//     readln(e.code);
+//     while(e.code <> -1) do begin
+//         readln(e.nombre);
+//         readln(e.comision);
+//         write(aD,e);
 
-        readln(e.code);
-    end;
-    close(aD);
-end;
+//         readln(e.code);
+//     end;
+//     close(aD);
+// end;
 procedure cargarMaestro(var aD,aM:a1);
 var
     codeAct:integer; eDetalle,eMaestro:empleado;
@@ -44,7 +44,7 @@ begin
         codeAct := eDetalle.code;
         eMaestro := eDetalle;
         leer(aD,eDetalle);
-        while(codeAct = eDetalle.code) and (eDetalle.code <> VALOR_ALTO) do begin
+        while(eDetalle.code <> VALOR_ALTO) and (codeAct = eDetalle.code) do begin
             eMaestro.comision := eMaestro.comision + eDetalle.comision;
             leer(aD,eDetalle);
         end;
@@ -72,7 +72,6 @@ var
     aDetalle:a1;
     aMaestro:a1;
 begin
-    cargarDetalles(aDetalle);
+    // cargarDetalles(aDetalle); se dispone
     cargarMaestro(aDetalle,aMaestro);
-    exportarATXT(aMaestro);
 end.
