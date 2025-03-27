@@ -57,6 +57,5 @@ public class Calcular {
 
     private static void setRes(String res) {
         Calcular.RES = res;
-    }
-    
+    }   
 }

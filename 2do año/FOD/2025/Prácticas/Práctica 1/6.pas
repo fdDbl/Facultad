@@ -235,9 +235,7 @@ var
     opc: integer;
 begin
     writeln('----- MENU DE OPCIONES -----');
-    opc := -1;
-    
-    while opc <> 99 do begin
+    repeat
         writeln('1. Nuevo archivo a partir de .txt existente');
         writeln('2. Listar celulares con stock menor al minimo');
         writeln('3. Listar celulares con descripcion determinada');
@@ -259,7 +257,7 @@ begin
         else
             writeln('(!) ERROR: Opcion incorrecta');
         end;
-    end;
+    until opc = 99;
 end;
 
 var

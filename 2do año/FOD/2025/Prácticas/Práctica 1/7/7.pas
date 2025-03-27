@@ -77,8 +77,7 @@ procedure abrirBinario(var a:a1);
 var
     opc:integer;
 begin
-    opc := -1;
-    while opc <> 99 do begin
+    repeat
         writeln('1. Modificar novela');
         writeln('2. Agregar novela');
         writeln('99. X SALIR X');
@@ -90,7 +89,7 @@ begin
         else
             writeln('(!) ERROR: Opcion incorrecta');
         end;
-    end;
+    until opc = 99;
 end;
 var
     aN:a1;
