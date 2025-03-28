@@ -1,30 +1,30 @@
 {
   "format": 1,
   "restore": {
-    "c:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\teoria1\\teoria1.csproj": {}
+    "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj": {}
   },
   "projects": {
-    "c:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\teoria1\\teoria1.csproj": {
+    "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "c:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\teoria1\\teoria1.csproj",
-        "projectName": "teoria1",
-        "projectPath": "c:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\teoria1\\teoria1.csproj",
+        "projectUniqueName": "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj",
+        "projectName": "ejercicios-teoria3",
+        "projectPath": "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj",
         "packagesPath": "C:\\Users\\Federico Dobal\\.nuget\\packages\\",
-        "outputPath": "c:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\teoria1\\obj\\",
+        "outputPath": "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\Federico Dobal\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net8.0"
+          "net9.0"
         ],
         "sources": {
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "net8.0": {
-            "targetAlias": "net8.0",
+          "net9.0": {
+            "targetAlias": "net9.0",
             "projectReferences": {}
           }
         },
@@ -41,8 +41,8 @@
         "SdkAnalysisLevel": "9.0.200"
       },
       "frameworks": {
-        "net8.0": {
-          "targetAlias": "net8.0",
+        "net9.0": {
+          "targetAlias": "net9.0",
           "imports": [
             "net461",
             "net462",
