@@ -5,6 +5,6 @@ package Práctica_1.EJ8;
  */
 public class DoubleEndedQueue extends Queue {
     public void enqueueFirst(T element) {
-        super.enqueue(element);
+        enqueueIndex(0,element);
     }
 }

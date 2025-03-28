@@ -13,7 +13,7 @@ public class Queue extends Sequence {
     public Queue() {}
     
     public void enqueue(T data) {
-        this.enqueueIndex(this.queue.size()-1, data);
+        this.enqueueIndex(this.queue.size()-1, data); /* consultar */
     }
     
     public void enqueueIndex(int pos, T data) {
