@@ -11,19 +11,19 @@ Console.WriteLine("--- PUNTO " + ++z + " ---");
     Console.CursorVisible = true;
 }
 
-double[,] matriz46 = new double[4,6];
-for (int k = 0; k < 24; k++)
-    matriz46[k / 6, k % 6] = k;
+double[,] matriz1 = new double[4,6];
+for (int k = 0; k < matriz1.GetLength(0) * matriz1.GetLength(1); k++)
+    matriz1[k / matriz1.GetLength(1), k % matriz1.GetLength(1)] = k;
 
 Console.WriteLine("\n--- PUNTO " + ++z + " ---");
 {
-    ImprimirMatriz(matriz46);
+    ImprimirMatriz(matriz1);
+}
 
-    void ImprimirMatriz(double[,] matriz) {
-        for (int k = 0; k < 24; k++){
-            Console.Write(matriz[k / 6, k % 6]);
-            Console.Write((k % 6 != 5) ? " " : "\n");
-        }
+void ImprimirMatriz(double[,] matriz) {
+    for (int k = 0; k < matriz.GetLength(0) * matriz.GetLength(1); k++){
+        Console.Write(matriz[k / matriz.GetLength(1), k % matriz.GetLength(1)]);
+        Console.Write((k % matriz.GetLength(1) < matriz.GetLength(1)-1) ? " " : "\n");
     }
 }
 
@@ -31,54 +31,70 @@ Console.WriteLine("\n--- PUNTO " + ++z + " ---");
 {
     Console.WriteLine("Ingrese su plantilla de formato:");
     string? formato = Console.ReadLine();
-    ImprimirMatrizConFormato(matriz46,formato);
-    
-    void ImprimirMatrizConFormato(double[,] matriz, string? formatString) {
-        for (int k = 0; k < 24; k++){
-            Console.Write(matriz[k / 6, k % 6].ToString(formatString));
-            Console.Write((k % 6 != 5) ? " " : "\n");
-        }
-        
+    ImprimirMatrizConFormato(matriz1,formato);
+}
+
+void ImprimirMatrizConFormato(double[,] matriz, string? formatString) {
+    for (int k = 0; k < matriz.GetLength(0) * matriz.GetLength(1); k++){
+        Console.Write(matriz[k / matriz.GetLength(1), k % matriz.GetLength(1)].ToString(formatString));
+        Console.Write((k % matriz.GetLength(1) < matriz.GetLength(1)-1) ? " " : "\n");
     }
 }
 
+double[,] matrizCuadrada = new double[6,6];
+for (int k = 0; k < Math.Pow(matrizCuadrada.GetLength(0),2); k++)
+    matrizCuadrada[k / matrizCuadrada.GetLength(1), k % matrizCuadrada.GetLength(1)] = k;
+
 Console.WriteLine("\n--- PUNTO " + ++z + " ---");
 {
-    double[,] matrizCuadrada = new double[6,6];
-    for (int k = 0; k < 36; k++)
-        matrizCuadrada[k / 6, k % 6] = k;
-
-    double[] array = GetDiagonalPrincipal(matrizCuadrada);
+    var array = GetDiagonalPrincipal(matrizCuadrada);
     Console.WriteLine("Diagonal principal:");
-    foreach(double a in array)
-        Console.Write(a + " ");
+    ImprimirArreglo(array);
 
     array = GetDiagonalSecundaria(matrizCuadrada);
-    Console.WriteLine("Diagonal secundaria:");
+    Console.WriteLine("\nDiagonal secundaria:");
+    ImprimirArreglo(array);
+}
+
+void ImprimirArreglo(double[] array) {
     foreach(double a in array)
         Console.Write(a + " ");
+}
 
-    double[] GetDiagonalPrincipal(double[,] matriz) {
-        double[] aux = new double[6];
-        for(int i = 0; i < 6; i++)
-            aux[i] = matriz[i,i];
-        return aux;
-    }
+double[] GetDiagonalPrincipal(double[,] matriz) {
+    double[] aux = new double[6];
+    for(int i = 0; i < matriz.GetLength(1); i++)
+        aux[i] = matriz[i,i];
+    return aux;
+}
 
-    double[] GetDiagonalSecundaria(double[,] matriz) {
-        double[] aux = new double[6];
-        int j = 5;
-        for(int i = 0; i < 6; i++, j--)
-            aux[i] = matriz[i,j];
-        return aux;
+double[] GetDiagonalSecundaria(double[,] matriz) {
+    double[] aux = new double[6];
+    int j = 5;
+    for(int i = 0; i < matriz.GetLength(1); i++, j--)
+        aux[i] = matriz[i,j];
+    return aux;
+}
+
+void ImprimirArregloDeArreglo(double[][] arrayarray) {
+    foreach(double[] columna in arrayarray) {
+        Console.WriteLine("Columna");
+        foreach(double element in columna)
+            Console.WriteLine(element);
     }
 }
 
 Console.WriteLine("\n--- PUNTO " + ++z + " ---");
 {
+    ImprimirArregloDeArreglo(GetArregloDeArreglo(matriz1));
 
-    
     double[][] GetArregloDeArreglo(double [,] matriz) {
-
+        double[][] aux = new double[matriz.GetLength(0)][];
+        for (int i = 0; i < matriz.GetLength(0); i++) 
+            aux[i] = new double[matriz.GetLength(1)];
+    
+        for(int i=0; i < matriz.GetLength(0) * matriz.GetLength(1); i++)
+            aux[i / matriz.GetLength(1)][i % matriz.GetLength(1)] = matriz[i / matriz.GetLength(1),i % matriz.GetLength(1)];
+        return aux;
     }
 }
