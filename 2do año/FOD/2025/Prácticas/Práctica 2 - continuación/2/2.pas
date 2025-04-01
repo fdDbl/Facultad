@@ -89,11 +89,12 @@ begin
     leerDetalle(aD,regDet);
     while(regDet.code < MAX) do begin
         leerMaestro(aM,regMae);
-        while(regMae.code < regDet.code) do
+        while(regMae.code <> regDet.code) do
             leerMaestro(aM,regMae);
         while(regMae.code < MAX) and (regMae.code = regDet.code) do begin
             case regDet.nota of
-                0..5: begin regMae.cantFinal := regMae.cantFinal + 1;
+                0..5: begin 
+                    regMae.cantFinal := regMae.cantFinal + 1;
                     regMae.cantCursadas := regMae.cantCursadas - 1;
                 end;
                 6..10: regMae.cantCursadas := regMae.cantCursadas + 1;
