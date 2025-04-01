@@ -50,35 +50,15 @@ type
 
     archivoDetalleNacimiento = file of nacimiento;
     archivoDetalleFallecimiento = file of fallecimiento;
-    delegacion = record
-        nacimientos:archivoDetalleNacimiento;
-        fallecimientos:archivoDetalleFallecimiento
-    end;
-    vectorDelegaciones = Array[1..DEL] of delegacion;
+    vectorNacidos = Array[1..DEL] of archivoDetalleNacimiento;
+    vectorFallecidos = Array[1..DEL] of archivoDetalleFallecimiento;
+    vectorRegistrosN = Array[1..DEL] of nacimiento;
+    vectorRegistrosF = Array[1..DEL] of fallecimiento;
 
     archivoMaestro = file of registroMaestro;
-procedure generarMaestro(var aM:archivoMaestro; v:vectorDelegaciones);
 var
-    i:integer;
-    regMae:registroMaestro;
-    nAct:archivoDetalleNacimiento;
-    regNac:nacimiento;
-    fAct:archivoDetalleFallecimiento;
-    regFac:fallecimiento;
-begin
-    assign(aM,'archivoMaestro.bin');
-    rewrite(aM):
-    for i:= 1 to DEL do begin
-        nAct := v[i].nacimientos;
-        fAct := v[i].fallecimientos;
-
-        // continuar
-    end;
-end;
-var
-    vD:vectorDelegaciones;
     a1:archivoMaestro;
 begin
-    generarMaestro(aM,vD);
-    listarTXT(aM);
+    generarMaestro(a1); // implementar
+    listarTXT(a1); // implementar
 end;
