@@ -43,26 +43,25 @@ end;
 //     end;
 //     close(aD);
 // end;
-procedure cargarMaestro(var aD,aM:a1);
+procedure cargarCompacto(var aD,aC:a1);
 var
-    codeAct:integer; eDetalle,eMaestro:empleado;
+    eDetalle,eCompacto:empleado;
 begin
     reset(aD);
-    assign(aM,'archivoMaestro');
-    rewrite(aM);
+    assign(aC,'archivoCompacto');
+    rewrite(aC);
     leer(aD,eDetalle);
     while(eDetalle.code <> VALOR_ALTO) do begin
-        codeAct := eDetalle.code;
-        eMaestro := eDetalle;
-        leer(aD,eDetalle);
-        while(eDetalle.code <> VALOR_ALTO) and (codeAct = eDetalle.code) do begin
-            eMaestro.comision := eMaestro.comision + eDetalle.comision;
+        eCompacto := eDetalle;
+        eCompacto.comision := 0;
+        while(eDetalle.code <> VALOR_ALTO) and (eCompacto.code = eDetalle.code) do begin
+            eCompacto.comision := eCompacto.comision + eDetalle.comision;
             leer(aD,eDetalle);
         end;
-        write(aM,eMaestro);
+        write(aC,eCompacto);
     end;
     close(aD);
-    close(aM);
+    close(aC);
 end;
 
 procedure exportarATXT(var a:a1);
@@ -81,8 +80,8 @@ begin
 end;
 var
     aDetalle:a1;
-    aMaestro:a1;
+    aCompacto:a1;
 begin
     // cargarDetalles(aDetalle); se dispone
-    cargarMaestro(aDetalle,aMaestro);
+    cargarCompacto(aDetalle,aCompacto);
 end.

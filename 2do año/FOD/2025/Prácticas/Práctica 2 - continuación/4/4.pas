@@ -76,8 +76,7 @@ begin
     while(min.code < VALOR_ALTO) do begin
         regMae.code := min.code;
         regMae.fecha := min.fecha;
-        regMae.tiempo_total_de_sesiones_abiertas := min.tiempo_sesion;
-        minimo(regDet1,regDet2,aD1,aD2,min);
+        regMae.tiempo_total_de_sesiones_abiertas := 0;
         while(min.code < VALOR_ALTO) and (regMae.code = min.code) do begin
             regMae.tiempo_total_de_sesiones_abiertas := regMae.tiempo_total_de_sesiones_abiertas + min.tiempo_sesion;
             minimo(regDet1,regDet2,aD1,aD2,min);
