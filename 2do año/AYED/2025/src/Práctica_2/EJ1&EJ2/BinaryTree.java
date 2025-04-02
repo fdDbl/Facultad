@@ -53,9 +53,6 @@ public class BinaryTree<T> {
         return (this.isLeaf() && this.getData() == null);
     }
 
-    /*
-	 * El método isLeaf() indica si el árbol no tiene hijos.
-     */
     public boolean isLeaf() {
         return (!this.hasLeftChild() && !this.hasRightChild());
 
@@ -98,8 +95,51 @@ public class BinaryTree<T> {
         return tree;
     }
     
-    public void entreNiveles(int n, int m) {
-        
+public void entreNiveles(int n, int m) {
+        if (this.isEmpty() || n < 0 || m < n) {
+            return;
+        }
+        Queue<BinaryTree<T>> cola = new LinkedList<>();
+        cola.add(this);
+        int nivelActual = 0;
+
+        while (!cola.isEmpty()) {
+            int nodosEnNivel = cola.size();
+
+            if (nivelActual >= n && nivelActual <= m) {
+                for (int i = 0; i < nodosEnNivel; i++) {
+                    BinaryTree<T> nodo = cola.remove();
+                    System.out.print(nodo.getData() + " | ");
+                    if (nodo.hasLeftChild()) {
+                        cola.add(nodo.getLeftChild());
+                    }
+                    if (nodo.hasRightChild()) {
+                        cola.add(nodo.getRightChild());
+                    }
+                }
+                System.out.println();
+            } else {
+                for (int i = 0; i < nodosEnNivel; i++) {
+                    BinaryTree<T> nodo = cola.remove();
+                    if (nivelActual < n) {
+                        if (nodo.hasLeftChild()) {
+                            cola.add(nodo.getLeftChild());
+                        }
+                        if (nodo.hasRightChild()) {
+                            cola.add(nodo.getRightChild());
+                        }
+                    }
+                }
+                if (nivelActual < n) {
+                    System.out.println();
+                }
+            }
+
+            nivelActual++;
+            if (nivelActual > m) {
+                break;
+            }
+        }
     }
 
     @Override
@@ -107,14 +147,14 @@ public class BinaryTree<T> {
         return this.getData().toString();
     }
 
-    public void imprimir() {
+    public void inOrder() {
         if (this != null) {
             if (this.hasLeftChild()) {
-                this.getLeftChild().imprimir();
+                this.getLeftChild().inOrder();
             }
             System.out.print(this.data + " ");
             if (this.hasRightChild()) {
-                this.getRightChild().imprimir();
+                this.getRightChild().inOrder();
             }
         }
     }
