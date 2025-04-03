@@ -15,8 +15,25 @@ public class Transformacion {
     }
     
     public BinaryTree<Integer> suma() {
-        BinaryTree<Integer> aux = new BinaryTree();
-        Queue cola = new Queue();
-        
+        suma(this.tree);
+        return this.tree;
     }
+    
+    private int suma(BinaryTree<Integer> tree) {
+        int aux = 0;
+        if(tree.isLeaf()) {
+            aux = tree.getData();
+            tree.setData(0);
+            return aux;
+        }
+        if(tree.hasLeftChild())
+            aux += suma(tree.getLeftChild());
+        if(tree.hasRightChild())
+            aux += suma(tree.getRightChild());
+        int data = tree.getData();
+        tree.setData(aux);
+        return data + aux;
+    }
+    
+    /* Esta solución recorre una sola vez cada subárbol */
 }

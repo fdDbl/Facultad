@@ -31,7 +31,7 @@
     estudiante o el profesor recuperado es lo esperado.
  */
 package Práctica_1.EJ3;
-import PaqueteLectura.*;
+import java.util.Random;
 public class Test {
 
     /**
@@ -40,22 +40,22 @@ public class Test {
     public static void main(String[] args) {
         Estudiante[] arregloE = new Estudiante[2];
         Profesor[] arregloP = new Profesor[3];
-        GeneradorAleatorio.iniciar();
+        Random rand = new Random();
         for(int i=0; i<2; i++) {
             arregloE[i] = new Estudiante();
             arregloE[i].setNombre("Fulanito " + i);
             arregloE[i].setApellido("De tal " + i);
-            arregloE[i].setEmail(GeneradorAleatorio.generarString(10) + "@alumnos.unlp.edu.ar");
-            arregloE[i].setDireccion(GeneradorAleatorio.generarString(5));
-            arregloE[i].setComision(GeneradorAleatorio.generarInt(20));
+            arregloE[i].setEmail(rand.nextInt(5000) + ".mail" + "@alumnos.unlp.edu.ar");
+            arregloE[i].setDireccion(rand.nextInt(100) + " Address");
+            arregloE[i].setComision(rand.nextInt(50));
         }
         for(int i=0; i<3; i++) {
             arregloP[i] = new Profesor();
             arregloP[i].setNombre("Menganito " + i);
             arregloP[i].setApellido("De tal " + i);
-            arregloP[i].setEmail(GeneradorAleatorio.generarString(10) + "@info.unlp.edu.ar");
-            arregloP[i].setFacultad(GeneradorAleatorio.generarString(5));
-            arregloP[i].setCatedra(GeneradorAleatorio.generarInt(20));
+            arregloP[i].setEmail(rand.nextInt(5000) + ".docente" + "@info.unlp.edu.ar");
+            arregloP[i].setFacultad("Facultad " + rand.nextInt(100));
+            arregloP[i].setCatedra(rand.nextInt(50));
         }
         for(int i=0; i<2; i++) {
             System.out.println(arregloE[i].tusDatos());
