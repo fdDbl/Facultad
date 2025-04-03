@@ -10,7 +10,9 @@ import java.util.List;
 public class Queue extends Sequence {
     private List<T> queue = new ArrayList();
     
-    public Queue() {}
+    public Queue() {
+        super();
+    }
     
     public void enqueue(T data) {
         this.enqueueIndex(this.queue.size()-1, data); /* consultar */

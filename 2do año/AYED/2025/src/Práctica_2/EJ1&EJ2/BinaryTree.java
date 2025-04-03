@@ -149,13 +149,11 @@ public void entreNiveles(int n, int m) {
 
     public void inOrder() {
         if (this != null) {
-            if (this.hasLeftChild()) {
+            if (this.hasLeftChild()) 
                 this.getLeftChild().inOrder();
-            }
             System.out.print(this.data + " ");
-            if (this.hasRightChild()) {
+            if (this.hasRightChild()) 
                 this.getRightChild().inOrder();
-            }
         }
     }
 }
