@@ -96,51 +96,43 @@ public class BinaryTree<T> {
     }
     
 public void entreNiveles(int n, int m) {
-        if (this.isEmpty() || n < 0 || m < n) {
+        if (this.isEmpty() || n < 0 || m < n) 
             return;
-        }
         Queue<BinaryTree<T>> cola = new LinkedList<>();
         cola.add(this);
         int nivelActual = 0;
 
         while (!cola.isEmpty()) {
             int nodosEnNivel = cola.size();
-
             if (nivelActual >= n && nivelActual <= m) {
                 for (int i = 0; i < nodosEnNivel; i++) {
                     BinaryTree<T> nodo = cola.remove();
                     System.out.print(nodo.getData() + " | ");
-                    if (nodo.hasLeftChild()) {
+                    if (nodo.hasLeftChild()) 
                         cola.add(nodo.getLeftChild());
-                    }
-                    if (nodo.hasRightChild()) {
+                    if (nodo.hasRightChild()) 
                         cola.add(nodo.getRightChild());
-                    }
                 }
                 System.out.println();
             } else {
                 for (int i = 0; i < nodosEnNivel; i++) {
                     BinaryTree<T> nodo = cola.remove();
                     if (nivelActual < n) {
-                        if (nodo.hasLeftChild()) {
+                        if (nodo.hasLeftChild()) 
                             cola.add(nodo.getLeftChild());
-                        }
                         if (nodo.hasRightChild()) {
                             cola.add(nodo.getRightChild());
-                        }
                     }
                 }
-                if (nivelActual < n) {
+                if (nivelActual < n) 
                     System.out.println();
-                }
             }
-
             nivelActual++;
-            if (nivelActual > m) {
+            if (nivelActual > m) 
                 break;
-            }
         }
     }
+}
 
     @Override
     public String toString() {
@@ -148,10 +140,10 @@ public void entreNiveles(int n, int m) {
     }
 
     public void inOrder() {
-        if (this != null) {
+        if (!this.isEmpty()) {
             if (this.hasLeftChild()) 
                 this.getLeftChild().inOrder();
-            System.out.print(this.data + " ");
+            System.out.print(this.getData() + " ");
             if (this.hasRightChild()) 
                 this.getRightChild().inOrder();
         }
