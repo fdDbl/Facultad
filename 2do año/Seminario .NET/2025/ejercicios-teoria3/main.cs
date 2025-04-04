@@ -259,3 +259,27 @@ Console.WriteLine("\n--- PUNTO " + ++ñ + " ---");
         return res;
     }
 }
+
+Console.WriteLine("\n--- PUNTO " + ++ñ + " ---");
+{
+    Queue<int> cola = new();
+    string abc = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZ ";
+    Console.Write("Ingrese la clave de codificación: ");
+    string? clave = Console.ReadLine();
+    Console.Write("Ingrese el mensaje a codificar: ");
+    StringBuilder mensaje = new StringBuilder(Console.ReadLine());
+
+    for(int i = 0; i < clave.Length; i++)
+        cola.Enqueue(clave.ToCharArray().ElementAt(i) - 0x30);
+    
+    for(int i = 0; i < mensaje.Length; i++) {
+        int suma = abc.IndexOf(mensaje[i]) + cola.Peek();
+        if(suma > 28)
+            suma -= 28;
+        mensaje[i] = abc[suma];
+        cola.Enqueue(cola.Dequeue());
+    }
+
+    Console.WriteLine(mensaje);
+
+}
