@@ -1,137 +1,280 @@
-﻿Console.WriteLine("--------- Punto 1 ---------");
-/* La principal diferencia entre Write() y WriteLine() de System.Console es que el primero
-    permite a la siguiente salida en consola continuar en la misma línea, mientras que WriteLine()
-    establece un salto de línea (\n) implícito. 
-    El método Console.ReadKey() obtiene la tecla que va a presionar el usuario una vez invocado 
-    dicho método. */
-while(Console.ReadKey().Key != ConsoleKey.Enter) {} // Espera a que presione enter...
-string st1 = "Hola ";
-Console.Write(st1);
-while(Console.ReadKey().Key != ConsoleKey.Enter) {} // Espera a que presione enter...
-Console.Write(st1 += "Mundo");
+﻿using System;
 
-Console.WriteLine("\n--------- Punto 2 ---------");
-Console.WriteLine("Holaaa Mundo\nHello World\tHi everyone\nChau\\");
-
-Console.WriteLine("\n--------- Punto 3 ---------");
-/* Para prescindir del @, se puede usar \\ para evitar el código de escape que produce la \ simple. */
-string st2 = "c:\\windows\\system";
-Console.WriteLine(st2);
-
-Console.WriteLine("\n--------- Punto 4 ---------");
-string msj = Console.ReadLine();
-Console.WriteLine((string.IsNullOrWhiteSpace(msj)) ? "Hola mundo" : ("Bienvenido seas " + msj));
-
-Console.WriteLine("\n--------- Punto 5 ---------");
-msj = Console.ReadLine();
-string impresion = msj switch {"Juan" => "¡Hola Amigo!", "María" => "Buenos días Señora", "Alberto" => "Hola Alberto", "" => "¡Buen día Mundo!", _ => "Buen día " + msj};
-Console.WriteLine(impresion);
-
-Console.WriteLine("\n--------- Punto 6 ---------");
-msj = Console.ReadLine();
-while(msj != "") {
-    Console.WriteLine(msj.Length);
-    msj = Console.ReadLine();
-}
-
-Console.WriteLine("\n--------- Punto 7 ---------");
-/* La instrucción Console.WriteLine("100".Length) imprime el tamaño del string especificado (en este
-    caso es "100", que no es un numero sino una cadena, por lo que va a imprimir "3"): */
-Console.WriteLine("100".Length);
-
-Console.WriteLine("\n--------- Punto 8 ---------");
-string st;
-Console.WriteLine(st=Console.ReadLine()); // Esta instrucción es válida y primero hay que pensarla desde dentro del WriteLine.
-/* Primero se guarda en st lo que se lee desde teclado mediante st=Console.ReadLine(). 
-Una vez guardado el valor, Console.WriteLine() imprime el valor que se le asignó a st. */
-
-Console.WriteLine("\n--------- Punto 9 ---------");
-Console.WriteLine("-- SIMETRÍA DE PALABRAS --");
-Console.WriteLine("Palabras:");
-string palabras = Console.ReadLine();
-int pri;
-int ult = palabras.Length-1;
-bool simetricas = true;
-if(!string.IsNullOrEmpty(palabras) && palabras[palabras.Length/2] != ' ') {
-    simetricas=false;
-} else {
-    for (pri=0; pri<(palabras.Length / 2); pri++, ult--) {
-        if(palabras[pri] != palabras[ult]) {
-            simetricas = false;
-            break;
-        } else if(char.IsWhiteSpace(palabras[pri]))
-            break;
+class Program
+{
+    static void Main(string[] args)
+    {
+        bool continuar = true;
+        while (continuar)
+        {
+            Console.Clear();
+            Console.WriteLine("Seleccione un punto (1-16) o 0 para salir:");
+            for (int i = 1; i <= 16; i++)
+                Console.WriteLine($"{i}. Punto {i}");
+            
+            if (int.TryParse(Console.ReadLine(), out int opcion))
+            {
+                if (opcion == 0)
+                {
+                    continuar = false;
+                }
+                else if (opcion >= 1 && opcion <= 16)
+                {
+                    Console.Clear();
+                    switch (opcion)
+                    {
+                        case 1: Punto1.Ejecutar(); break;
+                        case 2: Punto2.Ejecutar(); break;
+                        case 3: Punto3.Ejecutar(); break;
+                        case 4: Punto4.Ejecutar(); break;
+                        case 5: Punto5.Ejecutar(); break;
+                        case 6: Punto6.Ejecutar(); break;
+                        case 7: Punto7.Ejecutar(); break;
+                        case 8: Punto8.Ejecutar(); break;
+                        case 9: Punto9.Ejecutar(); break;
+                        case 10: Punto10.Ejecutar(); break;
+                        case 11: Punto11.Ejecutar(); break;
+                        case 12: Punto12.Ejecutar(); break;
+                        case 13: Punto13.Ejecutar(); break;
+                        case 14: Punto14.Ejecutar(); break;
+                        case 15: Punto15.Ejecutar(); break;
+                        case 16: Punto16.Ejecutar(); break;
+                    }
+                    Console.WriteLine("\nPresione Enter para continuar...");
+                    Console.ReadLine();
+                }
+            }
+        }
     }
 }
-Console.WriteLine(simetricas ? "Son simétricas" : "No son simétricas");
 
-Console.WriteLine("\n--------- Punto 10 ---------");
-const int n = 17;
-const int m = 29;
-Console.WriteLine("Múltiplos de 17 o 29 entre 1 y 1000:");
-for(int i=1; i<1000; i++) {
-    if(i % n == 0 || i % m == 0) // Para que no se repitan los múltiplos
-        Console.WriteLine(i);
-}
-
-Console.WriteLine("\n--------- Punto 11 ---------");
-Console.WriteLine("10/3 = " + 10 / 3);
-Console.WriteLine("10.0/3 = " + 10.0 / 3);
-Console.WriteLine("10/3.0 = " + 10 / 3.0);
-int a = 10, b = 3;
-Console.WriteLine("Si a y b son variables enteras, si a=10 y b=3");
-Console.WriteLine("entonces a/b = " + a / b);
-double c = 3;
-Console.WriteLine("Si c es una variable double, c=3");
-Console.WriteLine("entonces a/c = " + a / c);
-/* Llegamos fácilmente a la conclusión de que solo basta que un operando sea de punto flotante para que el resultado directo (es decir,
-sin declarar una variable resultado, sino simplemente imprimiendo la operación) sea también de punto flotante. */
-// Se puede concluir que el operador "/" devuelve resultados tanto enteros cómo en punto flotante.
-// Cuando se usa el operador + entre un string y un dato numérico, se produce una conversión implícita del número a cadena y luego se realiza una concatenación.
-
-Console.WriteLine("\n--------- Punto 12 ---------");
-Console.WriteLine("Ingrese el entero para ver sus divisores:");
-string entString = Console.ReadLine();
-if(!string.IsNullOrWhiteSpace(entString)) {
-    int ent = int.Parse(entString);
-    for(int i = 1; i<=ent; i++)
-        if(ent % i == 0)
-            Console.WriteLine(i);
-}
-
-Console.WriteLine("\n--------- Punto 13 ---------");
-int aa = 50;
-int bb = 0;
-// El problema es que si usamos & para evaluar la condicion, sí o sí se va a evaluar aunque b = 0 y
-// automáticamente se evaluaría una división por cero, cosa que da error. Se debe reemplazar el & por
-// && (AND en cortocircuito) para que si la primera condición es falsa, no se tenga que evaluar la otra.
-if ((bb != 0) && /* <- acá */ (aa/bb > 5))
-    Console.WriteLine(aa/bb);
-
-Console.WriteLine("\n--------- Punto 14 ---------");
-int aaa = 10;
-int bbb = 20;
-int menor = (aaa < bbb) ? aaa : bbb;
-Console.WriteLine($"El menor valor es: {menor}");
-
-Console.WriteLine("\n--------- Punto 15 ---------");
-/* int i = 0; */ // El error es que hay una variable i ya declarada cuando el bloque for intenta declarar otra más.
-for (int i = 1; i <= 10;) // Se soluciona declarando i solo una vez.
+class Punto1
 {
-    Console.WriteLine(i++);
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 1 ---------");
+        while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+        string st1 = "Hola ";
+        Console.Write(st1);
+        while (Console.ReadKey().Key != ConsoleKey.Enter) { }
+        Console.Write(st1 += "Mundo");
+    }
 }
 
-Console.WriteLine("\n--------- Punto 16 ---------");
-int j = 1;
-if (--j == 0)
+class Punto2
 {
-Console.WriteLine("cero");
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 2 ---------");
+        Console.WriteLine("Holaaa Mundo\nHello World\tHi everyone\nChau\\");
+    }
 }
-if (j++ == 0)
+
+class Punto3
 {
-Console.WriteLine("cero");
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 3 ---------");
+        string st2 = "c:\\windows\\system";
+        Console.WriteLine(st2);
+    }
 }
-Console.WriteLine(j);
 
+class Punto4
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 4 ---------");
+        string msj = Console.ReadLine();
+        Console.WriteLine((string.IsNullOrWhiteSpace(msj)) ? "Hola mundo" : ("Bienvenido seas " + msj));
+    }
+}
 
-Console.ReadKey();
+class Punto5
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 5 ---------");
+        string msj = Console.ReadLine();
+        string impresion = msj switch
+        {
+            "Juan" => "¡Hola Amigo!",
+            "María" => "Buenos días Señora",
+            "Alberto" => "Hola Alberto",
+            "" => "¡Buen día Mundo!",
+            _ => "Buen día " + msj
+        };
+        Console.WriteLine(impresion);
+    }
+}
+
+class Punto6
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 6 ---------");
+        string msj = Console.ReadLine();
+        while (msj != "")
+        {
+            Console.WriteLine(msj.Length);
+            msj = Console.ReadLine();
+        }
+    }
+}
+
+class Punto7
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 7 ---------");
+        Console.WriteLine("100".Length);
+    }
+}
+
+class Punto8
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 8 ---------");
+        string st;
+        Console.WriteLine(st = Console.ReadLine());
+    }
+}
+
+class Punto9
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 9 ---------");
+        Console.WriteLine("-- SIMETRÍA DE PALABRAS --");
+        Console.WriteLine("Palabras:");
+        string palabras = Console.ReadLine();
+        int pri;
+        int ult = palabras.Length - 1;
+        bool simetricas = true;
+        if (!string.IsNullOrEmpty(palabras) && palabras[palabras.Length / 2] != ' ')
+        {
+            simetricas = false;
+        }
+        else
+        {
+            for (pri = 0; pri < (palabras.Length / 2); pri++, ult--)
+            {
+                if (palabras[pri] != palabras[ult])
+                {
+                    simetricas = false;
+                    break;
+                }
+                else if (char.IsWhiteSpace(palabras[pri]))
+                    break;
+            }
+        }
+        Console.WriteLine(simetricas ? "Son simétricas" : "No son simétricas");
+    }
+}
+
+class Punto10
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 10 ---------");
+        const int n = 17;
+        const int m = 29;
+        Console.WriteLine("Múltiplos de 17 o 29 entre 1 y 1000:");
+        for (int i = 1; i < 1000; i++)
+        {
+            if (i % n == 0 || i % m == 0)
+                Console.WriteLine(i);
+        }
+    }
+}
+
+class Punto11
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 11 ---------");
+        Console.WriteLine("10/3 = " + 10 / 3);
+        Console.WriteLine("10.0/3 = " + 10.0 / 3);
+        Console.WriteLine("10/3.0 = " + 10 / 3.0);
+        int a = 10, b = 3;
+        Console.WriteLine("Si a y b son variables enteras, si a=10 y b=3");
+        Console.WriteLine("entonces a/b = " + a / b);
+        double c = 3;
+        Console.WriteLine("Si c es una variable double, c=3");
+        Console.WriteLine("entonces a/c = " + a / c);
+    }
+}
+
+class Punto12
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 12 ---------");
+        Console.WriteLine("Ingrese el entero para ver sus divisores:");
+        string entString = Console.ReadLine();
+        if (!string.IsNullOrWhiteSpace(entString))
+        {
+            int ent = int.Parse(entString);
+            for (int i = 1; i <= ent; i++)
+                if (ent % i == 0)
+                    Console.WriteLine(i);
+        }
+    }
+}
+
+class Punto13
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 13 ---------");
+        int aa = 50;
+        int bb = 0;
+        if ((bb != 0) && (aa / bb > 5))
+            Console.WriteLine(aa / bb);
+        else
+            Console.WriteLine("No se puede dividir por cero");
+    }
+}
+
+class Punto14
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 14 ---------");
+        int aaa = 10;
+        int bbb = 20;
+        int menor = (aaa < bbb) ? aaa : bbb;
+        Console.WriteLine($"El menor valor es: {menor}");
+    }
+}
+
+class Punto15
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 15 ---------");
+        for (int i = 1; i <= 10;)
+        {
+            Console.WriteLine(i++);
+        }
+    }
+}
+
+class Punto16
+{
+    public static void Ejecutar()
+    {
+        Console.WriteLine("--------- Punto 16 ---------");
+        int j = 1;
+        if (--j == 0)
+        {
+            Console.WriteLine("cero");
+        }
+        if (j++ == 0)
+        {
+            Console.WriteLine("cero");
+        }
+        Console.WriteLine(j);
+    }
+}
