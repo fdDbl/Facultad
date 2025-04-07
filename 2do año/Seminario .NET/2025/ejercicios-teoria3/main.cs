@@ -281,5 +281,101 @@ Console.WriteLine("\n--- PUNTO " + ++ñ + " ---");
     }
 
     Console.WriteLine(mensaje);
+}
 
+Console.WriteLine("\n--- PUNTO " + ++ñ + " ---");
+{
+    int x = 0;
+    try
+    {
+        Console.WriteLine("Resultado 1: " + 1.0 / x);
+        Console.WriteLine("Resultado 2: " + 1 / x);
+        Console.WriteLine("todo OK");
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.Message);
+    }
+    // imprime el resultado (que tiende al infinito) solamente del double, del int no
+}
+
+Console.WriteLine("\n--- PUNTO " + ++ñ + " ---");
+{
+    double suma = 0;
+    string? st = Console.ReadLine();
+    while(!String.IsNullOrEmpty(st)) {
+        try {
+            suma += double.Parse(st);
+            Console.WriteLine(suma);
+        } catch(Exception E) {
+            Console.WriteLine("Usuario, tiene un ERROR: " + E.Message);
+        } finally {
+            st = Console.ReadLine();
+        }
+    }
+}
+
+Console.WriteLine("\n--- PUNTO " + ++ñ + " ---");
+{
+    try
+    {
+        Metodo1();
+    }
+    catch
+    {
+        Console.WriteLine("Método 1 propagó una excepción no tratada");
+    }
+    try
+    {
+        Metodo2();
+    }
+    catch
+    {
+        Console.WriteLine("Método 2 propagó una excepción no tratada");
+    }
+    try
+    {
+        Metodo3();
+    }
+    catch
+    {
+        Console.WriteLine("Método 3 propagó una excepción");
+    }
+    void Metodo1()
+    {
+        object obj = "hola";
+        try
+        {
+            int i = (int)obj;
+        }
+        finally
+        {
+            Console.WriteLine("Bloque finally en Metodo1");
+        }
+    }
+    void Metodo2()
+    {
+        object obj = "hola";
+        try
+        {
+            int i = (int)obj;
+        }
+        catch (OverflowException)
+        {
+            Console.WriteLine("Overflow");
+        }
+    }
+    void Metodo3()
+    {
+        object obj = "hola";
+        try
+        {
+            int i = (int)obj;
+        }
+        catch (InvalidCastException)
+        {
+            Console.WriteLine("Excepción InvalidCast en Metodo3");
+            throw;
+        }
+    }
 }
