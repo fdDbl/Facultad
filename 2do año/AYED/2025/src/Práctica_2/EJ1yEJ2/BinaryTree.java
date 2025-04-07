@@ -1,4 +1,4 @@
-package Práctica_2.EJ1;
+package Práctica_2.EJ1yEJ2;
 
 import java.util.LinkedList;
 import java.util.Queue;

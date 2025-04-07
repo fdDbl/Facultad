@@ -7,7 +7,7 @@ import java.util.List;
  *
  * @author Federico Dobal
  */
-public class Queue extends Sequence {
+public class Queue<T> extends Sequence {
     private List<T> queue = new ArrayList();
     
     public Queue() {

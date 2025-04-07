@@ -29,6 +29,6 @@ public class DobleInteger {
     }
 
     public String toString() {
-        return "{Suma= " + I1 + ", Diferencia= " + I2 + '}';
+        return "{" + I1 + "|" + I2 + "}";
     }
 }

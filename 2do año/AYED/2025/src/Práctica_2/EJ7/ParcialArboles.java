@@ -1,6 +1,6 @@
 package Práctica_2.EJ7;
 
-import Práctica_2.EJ1.BinaryTree;
+import Práctica_2.EJ1yEJ2.BinaryTree;
 
 /**
  *

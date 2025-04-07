@@ -1,5 +1,5 @@
 
-import Práctica_2.EJ1.BinaryTree;
+import Práctica_2.EJ1yEJ2.BinaryTree;
 import java.util.ArrayList;
 import java.util.List;
 
