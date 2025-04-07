@@ -143,7 +143,7 @@ public void entreNiveles(int n, int m) {
         if (!this.isEmpty()) {
             if (this.hasLeftChild()) 
                 this.getLeftChild().inOrder();
-            System.out.print(this.getData() + " ");
+            System.out.print(this.getData().toString() + " ");
             if (this.hasRightChild()) 
                 this.getRightChild().inOrder();
         }

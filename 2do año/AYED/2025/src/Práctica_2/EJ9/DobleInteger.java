@@ -30,6 +30,6 @@ public class DobleInteger {
 
     @Override
     public String toString() {
-        return "DobleInteger{" + "I1=" + I1 + ", I2=" + I2 + '}';
+        return "DobleInteger{" + "Suma=" + I1 + ", Diferencia=" + I2 + '}';
     }
 }
