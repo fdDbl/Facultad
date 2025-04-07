@@ -28,8 +28,7 @@ public class DobleInteger {
         this.I2 = I2;
     }
 
-    @Override
     public String toString() {
-        return "DobleInteger{" + "Suma=" + I1 + ", Diferencia=" + I2 + '}';
+        return "{Suma= " + I1 + ", Diferencia= " + I2 + '}';
     }
 }

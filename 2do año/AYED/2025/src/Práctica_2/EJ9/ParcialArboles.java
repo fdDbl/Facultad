@@ -1,7 +1,6 @@
 package Práctica_2.EJ9;
 
 import Práctica_2.EJ1.BinaryTree;
-import java.util.Objects;
 
 /**
  *
@@ -12,16 +11,26 @@ public class ParcialArboles {
     
     public BinaryTree<DobleInteger> sumAndDif(BinaryTree<Integer> arbol) {
         BinaryTree<DobleInteger> nuevoArbol = new BinaryTree();
-        if(!arbol.isEmpty())
-            nuevoArbol.setData(new DobleInteger(arbol.getData(),arbol.getData()));
-        Integer sum = 0;
-        Integer dif = 0;
-        sumAndDifAux(arbol,nuevoArbol,sum,dif);
+        sumAndDifAux(arbol,nuevoArbol,0,0);
         return nuevoArbol;
     }
     
-    private BinaryTree<DobleInteger> sumAndDifAux(BinaryTree<Integer> arbol, BinaryTree<DobleInteger> nuevoArbol, Integer sum, Integer dif) {
+    private void sumAndDifAux(BinaryTree<Integer> arbol, BinaryTree<DobleInteger> nuevoArbol, Integer sum, Integer padre) {
+        if(arbol.isEmpty())
+            return;
+        int suma = sum + arbol.getData();
+        int dif = arbol.getData() - padre;
         
+        nuevoArbol.setData(new DobleInteger(suma,dif));
+        
+        if(arbol.hasLeftChild()) {
+            nuevoArbol.addLeftChild(new BinaryTree());
+            sumAndDifAux(arbol.getLeftChild(),nuevoArbol.getLeftChild(),suma,arbol.getData());
+        }
+        if(arbol.hasRightChild()) {
+            nuevoArbol.addRightChild(new BinaryTree());
+            sumAndDifAux(arbol.getRightChild(),nuevoArbol.getRightChild(),suma,arbol.getData());
+        }
     }
     
     public static void main(String[] args) {
@@ -32,6 +41,8 @@ public class ParcialArboles {
         arbol.addLeftChild(new BinaryTree<>(15));
         
         ParcialArboles p = new ParcialArboles();
+        arbol.inOrder();
+        System.out.println("");
         p.sumAndDif(arbol).inOrder();
     }
     
