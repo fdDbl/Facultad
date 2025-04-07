@@ -13,3 +13,18 @@ C:\Users\Federico Dobal\Desktop\Facultad\2do año\Seminario .NET\2025\ejercicios
 C:\Users\Federico Dobal\Desktop\Facultad\2do año\Seminario .NET\2025\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.pdb
 C:\Users\Federico Dobal\Desktop\Facultad\2do año\Seminario .NET\2025\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.genruntimeconfig.cache
 C:\Users\Federico Dobal\Desktop\Facultad\2do año\Seminario .NET\2025\ejercicios-teoria3\obj\Debug\net9.0\ref\ejercicios-teoria3.dll
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\bin\Debug\net9.0\ejercicios-teoria3.exe
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\bin\Debug\net9.0\ejercicios-teoria3.deps.json
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\bin\Debug\net9.0\ejercicios-teoria3.runtimeconfig.json
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\bin\Debug\net9.0\ejercicios-teoria3.dll
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\bin\Debug\net9.0\ejercicios-teoria3.pdb
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.AssemblyInfoInputs.cache
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.AssemblyInfo.cs
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.csproj.CoreCompileInputs.cache
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.sourcelink.json
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.dll
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\refint\ejercicios-teoria3.dll
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.pdb
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ejercicios-teoria3.genruntimeconfig.cache
+C:\Users\Fede Dobal\Desktop\www\Facultad\2do año\Seminario .NET\2025\Clase 3\ejercicios-teoria3\obj\Debug\net9.0\ref\ejercicios-teoria3.dll

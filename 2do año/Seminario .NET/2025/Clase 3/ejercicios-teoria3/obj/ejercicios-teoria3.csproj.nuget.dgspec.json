@@ -1,20 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj": {}
+    "C:\\Users\\Fede Dobal\\Desktop\\www\\Facultad\\2do año\\Seminario .NET\\2025\\Clase 3\\ejercicios-teoria3\\ejercicios-teoria3.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj": {
+    "C:\\Users\\Fede Dobal\\Desktop\\www\\Facultad\\2do año\\Seminario .NET\\2025\\Clase 3\\ejercicios-teoria3\\ejercicios-teoria3.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj",
+        "projectUniqueName": "C:\\Users\\Fede Dobal\\Desktop\\www\\Facultad\\2do año\\Seminario .NET\\2025\\Clase 3\\ejercicios-teoria3\\ejercicios-teoria3.csproj",
         "projectName": "ejercicios-teoria3",
-        "projectPath": "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\ejercicios-teoria3.csproj",
-        "packagesPath": "C:\\Users\\Federico Dobal\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Federico Dobal\\Desktop\\Facultad\\2do año\\Seminario .NET\\2025\\ejercicios-teoria3\\obj\\",
+        "projectPath": "C:\\Users\\Fede Dobal\\Desktop\\www\\Facultad\\2do año\\Seminario .NET\\2025\\Clase 3\\ejercicios-teoria3\\ejercicios-teoria3.csproj",
+        "packagesPath": "C:\\Users\\Fede Dobal\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Fede Dobal\\Desktop\\www\\Facultad\\2do año\\Seminario .NET\\2025\\Clase 3\\ejercicios-teoria3\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\Federico Dobal\\AppData\\Roaming\\NuGet\\NuGet.Config"
+          "C:\\Users\\Fede Dobal\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net9.0"
@@ -59,7 +59,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.200/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.202/PortableRuntimeIdentifierGraph.json"
         }
       }
     }
