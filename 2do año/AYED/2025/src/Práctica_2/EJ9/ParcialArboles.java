@@ -1,5 +1,8 @@
 package Práctica_2.EJ9;
 
+/*  1. si el recorrido no es por niveles, usar helper 
+*/
+
 import Práctica_2.EJ1yEJ2.BinaryTree;
 /**
  *

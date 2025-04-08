@@ -15,7 +15,10 @@ public class Queue<T> extends Sequence {
     }
     
     public void enqueue(T data) {
-        this.enqueueIndex(this.queue.size()-1, data); /* consultar */
+        if(!this.queue.isEmpty())
+            this.enqueueIndex(this.queue.size()-1, data);
+        else
+            this.enqueueIndex(0, data);
     }
     
     public void enqueueIndex(int pos, T data) {

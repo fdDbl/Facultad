@@ -106,8 +106,7 @@ public class GeneralTree<T>{
     }
     
     private void numerosImparesMayoresQuePostOrden(Integer n, List<Integer> lista) {
-        List<GeneralTree<T>> hijos = this.getChildren();
-        for(GeneralTree<T> hijo: hijos)
+        for(GeneralTree<T> hijo: this.getChildren())
             hijo.numerosImparesMayoresQuePreOrden(n,lista);
         
         if((Integer) this.getData() > n & (Integer) this.getData() % 2 != 0)
@@ -124,8 +123,7 @@ public class GeneralTree<T>{
             t = cola.dequeue();
             if(!t.isEmpty() & (Integer) t.getData() > n & (Integer) t.getData() % 2 != 0)
                 lista.add((Integer) t.getData());
-            List<GeneralTree<T>> hijos = t.getChildren();
-            for(GeneralTree<T> hijo: hijos)
+            for(GeneralTree<T> hijo: t.getChildren())
                 cola.enqueue(hijo);
         }
         
@@ -137,18 +135,59 @@ public class GeneralTree<T>{
     public int altura() {
         if(this.isEmpty())
             return -1;
-        return alturaAux();
+        return alturaHelper();
     }
     
-    private int alturaAux() {
+    private int alturaHelper() {
         if(this.isLeaf())
             return 0;
         else {
             int altAct = 0;
             List<GeneralTree<T>> hijos = this.getChildren();
             for(GeneralTree<T> hijo: hijos)
-                altAct = Math.max(altAct, hijo.alturaAux());
+                altAct = Math.max(altAct, hijo.alturaHelper());
             return altAct;
         }
+    }
+    
+    public int nivel(T dato) {
+        if(!this.isEmpty()) {
+            Queue<GeneralTree<T>> cola = new Queue<>();
+            cola.enqueue(this);
+            GeneralTree<T> aux;
+            int level = 0;
+        
+            while(!cola.isEmpty()) {
+                for(int i=0; i < cola.size(); i++) {
+                    aux = cola.dequeue();
+                    if(!aux.isEmpty() && aux.getData() == dato)
+                        return level;
+                    for(GeneralTree<T> hijo: aux.getChildren())
+                        cola.enqueue(hijo);
+                }
+                level++;    
+            }
+        }
+        return -1;
+    }
+    
+    public int ancho() {
+        if(!this.isEmpty()) {
+            int anchoMax = -1;
+            Queue<GeneralTree<T>> cola = new Queue<>();
+            GeneralTree<T> aux;
+            cola.enqueue(this);
+            
+            while(!cola.isEmpty()) {
+                if(cola.size() > anchoMax)
+                    anchoMax = cola.size();
+                aux = cola.dequeue();
+                for(GeneralTree<T> hijo: aux.getChildren())
+                    cola.enqueue(hijo);
+            }
+        }
+        if(this.isLeaf())
+            return 0;
+        return -1;
     }
 }
