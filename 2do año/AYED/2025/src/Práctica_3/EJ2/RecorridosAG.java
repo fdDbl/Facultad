@@ -18,11 +18,10 @@ public class RecorridosAG {
     }
     
     private void numerosImparesMayoresQuePreOrden(GeneralTree <Integer> a, Integer n, List<Integer> lista) {
-        if(a.getData() > n & a.getData() % 2 != 0)
+        if(a.getData() > n && a.getData() % 2 != 0)
             lista.add(a.getData());
         
-        List<GeneralTree<Integer>> hijos = a.getChildren();
-        for(GeneralTree<Integer> hijo: hijos)
+        for(GeneralTree<Integer> hijo: a.getChildren())
             numerosImparesMayoresQuePreOrden(hijo,n,lista);
     }
     
@@ -37,12 +36,11 @@ public class RecorridosAG {
         if(a.hasChildren())
             numerosImparesMayoresQueInOrden(a.getChildren().getFirst(),n,lista);
         
-        if(a.getData() > n & a.getData() % 2 != 0)
+        if(a.getData() > n && a.getData() % 2 != 0)
             lista.add(a.getData());
         
-        List<GeneralTree<Integer>> hijos = a.getChildren();
-        for(GeneralTree<Integer> hijo: hijos.subList(1, hijos.size()))
-            numerosImparesMayoresQueInOrden(hijo,n,lista);
+        for(int i=0; i< a.getChildren().size(); i++)
+            numerosImparesMayoresQueInOrden(a.getChildren().get(i),n,lista);
     }
     
     public List<Integer> numerosImparesMayoresQuePostOrden(GeneralTree <Integer> a, Integer n) {
@@ -55,7 +53,7 @@ public class RecorridosAG {
     private void numerosImparesMayoresQuePostOrden(GeneralTree <Integer> a, Integer n, List<Integer> lista) {
         List<GeneralTree<Integer>> hijos = a.getChildren();
         for(GeneralTree<Integer> hijo: hijos)
-            numerosImparesMayoresQuePreOrden(hijo,n,lista);
+            numerosImparesMayoresQuePostOrden(hijo,n,lista);
         
         if(a.getData() > n & a.getData() % 2 != 0)
             lista.add(a.getData());
@@ -69,10 +67,9 @@ public class RecorridosAG {
         
         while(!cola.isEmpty()) {
             t = cola.dequeue();
-            if(!t.isEmpty() & t.getData() > n & t.getData() % 2 != 0)
+            if(t.getData() > n & t.getData() % 2 != 0)
                 lista.add(t.getData());
-            List<GeneralTree<Integer>> hijos = t.getChildren();
-            for(GeneralTree<Integer> hijo: hijos)
+            for(GeneralTree<Integer> hijo: t.getChildren())
                 cola.enqueue(hijo);
         }
         

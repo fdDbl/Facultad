@@ -179,15 +179,15 @@ public class GeneralTree<T>{
             cola.enqueue(this);
             
             while(!cola.isEmpty()) {
-                if(cola.size() > anchoMax)
-                    anchoMax = cola.size();
-                aux = cola.dequeue();
-                for(GeneralTree<T> hijo: aux.getChildren())
-                    cola.enqueue(hijo);
+                anchoMax = Math.max(anchoMax, cola.size());
+                for(int i=0; i < cola.size(); i++) {
+                    aux = cola.dequeue();
+                    for(GeneralTree<T> hijo: aux.getChildren())
+                        cola.enqueue(hijo);
+                }
             }
+            return anchoMax;
         }
-        if(this.isLeaf())
-            return 0;
         return -1;
     }
 }
