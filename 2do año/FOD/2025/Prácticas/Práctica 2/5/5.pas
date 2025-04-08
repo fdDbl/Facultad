@@ -12,7 +12,7 @@ Notas:
 máquinas.
 - El archivo maestro debe crearse en la siguiente ubicación física: /var/log. }
 
-program cuatro;
+program cinco;
 const
     VALOR_ALTO = 32700;
 type
