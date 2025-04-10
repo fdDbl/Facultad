@@ -13,13 +13,12 @@ public class ParcialArboles {
     
     public BinaryTree<DobleInteger> sumAndDif(BinaryTree<Integer> arbol) {
         BinaryTree<DobleInteger> nuevoArbol = new BinaryTree();
-        sumAndDifAux(arbol,nuevoArbol,0,0);
+        if(!arbol.isEmpty())
+            sumAndDif(arbol,nuevoArbol,0,0);
         return nuevoArbol;
     }
     
-    private void sumAndDifAux(BinaryTree<Integer> arbol, BinaryTree<DobleInteger> nuevoArbol, Integer sum, Integer padre) {
-        if(arbol.isEmpty())
-            return;
+    private void sumAndDif(BinaryTree<Integer> arbol, BinaryTree<DobleInteger> nuevoArbol, Integer sum, Integer padre) {
         int suma = sum + arbol.getData();
         int dif = arbol.getData() - padre;
         
@@ -27,11 +26,11 @@ public class ParcialArboles {
         
         if(arbol.hasLeftChild()) {
             nuevoArbol.addLeftChild(new BinaryTree());
-            sumAndDifAux(arbol.getLeftChild(),nuevoArbol.getLeftChild(),suma,arbol.getData());
+            sumAndDif(arbol.getLeftChild(),nuevoArbol.getLeftChild(),suma,arbol.getData());
         }
         if(arbol.hasRightChild()) {
             nuevoArbol.addRightChild(new BinaryTree());
-            sumAndDifAux(arbol.getRightChild(),nuevoArbol.getRightChild(),suma,arbol.getData());
+            sumAndDif(arbol.getRightChild(),nuevoArbol.getRightChild(),suma,arbol.getData());
         }
     }
     

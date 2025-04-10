@@ -132,6 +132,8 @@ begin
         end;
     end;
 
+
+
     leerDetalle(vD[popMin],vRD[popMin]);
 end;
 procedure cargarMaestro(var vD:vDetalles; var aM:archivoMaestro);
@@ -203,7 +205,7 @@ begin
         close(vD[i]);
     close(aM);
 end;
-procedure maestroTXT(var a:archivoMaestro);
+procedure maestroTXT(var a:archivoMaestro; var cantCA50:integer);
 var
     aTXT:text;
     r:registroMaestro;
@@ -222,6 +224,9 @@ begin
             writeln(aTXT, '         Activos: ', cantCasosActivos);
             writeln(aTXT, '         Recuperados: ', cantCasosRecuperados);
             writeln(aTXT, '         Fallecidos: ', cantCasosFallecidos);
+
+            if(cantCasosActivos > 50) then
+                cantCA50 := cantCA50 + 1;
         end;
         writeln(aTXT, '----------------------------------------------------------');
     end;
@@ -232,6 +237,7 @@ end;
 var
     aM:archivoMaestro;
     vD: vDetalles;
+    cantCA50:integer;
 begin
     Randomize;
     recibirDetalles(vD);
@@ -240,5 +246,7 @@ begin
     assign(aM,'archivoMaestro');
     // cargarMaestro(vD,aM);
     actualizarMaestro(vD,aM);
-    maestroTXT(aM);
+    cantCA50 := 0;
+    maestroTXT(aM,cantCA50);
+    writeln('Cantidad de localidades con mas de 50 casos activos: ', cantCA50);
 end.

@@ -1,18 +1,18 @@
-|| Codigo de localidad: 8807; Nombre de localidad: Localidad ||
+|| Codigo de localidad: 3983; Nombre de localidad: Localidad ||
 || Codigo de cepa: 1; Nombre de cepa: Cepa ||
       Recuento de casos...
-         Nuevos: 11
-         Activos: 35
-         Recuperados: 265
-         Fallecidos: 473
+         Nuevos: 19
+         Activos: 59
+         Recuperados: 76
+         Fallecidos: 397
 ----------------------------------------------------------
-|| Codigo de localidad: 8808; Nombre de localidad: Localidad ||
+|| Codigo de localidad: 3984; Nombre de localidad: Localidad ||
 || Codigo de cepa: 2; Nombre de cepa: Cepa ||
       Recuento de casos...
-         Nuevos: 37
-         Activos: 112
-         Recuperados: 662
-         Fallecidos: 560
+         Nuevos: 42
+         Activos: 128
+         Recuperados: 267
+         Fallecidos: 631
 ----------------------------------------------------------
 || Codigo de localidad: 8809; Nombre de localidad: Localidad ||
 || Codigo de cepa: 3; Nombre de cepa: Cepa ||
