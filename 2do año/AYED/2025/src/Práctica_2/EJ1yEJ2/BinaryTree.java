@@ -104,24 +104,25 @@ public void entreNiveles(int n, int m) {
 
         while (!cola.isEmpty()) {
             int nodosEnNivel = cola.size();
+            BinaryTree<T> aux;
             if (nivelActual >= n && nivelActual <= m) {
                 for (int i = 0; i < nodosEnNivel; i++) {
-                    BinaryTree<T> nodo = cola.remove();
-                    System.out.print(nodo.getData() + " | ");
-                    if (nodo.hasLeftChild()) 
-                        cola.add(nodo.getLeftChild());
-                    if (nodo.hasRightChild()) 
-                        cola.add(nodo.getRightChild());
+                    aux = cola.remove();
+                    System.out.print(aux.getData() + " | ");
+                    if (aux.hasLeftChild()) 
+                        cola.add(aux.getLeftChild());
+                    if (aux.hasRightChild()) 
+                        cola.add(aux.getRightChild());
                 }
                 System.out.println();
             } else {
                 for (int i = 0; i < nodosEnNivel; i++) {
-                    BinaryTree<T> nodo = cola.remove();
+                    aux = cola.remove();
                     if (nivelActual < n) {
-                        if (nodo.hasLeftChild()) 
-                            cola.add(nodo.getLeftChild());
-                        if (nodo.hasRightChild()) {
-                            cola.add(nodo.getRightChild());
+                        if (aux.hasLeftChild()) 
+                            cola.add(aux.getLeftChild());
+                        if (aux.hasRightChild()) {
+                            cola.add(aux.getRightChild());
                     }
                 }
                 if (nivelActual < n) 
