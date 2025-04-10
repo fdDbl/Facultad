@@ -1,104 +1,136 @@
-|| Codigo de localidad: 596; Nombre de localidad: Localidad ||
+|| Codigo de localidad: 8807; Nombre de localidad: Localidad ||
 || Codigo de cepa: 1; Nombre de cepa: Cepa ||
       Recuento de casos...
-         Nuevos: 9
-         Activos: 27
-         Recuperados: 414
-         Fallecidos: 101
+         Nuevos: 11
+         Activos: 35
+         Recuperados: 265
+         Fallecidos: 473
 ----------------------------------------------------------
-|| Codigo de localidad: 597; Nombre de localidad: Localidad ||
+|| Codigo de localidad: 8808; Nombre de localidad: Localidad ||
 || Codigo de cepa: 2; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 37
+         Activos: 112
+         Recuperados: 662
+         Fallecidos: 560
+----------------------------------------------------------
+|| Codigo de localidad: 8809; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 3; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 33
+         Activos: 100
+         Recuperados: 845
+         Fallecidos: 602
+----------------------------------------------------------
+|| Codigo de localidad: 8810; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 4; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 10
+         Activos: 30
+         Recuperados: 1074
+         Fallecidos: 640
+----------------------------------------------------------
+|| Codigo de localidad: 8811; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 5; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 3
+         Activos: 10
+         Recuperados: 1301
+         Fallecidos: 690
+----------------------------------------------------------
+|| Codigo de localidad: 8812; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 6; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 29
+         Activos: 88
+         Recuperados: 1325
+         Fallecidos: 1081
+----------------------------------------------------------
+|| Codigo de localidad: 8813; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 7; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 19
+         Activos: 59
+         Recuperados: 1710
+         Fallecidos: 1394
+----------------------------------------------------------
+|| Codigo de localidad: 8814; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 8; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 26
+         Activos: 78
+         Recuperados: 1754
+         Fallecidos: 1555
+----------------------------------------------------------
+|| Codigo de localidad: 8815; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 9; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 33
+         Activos: 100
+         Recuperados: 2240
+         Fallecidos: 1666
+----------------------------------------------------------
+|| Codigo de localidad: 8816; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 10; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 12
+         Activos: 38
+         Recuperados: 2694
+         Fallecidos: 2062
+----------------------------------------------------------
+|| Codigo de localidad: 8817; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 11; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 47
+         Activos: 143
+         Recuperados: 3125
+         Fallecidos: 2347
+----------------------------------------------------------
+|| Codigo de localidad: 8818; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 12; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 26
+         Activos: 78
+         Recuperados: 3254
+         Fallecidos: 2373
+----------------------------------------------------------
+|| Codigo de localidad: 8819; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 13; Nombre de cepa: Cepa ||
       Recuento de casos...
          Nuevos: 12
          Activos: 37
-         Recuperados: 500
-         Fallecidos: 476
+         Recuperados: 3539
+         Fallecidos: 2652
 ----------------------------------------------------------
-|| Codigo de localidad: 598; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 3; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 8
-         Activos: 25
-         Recuperados: 728
-         Fallecidos: 862
-----------------------------------------------------------
-|| Codigo de localidad: 599; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 4; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 15
-         Activos: 47
-         Recuperados: 1085
-         Fallecidos: 911
-----------------------------------------------------------
-|| Codigo de localidad: 600; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 5; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 18
-         Activos: 56
-         Recuperados: 1479
-         Fallecidos: 1380
-----------------------------------------------------------
-|| Codigo de localidad: 601; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 6; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 28
-         Activos: 86
-         Recuperados: 1596
-         Fallecidos: 1389
-----------------------------------------------------------
-|| Codigo de localidad: 602; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 7; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 44
-         Activos: 132
-         Recuperados: 1815
-         Fallecidos: 1599
-----------------------------------------------------------
-|| Codigo de localidad: 603; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 8; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 7
-         Activos: 23
-         Recuperados: 2114
-         Fallecidos: 2020
-----------------------------------------------------------
-|| Codigo de localidad: 604; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 9; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 36
-         Activos: 109
-         Recuperados: 2310
-         Fallecidos: 2313
-----------------------------------------------------------
-|| Codigo de localidad: 605; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 10; Nombre de cepa: Cepa ||
-      Recuento de casos...
-         Nuevos: 14
-         Activos: 43
-         Recuperados: 2707
-         Fallecidos: 2406
-----------------------------------------------------------
-|| Codigo de localidad: 606; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 11; Nombre de cepa: Cepa ||
+|| Codigo de localidad: 8820; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 14; Nombre de cepa: Cepa ||
       Recuento de casos...
          Nuevos: 31
          Activos: 93
-         Recuperados: 2807
-         Fallecidos: 2621
+         Recuperados: 3819
+         Fallecidos: 3100
 ----------------------------------------------------------
-|| Codigo de localidad: 607; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 12; Nombre de cepa: Cepa ||
+|| Codigo de localidad: 8821; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 15; Nombre de cepa: Cepa ||
       Recuento de casos...
-         Nuevos: 28
-         Activos: 84
-         Recuperados: 3263
-         Fallecidos: 2889
+         Nuevos: 31
+         Activos: 93
+         Recuperados: 4080
+         Fallecidos: 3262
 ----------------------------------------------------------
-|| Codigo de localidad: 608; Nombre de localidad: Localidad ||
-|| Codigo de cepa: 13; Nombre de cepa: Cepa ||
+|| Codigo de localidad: 8822; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 16; Nombre de cepa: Cepa ||
       Recuento de casos...
-         Nuevos: 48
-         Activos: 146
-         Recuperados: 3755
-         Fallecidos: 3008
+         Nuevos: 4
+         Activos: 13
+         Recuperados: 4210
+         Fallecidos: 3413
+----------------------------------------------------------
+|| Codigo de localidad: 8823; Nombre de localidad: Localidad ||
+|| Codigo de cepa: 17; Nombre de cepa: Cepa ||
+      Recuento de casos...
+         Nuevos: 9
+         Activos: 28
+         Recuperados: 4620
+         Fallecidos: 3839
 ----------------------------------------------------------
