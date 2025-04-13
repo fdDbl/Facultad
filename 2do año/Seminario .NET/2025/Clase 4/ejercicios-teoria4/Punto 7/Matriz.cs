@@ -53,7 +53,7 @@ public class Matriz {
             aux[i] = _m[i, j];
         return aux;
     }
-    public double[][] getArregloDeArreglo() {
+    public double[][] GetArregloDeArreglo() {
         double[][] aux = new double[_m.GetLength(0)][];
         for (int i = 0; i < _m.GetLength(0); i++)
             aux[i] = new double[_m.GetLength(1)];
@@ -62,19 +62,42 @@ public class Matriz {
             aux[i / _m.GetLength(1)][i % _m.GetLength(1)] = _m[i / _m.GetLength(1), i % _m.GetLength(1)];
         return aux;
     }
-    public static bool SameSize(Matriz A) {
-        return A.GetLength(0) == _m.GetLength(0) && A.GetLength(1) == _m.GetLength(1);
+    public bool SameSize(Matriz m) {
+        return m.GetLength(0) == _m.GetLength(0) && m.GetLength(1) == _m.GetLength(1);
     }
     public int GetLength(int d) {
         return _m.GetLength(d);
     }
-    public void sumarle(Matriz m) {
-        if (!(m.GetLength(0) == _m.GetLength(0) && m.GetLength(1) == _m.GetLength(1)))
-            return;
-        for (int i = 0; i < _m.GetLength(0) * _m.GetLength(1); i++)
+    public void Sumarle(Matriz m) {
+        if (!SameSize(m))
+            throw new ArgumentException("Suma inválida.");;
+        for (int i = 0; i < _m.GetLength(1) * _m.GetLength(1); i++)
             _m[i / _m.GetLength(1), i % _m.GetLength(1)] = _m[i / _m.GetLength(1), i % _m.GetLength(1)] + m.GetElemento(i / m.GetLength(1), i % m.GetLength(1));
     }
-    public void restarle(Matriz m)
-    public void multiplicarPor(Matriz m) {}
+    public void Restarle(Matriz m) {
+        if (!SameSize(m))
+            throw new ArgumentException("Resta inválida.");
+        for (int i = 0; i < _m.GetLength(1) * _m.GetLength(1); i++)
+            _m[i / _m.GetLength(1), i % _m.GetLength(1)] = _m[i / _m.GetLength(1), i % _m.GetLength(1)] - m.GetElemento(i / m.GetLength(1), i % m.GetLength(1));
+    }
+    public bool SameColumnsAndRows(Matriz m) {
+        return _m.GetLength(1) == m.GetLength(0);
+    }
+    public void MultiplicarPor(Matriz m) {
+        if (!SameColumnsAndRows(m))
+            throw new ArgumentException("Multiplicación inválida.");
+        int filasA = _m.GetLength(0);
+        int columnasA = _m.GetLength(1);
+        int columnasB = m.GetLength(1);
+        double[,] resultado = new double[filasA, columnasB];
+        for (int i = 0; i < filasA; i++)
+            for (int j = 0; j < columnasB; j++) {
+                double suma = 0;
+                for (int k = 0; k < columnasA; k++)
+                    suma += _m[i, k] * m.GetElemento(k, j);
+                resultado[i,j] = suma;
+            }
+        _m = resultado;
+    }
 
 }

@@ -8,5 +8,6 @@ Console.SetIn(entradaOriginal);
 Punto4.Run();
 Punto5.Run();
 Punto6.Run();
+Punto7.Run();
 
 Console.ReadKey();
