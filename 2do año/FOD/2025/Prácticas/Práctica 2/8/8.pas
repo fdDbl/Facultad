@@ -46,7 +46,6 @@ begin
         leer(vR[i],vRegDetalles[i]);
         if(vRegDetalles[i].codeP < minCode) then begin
             min := vRegDetalles[i];
-            minCode := min.codeP;
             pop := i;
         end;
     end;
@@ -74,7 +73,7 @@ begin
             totalK := totalK + min.cantK;
             minimo(vR,vRegDetalles,min);
         end;
-        aux.cantK := aux.cantK + totalK;
+        aux.cantKHistorico := aux.cantKHistorico + totalK;
         write(aM,aux);
     end;
 
