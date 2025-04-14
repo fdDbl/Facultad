@@ -10,28 +10,26 @@ public class Persona3 {
         _edad = edad;
         _DNI = dni;
     }
-    public string getNombre() {
-        return this._nombre;
-    }
     public void setNombre(string nombre) {
-        this._nombre = nombre;
+        _nombre = nombre;
+    }
+    public string getNombre() {
+        return _nombre ?? "NaN";
     }
     public int getEdad() {
-        return this._edad;
+        return _edad;
     }
     public void setEdad(int edad) {
-        this._edad = edad;
+        _edad = edad;
     }
     public int getDNI() {
-        return this._DNI;
+        return _DNI;
     }
     public void setDNI(int dni) {
-        this._DNI = dni;
+        _DNI = dni;
     }
     public bool EsMayorQue(Persona3 P) {
-        if(this._edad >P.getEdad())
-            return true;
-        return false;
+        return _edad > P.getEdad();
     }
     public void Imprimir() {
         Console.WriteLine(this._nombre + "    " + this._edad + "    " + this._DNI);
