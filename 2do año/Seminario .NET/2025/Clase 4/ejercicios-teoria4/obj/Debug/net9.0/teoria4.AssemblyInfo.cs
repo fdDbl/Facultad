@@ -13,7 +13,11 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("teoria4")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
+<<<<<<< Updated upstream
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+c1c1aa3d158b0d18c8d3c4ee412f159c86fb650c")]
+=======
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+62d6f534c78afb35f14227d75df3596a161dee76")]
+>>>>>>> Stashed changes
 [assembly: System.Reflection.AssemblyProductAttribute("teoria4")]
 [assembly: System.Reflection.AssemblyTitleAttribute("teoria4")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
