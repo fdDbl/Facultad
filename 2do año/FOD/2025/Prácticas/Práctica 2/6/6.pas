@@ -132,8 +132,6 @@ begin
         end;
     end;
 
-
-
     leerDetalle(vD[popMin],vRD[popMin]);
 end;
 procedure cargarMaestro(var vD:vDetalles; var aM:archivoMaestro);
