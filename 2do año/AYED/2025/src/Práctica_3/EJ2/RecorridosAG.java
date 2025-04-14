@@ -1,6 +1,6 @@
 package Práctica_3.EJ2;
 
-import Práctica_3.EJ1yEJ2ByEJ3.GeneralTree;
+import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 import Práctica_1.EJ8.Queue;
 import java.util.ArrayList;
 import java.util.List;

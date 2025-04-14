@@ -1,4 +1,4 @@
-package Práctica_3.EJ1yEJ2ByEJ3;
+package Práctica_3.EJ1yEJ2ByEJ3yEJ5;
 
 import Práctica_1.EJ8.Queue;
 import java.util.ArrayList;
@@ -65,7 +65,7 @@ public class GeneralTree<T>{
     
     public List<Integer> numerosImparesMayoresQuePreOrden(Integer n) {
         List<Integer> lista = new ArrayList();
-        if(!this.isEmpty())
+        if(this != null && !this.isEmpty())
             numerosImparesMayoresQuePreOrden(n,lista);
         return lista;
     }
@@ -81,7 +81,7 @@ public class GeneralTree<T>{
     
     public List<Integer> numerosImparesMayoresQueInOrden(Integer n) {
         List<Integer> lista = new ArrayList();
-        if(!this.isEmpty())
+        if(this != null && !this.isEmpty())
             numerosImparesMayoresQueInOrden(n,lista);
         return lista;
     }
@@ -100,7 +100,7 @@ public class GeneralTree<T>{
     
     public List<Integer> numerosImparesMayoresQuePostOrden(Integer n) {
         List<Integer> lista = new ArrayList();
-        if(!this.isEmpty())
+        if(this != null && !this.isEmpty())
             numerosImparesMayoresQuePostOrden(n,lista);
         return lista;
     }
@@ -151,20 +151,25 @@ public class GeneralTree<T>{
     }
     
     public int nivel(T dato) {
-        if(!this.isEmpty()) {
+        if(this != null && !this.isEmpty()) {
             Queue<GeneralTree<T>> cola = new Queue<>();
             cola.enqueue(this);
             GeneralTree<T> aux;
             int level = 0;
         
             while(!cola.isEmpty()) {
-                for(int i=0; i < cola.size(); i++) {
+                int i = 0;
+                boolean ok = false;
+                while(i < cola.size() && !ok) {
                     aux = cola.dequeue();
-                    if(!aux.isEmpty() && aux.getData() == dato)
-                        return level;
+                    if(aux.getData() == dato)
+                        ok = true;
                     for(GeneralTree<T> hijo: aux.getChildren())
                         cola.enqueue(hijo);
+                    i++;
                 }
+                if(ok)
+                    return level;
                 level++;    
             }
         }
@@ -172,7 +177,7 @@ public class GeneralTree<T>{
     }
     
     public int ancho() {
-        if(!this.isEmpty()) {
+        if(this != null && !this.isEmpty()) {
             int anchoMax = -1;
             Queue<GeneralTree<T>> cola = new Queue<>();
             GeneralTree<T> aux;
@@ -189,5 +194,28 @@ public class GeneralTree<T>{
             return anchoMax;
         }
         return -1;
+    }
+    
+    // PUNTO 5)
+    
+    public boolean esAncestro(T a, T b) {
+        if(a == null || b == null || this.isEmpty())
+            return false;
+        GeneralTree<T> nodo = esAncestro(this,a);
+        if(nodo == null)
+            return false;
+        return esAncestro(nodo,b) != null;
+    }
+    
+    private GeneralTree<T> esAncestro(GeneralTree<T> nodo, T dato) {
+        if(nodo.getData().equals(dato))
+            return nodo;
+        int i = 0;
+        GeneralTree<T> aux = null;
+        while(i < nodo.getChildren().size() && aux == null) {
+            aux = esAncestro(nodo.getChildren().get(i), dato);
+            i++;
+        }
+        return aux;
     }
 }

@@ -38,7 +38,7 @@ public class Queue<T> extends Sequence {
     }
     
     public boolean isEmpty() {
-        return this.queue.isEmpty();
+        return this.queue.size() == 0;
     }
     
     public String toString() {

@@ -95,7 +95,7 @@ public class BinaryTree<T> {
         return tree;
     }
     
-public void entreNiveles(int n, int m) {
+    public void entreNiveles(int n, int m) {
         if (this.isEmpty() || n < 0 || m < n) 
             return;
         Queue<BinaryTree<T>> cola = new LinkedList<>();
@@ -105,7 +105,7 @@ public void entreNiveles(int n, int m) {
         while (!cola.isEmpty()) {
             int nodosEnNivel = cola.size();
             BinaryTree<T> aux;
-            if (nivelActual >= n && nivelActual <= m) {
+            if(nivelActual <= m && nivelActual >= n) {
                 for (int i = 0; i < nodosEnNivel; i++) {
                     aux = cola.remove();
                     System.out.print(aux.getData() + " | ");
@@ -114,26 +114,14 @@ public void entreNiveles(int n, int m) {
                     if (aux.hasRightChild()) 
                         cola.add(aux.getRightChild());
                 }
-                System.out.println();
             } else {
-                for (int i = 0; i < nodosEnNivel; i++) {
-                    aux = cola.remove();
-                    if (nivelActual < n) {
-                        if (aux.hasLeftChild()) 
-                            cola.add(aux.getLeftChild());
-                        if (aux.hasRightChild()) {
-                            cola.add(aux.getRightChild());
-                    }
-                }
-                if (nivelActual < n) 
-                    System.out.println();
+                for(int i = 0; i < nodosEnNivel; i++)
+                    cola.remove();
             }
             nivelActual++;
-            if (nivelActual > m) 
-                break;
+            System.out.println();
         }
     }
-}
 
     @Override
     public String toString() {
