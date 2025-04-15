@@ -84,12 +84,10 @@ end;
 procedure informar(var aM:archivoMaestro);
 var
     r:registroMaestro;
-    codeAct:integer;
 begin
     reset(aM);
     leerMaestro(aM,r);
     while(r.codeP < VALOR_ALTO) do begin
-        codeAct := r.codeP;
         if(r.cantKHistorico > 10000) then
             writeln('En ', r.nomP, ' (código de provincia ' , r.codeP, ') se consumieron mas de 10 toneladas de yerba históricamente. Promedio consumido por habitante: ', r.cantKHistorico / r.cantH);
         leerMaestro(aM,r);
