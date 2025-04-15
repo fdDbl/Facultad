@@ -14,29 +14,32 @@ public class ParcialArboles {
     }
     
     private BinaryTree<Integer> buscarNodo(BinaryTree<Integer> tree, int num) {
-        if(tree == null)
-            return null;
+        BinaryTree<Integer> nodo = new BinaryTree<>();
         if(tree.getData() == num)
             return tree;
-        if(tree.hasLeftChild())
-            return buscarNodo(tree.getLeftChild(),num);
-        return buscarNodo(tree.getRightChild(),num);
+        if(tree.hasLeftChild() && nodo.isEmpty())
+            nodo = buscarNodo(tree.getLeftChild(),num);
+        if(tree.hasRightChild() && nodo.isEmpty())
+            nodo = buscarNodo(tree.getRightChild(),num);
+        return nodo;
     }
     
     private int contarNodosConUnicoHijo(BinaryTree<Integer> nodo) {
-        if(nodo == null)
-            return -1;
         int aux = 0;
-        if((nodo.getLeftChild() != null && nodo.getRightChild() == null) || (nodo.getLeftChild() == null && nodo.getRightChild() != null))
+        if(nodo.isLeaf())
+            return aux;
+        if((nodo.hasLeftChild() && !nodo.hasRightChild()) || (!nodo.hasLeftChild() && nodo.hasRightChild()))
             aux = 1;
-        aux += contarNodosConUnicoHijo(nodo.getLeftChild());
-        aux += contarNodosConUnicoHijo(nodo.getRightChild());
+        if(nodo.hasLeftChild())
+            aux += contarNodosConUnicoHijo(nodo.getLeftChild());
+        if(nodo.hasRightChild())
+            aux += contarNodosConUnicoHijo(nodo.getRightChild());
         return aux;
     }
     
     public boolean isLeftTree(int num) {
         BinaryTree<Integer> nodo = buscarNodo(tree,num);
-        if(nodo == null)
+        if(nodo.isEmpty())
             return false;
         
         int cantIzq = contarNodosConUnicoHijo(nodo.getLeftChild());
@@ -51,13 +54,13 @@ public class ParcialArboles {
         arbol.addRightChild(new BinaryTree<>(4));
         arbol.addLeftChild(new BinaryTree<>(15));
         arbol.getLeftChild().addLeftChild(new BinaryTree<>(100));
-        arbol.getLeftChild().addRightChild(new BinaryTree<>(-64));
+
         arbol.getRightChild().addLeftChild(new BinaryTree<>(-2));
         arbol.getRightChild().addRightChild(new BinaryTree<>(24));
         arbol.inOrder();
         System.out.println();
        
         ParcialArboles p = new ParcialArboles(arbol);
-        System.out.println(p.isLeftTree(55));
+        System.out.println(p.isLeftTree(40));
     }
 }

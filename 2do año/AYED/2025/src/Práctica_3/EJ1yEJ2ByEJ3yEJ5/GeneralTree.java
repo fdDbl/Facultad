@@ -1,9 +1,9 @@
 package Práctica_3.EJ1yEJ2ByEJ3yEJ5;
 
-import Práctica_1.EJ8.Queue;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 public class GeneralTree<T>{
 
@@ -107,7 +107,7 @@ public class GeneralTree<T>{
     
     private void numerosImparesMayoresQuePostOrden(Integer n, List<Integer> lista) {
         for(GeneralTree<T> hijo: this.getChildren())
-            hijo.numerosImparesMayoresQuePreOrden(n,lista);
+            hijo.numerosImparesMayoresQuePostOrden(n,lista);
         
         if((Integer) this.getData() > n & (Integer) this.getData() % 2 != 0)
             lista.add((Integer) this.getData());
@@ -115,16 +115,17 @@ public class GeneralTree<T>{
 
     public List<Integer> numerosImparesMayoresQuePorNiveles(Integer n) {
         List<Integer> lista = new ArrayList();
-        Queue<GeneralTree<T>> cola = new Queue<>();
-        cola.enqueue(this);
+        Queue<GeneralTree<T>> cola = new LinkedList<>();
+        cola.add(this);
+        cola.add(null);
         GeneralTree<T> t;
         
         while(!cola.isEmpty()) {
-            t = cola.dequeue();
+            t = cola.remove();
             if(!t.isEmpty() & (Integer) t.getData() > n & (Integer) t.getData() % 2 != 0)
                 lista.add((Integer) t.getData());
             for(GeneralTree<T> hijo: t.getChildren())
-                cola.enqueue(hijo);
+                cola.add(hijo);
         }
         
         return lista;
@@ -135,42 +136,44 @@ public class GeneralTree<T>{
     public int altura() {
         if(this.isEmpty())
             return -1;
-        return alturaHelper();
+        return alturaHelper(0);
     }
     
-    private int alturaHelper() {
+    private int alturaHelper(int h) {
         if(this.isLeaf())
-            return 0;
+            return h;
         else {
             int altAct = 0;
             List<GeneralTree<T>> hijos = this.getChildren();
             for(GeneralTree<T> hijo: hijos)
-                altAct = Math.max(altAct, hijo.alturaHelper());
+                altAct = Math.max(altAct, hijo.alturaHelper(h+1));
             return altAct;
         }
     }
     
     public int nivel(T dato) {
-        if(this != null && !this.isEmpty()) {
-            Queue<GeneralTree<T>> cola = new Queue<>();
-            cola.enqueue(this);
-            GeneralTree<T> aux;
+        if (this != null && !this.isEmpty()) {
+            Queue<GeneralTree<T>> cola = new LinkedList<>();
+            cola.add(this);
             int level = 0;
-        
-            while(!cola.isEmpty()) {
+            boolean encontre = false;
+            
+            while (!cola.isEmpty()) {
+                int size = cola.size();
                 int i = 0;
-                boolean ok = false;
-                while(i < cola.size() && !ok) {
-                    aux = cola.dequeue();
-                    if(aux.getData() == dato)
-                        ok = true;
-                    for(GeneralTree<T> hijo: aux.getChildren())
-                        cola.enqueue(hijo);
+                while (i < size && !encontre) {
+                    GeneralTree<T> aux = cola.remove();
+                    if (aux.getData().equals(dato)) {
+                        encontre = true;
+                    }
+                    for (GeneralTree<T> hijo : aux.getChildren()) {
+                        cola.add(hijo);
+                    }
                     i++;
                 }
-                if(ok)
+                if(encontre)
                     return level;
-                level++;    
+                level++;
             }
         }
         return -1;
@@ -179,22 +182,25 @@ public class GeneralTree<T>{
     public int ancho() {
         if(this != null && !this.isEmpty()) {
             int anchoMax = -1;
-            Queue<GeneralTree<T>> cola = new Queue<>();
+            Queue<GeneralTree<T>> cola = new LinkedList<>();
             GeneralTree<T> aux;
-            cola.enqueue(this);
+            cola.add(this);
             
             while(!cola.isEmpty()) {
-                anchoMax = Math.max(anchoMax, cola.size());
-                for(int i=0; i < cola.size(); i++) {
-                    aux = cola.dequeue();
-                    for(GeneralTree<T> hijo: aux.getChildren())
-                        cola.enqueue(hijo);
+                int colaSize = cola.size();
+                anchoMax = Math.max(anchoMax, colaSize);
+                for(int i=0; i < colaSize; i++) {
+                    aux = cola.remove();
+                    for(GeneralTree<T> hijo: aux.getChildren()) {
+                        cola.add(hijo);
+                    }
                 }
             }
             return anchoMax;
         }
         return -1;
     }
+
     
     // PUNTO 5)
     
@@ -217,5 +223,48 @@ public class GeneralTree<T>{
             i++;
         }
         return aux;
+    }
+    
+    public static void main(String[] args) {
+        List<GeneralTree<Integer>> children = new LinkedList<>();
+        
+        children.add(new GeneralTree<Integer>(1));
+        children.add(new GeneralTree<Integer>(2));
+        children.add(new GeneralTree<Integer>(3));
+        GeneralTree<Integer> a1 = new GeneralTree<>(4, children);
+        
+        children = new LinkedList<>();
+        children.add(new GeneralTree<Integer>(5));
+        children.add(new GeneralTree<Integer>(6));
+        children.add(new GeneralTree<Integer>(7));
+        GeneralTree<Integer> a2 = new GeneralTree<>(8, children);
+        
+        children = new LinkedList<>();
+        children.add(new GeneralTree<Integer>(9));
+        children.add(new GeneralTree<Integer>(10));
+        children.add(new GeneralTree<Integer>(11));
+        GeneralTree<Integer> a3 = new GeneralTree<>(12, children);
+        
+        children = new LinkedList<>();
+        children.add(a1);
+        children.add(a2);
+        children.add(a3);
+        GeneralTree<Integer> a = new GeneralTree<>(1000, children);
+        /*
+        
+                            1000
+                  __________/|\__________
+                 /           |           \
+                4            8            12
+              / | \        / | \        / | \
+              1 2 3        5 6 7       9 10 11
+
+        */
+        System.out.println("Altura:");
+        System.out.println(a.altura());
+        System.out.println("Ancho:");
+        System.out.println(a.ancho());
+        System.out.println("Nivel de un dato:");
+        System.out.println(a.nivel(9));
     }
 }

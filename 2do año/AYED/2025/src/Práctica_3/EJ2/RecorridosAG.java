@@ -5,9 +5,9 @@ import Práctica_1.EJ8.Queue;
 import java.util.ArrayList;
 import java.util.List;
 
-/**
+/**Dobal
  *
- * @author Federico Dobal
+ * @author Federico 
  */
 public class RecorridosAG {
     public List<Integer> numerosImparesMayoresQuePreOrden(GeneralTree <Integer> a, Integer n) {
@@ -63,14 +63,21 @@ public class RecorridosAG {
         List<Integer> lista = new ArrayList();
         Queue<GeneralTree<Integer>> cola = new Queue<>();
         cola.enqueue(a);
+        cola.enqueue(null);
         GeneralTree<Integer> t;
         
         while(!cola.isEmpty()) {
             t = cola.dequeue();
-            if(t.getData() > n & t.getData() % 2 != 0)
-                lista.add(t.getData());
-            for(GeneralTree<Integer> hijo: t.getChildren())
-                cola.enqueue(hijo);
+            if (t != null){
+                if(t.getData() > n & t.getData() % 2 != 0)
+                    lista.add(t.getData());
+                for(GeneralTree<Integer> hijo: t.getChildren())
+                    cola.enqueue(hijo);
+            }
+            else
+                // incremento un nivel
+                cola.enqueue(null);
+            
         }
         
         return lista;

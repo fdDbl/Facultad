@@ -17,6 +17,7 @@ public class AnalizadorArbol {
         if(arbol != null && !arbol.isEmpty()) {
             Queue<GeneralTree<AreaEmpresa>> cola = new LinkedList();
             cola.add(arbol);
+            cola.add(null);
             GeneralTree<AreaEmpresa> aux;
             
             while(!cola.isEmpty()) {
@@ -24,9 +25,12 @@ public class AnalizadorArbol {
                 int nodosEnNivel = cola.size();
                 for(int i = 0; i < nodosEnNivel; i++) {
                     aux = cola.remove();
-                    suma += aux.getData().getTardanza();
-                    for(GeneralTree<AreaEmpresa> hijo : aux.getChildren())
-                        cola.add(hijo);
+                    if(aux != null) {
+                        suma += aux.getData().getTardanza();
+                        for(GeneralTree<AreaEmpresa> hijo : aux.getChildren())
+                            cola.add(hijo);
+                    } else
+                        cola.add(null);
                 }
                 double prom = suma / nodosEnNivel;
                 maxProm = Math.max(maxProm, prom);
