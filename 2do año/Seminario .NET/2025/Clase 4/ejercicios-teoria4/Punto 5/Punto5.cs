@@ -1,4 +1,4 @@
-public class Punto5 {
+class Punto5 {
     public static void Run() {
         Console.WriteLine("----- PUNTO 5 -----");
         new Hora2(23, 30, 15).Imprimir();

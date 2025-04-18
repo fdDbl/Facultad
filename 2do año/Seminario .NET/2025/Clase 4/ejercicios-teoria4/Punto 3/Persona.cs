@@ -1,6 +1,6 @@
 namespace teoria4;
 
-public class Persona3 {
+class Persona3 {
     private string? _nombre;
     private int _edad;
     private int _DNI;

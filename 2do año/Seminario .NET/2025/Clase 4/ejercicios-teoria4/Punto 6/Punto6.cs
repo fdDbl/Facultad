@@ -1,4 +1,4 @@
-public class Punto6 {
+class Punto6 {
     public static void Run() {
         Console.WriteLine("----- PUNTO 6 -----");
         Console.WriteLine("Ingrese una ecuación cuadrática completa (ax^2 + bx + c):"); 

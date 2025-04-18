@@ -1,4 +1,4 @@
-public class Hora1 {
+class Hora1 {
     private int _horas;
     private int _minutos;
     private int _segundos;

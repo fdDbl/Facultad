@@ -1,7 +1,7 @@
 using teoria4;
 using System.IO;
 using System.Collections;
-public class Punto1 {
+class Punto1 {
     public static void Run() {
         Console.WriteLine("----- PUNTO 1 -----");
         LinkedList<Persona1> listaPersonas = new();

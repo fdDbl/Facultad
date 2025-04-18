@@ -1,7 +1,7 @@
 using System.Text.RegularExpressions;
 using Microsoft.VisualBasic;
 
-public class Ecuacion2 {
+class Ecuacion2 {
     private double _a,_b,_c;
     private string _exp;
     public Ecuacion2(string exp) {

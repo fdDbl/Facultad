@@ -1,4 +1,4 @@
-public class Matriz {
+class Matriz {
     private double[,] _m;
     public Matriz(int filas, int columnas) {
         _m = new double[filas,columnas];
