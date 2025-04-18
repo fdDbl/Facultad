@@ -39,7 +39,7 @@ public class RecorridosAG {
         if(a.getData() > n && a.getData() % 2 != 0)
             lista.add(a.getData());
         
-        for(int i=0; i< a.getChildren().size(); i++)
+        for(int i=1; i< a.getChildren().size(); i++)
             numerosImparesMayoresQueInOrden(a.getChildren().get(i),n,lista);
     }
     
