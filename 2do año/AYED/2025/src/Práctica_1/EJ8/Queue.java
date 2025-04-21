@@ -1,4 +1,4 @@
-package Práctica_1.EJ8;
+package EJ8;
 
 import java.util.ArrayList;
 import java.util.List;
