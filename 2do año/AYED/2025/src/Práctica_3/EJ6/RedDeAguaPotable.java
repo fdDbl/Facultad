@@ -45,22 +45,22 @@ public class RedDeAguaPotable {
         GeneralTree<Character> nodoP = new GeneralTree<>('P');
 
         nodoA.addChild(nodoB);
-//        nodoA.addChild(nodoC);
-//        nodoA.addChild(nodoD);
-//        nodoA.addChild(nodoE);
-//
-//        nodoB.addChild(nodoF);
-//        nodoC.addChild(nodoG);
-//        nodoG.addChild(nodoL);
-//
-//        nodoD.addChild(nodoH);
-//        nodoD.addChild(nodoI);
-//        nodoD.addChild(nodoJ);
-//        nodoD.addChild(nodoK);
-//        nodoD.addChild(nodoP);
-//
-//        nodoJ.addChild(nodoM);
-//        nodoJ.addChild(nodoN);
+        nodoA.addChild(nodoC);
+        nodoA.addChild(nodoD);
+        nodoA.addChild(nodoE);
+
+        nodoB.addChild(nodoF);
+        nodoC.addChild(nodoG);
+        nodoG.addChild(nodoL);
+
+        nodoD.addChild(nodoH);
+        nodoD.addChild(nodoI);
+        nodoD.addChild(nodoJ);
+        nodoD.addChild(nodoK);
+        nodoD.addChild(nodoP);
+
+        nodoJ.addChild(nodoM);
+        nodoJ.addChild(nodoN);
 
         RedDeAguaPotable Red = new RedDeAguaPotable(nodoA);
         System.out.println(Red.minimoCaudal(50000));

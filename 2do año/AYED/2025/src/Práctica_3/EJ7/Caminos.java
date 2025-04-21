@@ -1,13 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package Práctica_3.EJ7;
+
+import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 
 /**
  *
  * @author Fede Dobal
  */
 public class Caminos {
-    
+    private GeneralTree<Integer> tree;
 }
