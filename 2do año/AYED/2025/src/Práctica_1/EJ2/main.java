@@ -6,7 +6,7 @@
     teclado, mediante el uso de System.in. La clase Scanner permite leer de forma sencilla
     valores de entrada.
  */
-package Práctica_1.EJ2;
+package EJ2;
 
 import java.util.Scanner;
 
