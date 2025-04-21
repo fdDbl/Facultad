@@ -94,32 +94,30 @@ public class BinaryTree<T> {
         }
         return tree;
     }
-    
+
     public void entreNiveles(int n, int m) {
         if (this.isEmpty() || n < 0 || m < n) 
             return;
         Queue<BinaryTree<T>> cola = new LinkedList<>();
         cola.add(this);
+        cola.add(null);
+        BinaryTree<T> aux;
         int nivelActual = 0;
 
         while (!cola.isEmpty()) {
-            int nodosEnNivel = cola.size();
-            BinaryTree<T> aux;
-            if(nivelActual <= m && nivelActual >= n) {
-                for (int i = 0; i < nodosEnNivel; i++) {
-                    aux = cola.remove();
+            aux = cola.remove();
+            if(aux != null) {
+                if(nivelActual <= m && nivelActual >= n)
                     System.out.print(aux.getData() + " | ");
-                    if (aux.hasLeftChild()) 
-                        cola.add(aux.getLeftChild());
-                    if (aux.hasRightChild()) 
-                        cola.add(aux.getRightChild());
-                }
-            } else {
-                for(int i = 0; i < nodosEnNivel; i++)
-                    cola.remove();
+                if (aux.hasLeftChild()) 
+                    cola.add(aux.getLeftChild());
+                if (aux.hasRightChild()) 
+                    cola.add(aux.getRightChild());
+            } else if(!cola.isEmpty()) {
+                System.out.println();
+                cola.add(null);
+                nivelActual++;
             }
-            nivelActual++;
-            System.out.println();
         }
     }
 
@@ -137,4 +135,45 @@ public class BinaryTree<T> {
                 this.getRightChild().inOrder();
         }
     }
+
+    public static void main(String[] args) {
+
+        //             1
+        //           /   \
+        //         2       3
+        //        / \     /
+        //       4   5   6
+
+        BinaryTree<Integer> root = new BinaryTree<>(1);
+        BinaryTree<Integer> nodo2 = new BinaryTree<>(2);
+        BinaryTree<Integer> nodo3 = new BinaryTree<>(3);
+        BinaryTree<Integer> nodo4 = new BinaryTree<>(4);
+        BinaryTree<Integer> nodo5 = new BinaryTree<>(5);
+        BinaryTree<Integer> nodo6 = new BinaryTree<>(6);
+
+        root.addLeftChild(nodo2);
+        root.addRightChild(nodo3);
+        nodo2.addLeftChild(nodo4);
+        nodo2.addRightChild(nodo5);
+        nodo3.addLeftChild(nodo6);
+
+        // Contar hojas
+        System.out.println("Cantidad de hojas: " + root.contarHojas());
+
+        // Árbol original (inOrder)
+        System.out.print("Recorrido inOrder del árbol original: ");
+        root.inOrder();
+        System.out.println();
+
+        // Árbol espejo
+        BinaryTree<Integer> espejo = root.espejo();
+        System.out.print("Recorrido inOrder del árbol espejo: ");
+        espejo.inOrder();
+        System.out.println();
+
+        // Entre niveles
+        System.out.println("Nodos entre niveles 1 y 2:");
+        root.entreNiveles(1, 2);
+    }
+
 }
