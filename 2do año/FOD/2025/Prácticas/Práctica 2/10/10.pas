@@ -1,4 +1,6 @@
 program diez;
+const
+    VALOR_ALTO = 32700;
 type
     registroVoto = record
         codProvincia: integer;
@@ -58,12 +60,43 @@ type
 
     // close(aV);
 // end;
-
-var
-    aM:archivoVotos;
+procedure leer(var a:archivoVotos; var r:registroVoto);
 begin
-    assign(aM,'votos.dat');
-    reset(aM);
-    // checkpoint
-    close(aM);
+    if(not eof(a)) then
+        read(a,r)
+    else
+        r.codProvincia := VALOR_ALTO;
+end;
+var
+    aV:archivoVotos;
+    rV:registroVoto;
+    totalGeneral:integer;
+    provAct,locAct:integer;
+    cantVotos:integer;
+    cantVotosProvincia:integer;
+begin
+    assign(aV,'votos.dat');
+    totalGeneral := 0;
+    reset(aV);
+    leer(aV,rV);
+    while(rV.codProvincia < VALOR_ALTO) do begin
+        provAct := rV.codProvincia;
+        cantVotosProvincia := 0;
+        writeln('Codigo de Provincia: ', provAct);
+        while(rV.codProvincia = provAct) do begin
+            locAct := rV.codLocalidad;
+            cantVotos := 0;
+            write('Codigo de Localidad: ', locAct, '        ');
+            while(rV.codProvincia = provAct) and (rV.codLocalidad = locAct) do begin
+                cantVotos := cantVotos + rV.votos;
+                leer(aV,rV);
+            end;
+            writeln('Total de Votos: ', cantVotos);
+            cantVotosProvincia := cantVotosProvincia + cantVotos;
+        end;
+        writeln('Total de Votos Provincia: ', cantVotosProvincia);
+        totalGeneral := totalGeneral + cantVotosProvincia;
+    end;
+    writeln('Total General de Votos: ', totalGeneral);
+    close(aV);
 end.
