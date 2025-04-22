@@ -1,136 +1,145 @@
-programa parcial
+programa cuadrados
 procesos
-  proceso identificar
+  proceso asignarEquipos
   comenzar
-    EnviarMensaje(11,rA1)
-    EnviarMensaje(22,rB1)
-    EnviarMensaje(11,rA2)
-    EnviarMensaje(22,rB2)
+    EnviarMensaje(1,rA1)
+    EnviarMensaje(1,rA2)
+    EnviarMensaje(2,rB1)
+    EnviarMensaje(2,rB2)
   fin
-  proceso depo2020(E avO:numero; E caO:numero)
+  proceso juntarFlores(ES cant:numero)
   comenzar
-    BloquearEsquina(20,20)
-    Pos(20,20)
-    depositarFlor
-    Pos(avO,caO)
-    LiberarEsquina(20,20)
+    mientras(HayFlorEnLaEsquina)
+      tomarFlor
+      cant := cant + 1
+  fin
+  proceso depositar2020
+  variables
+    av,ca:numero
+  comenzar
+    av:=PosAv
+    ca:=PosCa
+    mientras(HayFlorEnLaBolsa)
+      BloquearEsquina(20,20)
+      Pos(20,20)
+      depositarFlor
+      Pos(av,ca)
+      LiberarEsquina(20,20)
   fin
 areas
-  cA: AreaPC(1,1,11,11)
-  cB: AreaPC(13,1,23,11)
+  cuadradoA: AreaPC(1,1,11,11)
+  cuadradoB: AreaPC(13,1,23,11)
   aF: AreaP(30,1,30,1)
   a2020: AreaPC(20,20,20,20)
 robots
-  robot r1
+  robot robot1
   variables
-    equipo,cantF,av,ca:numero
-    ack:boolean
+    eq:numero
+    cant:numero
+    ok:boolean
   comenzar
-    RecibirMensaje(equipo,f)
-    cantF:=0
-    ack:=V
-    repetir 2
-      repetir 10
-        mientras(HayFlorEnLaEsquina)
-          tomarFlor
-          cantF:=cantF+1
-        mover
-      mientras(HayFlorEnLaEsquina)
-        tomarFlor
-        cantF:=cantF+1
-      derecha
-    av:=PosAv
-    ca:=PosCa
-    EnviarMensaje(1,f)
-    EnviarMensaje(equipo,f)
-    EnviarMensaje(cantF,f)
-    Informar(cantF)
-    si(equipo=11)
-      EnviarMensaje(ack,rA2)
+    RecibirMensaje(eq,rF)
+    cant := 0
+    juntarFlores(cant)
+    repetir 10
+      mover
+      juntarFlores(cant)
+    derecha
+    juntarFlores(cant)
+    repetir 10
+      mover
+      juntarFlores(cant)
+    { fin etapa }
+    
+    si(eq = 1)
+      EnviarMensaje(cant,rA2)
     sino
-      EnviarMensaje(ack,rB2)
-    repetir cantF
-      depo2020(av,ca)
+      EnviarMensaje(cant,rB2)
+      
+    depositar2020
+    si(eq = 1)
+      EnviarMensaje(ok,rA2)
+    sino
+      EnviarMensaje(ok,rB2)
   fin
-  robot r2
+  
+  robot robot2
   variables
-    equipo,cantF,av,ca:numero
-    ack:boolean
+    eq:numero
+    cant:numero
+    ok:boolean
   comenzar
-    RecibirMensaje(equipo,f)
-    cantF:=0
-    repetir 2
-      derecha
-    si(equipo=11)
-      RecibirMensaje(ack,rA1)
+    RecibirMensaje(eq,rF)
+    si(eq = 1)
+      RecibirMensaje(cant,rA1)
     sino
-      RecibirMensaje(ack,rB1)
+      RecibirMensaje(cant,rB1)
+      
     repetir 2
-      repetir 9
-        mientras(HayFlorEnLaEsquina)
-          tomarFlor
-          cantF:=cantF+1
-        mover
-      mientras(HayFlorEnLaEsquina)
-        tomarFlor
-        cantF:=cantF+1
       derecha
-    av:=PosAv
-    ca:=PosCa
-    EnviarMensaje(2,f)
-    EnviarMensaje(equipo,f)
-    EnviarMensaje(cantF,f)
-    Informar(cantF)
-    repetir cantF
-      depo2020(av,ca)
+    juntarFlores(cant)
+    repetir 9
+      mover
+      juntarFlores(cant)
+    derecha
+    juntarFlores(cant)
+    repetir 9
+      mover
+      juntarFlores(cant)
+    { fin etapa }
+
+    Informar(cant)
+    depositar2020
+    
+    si(eq = 1)
+      RecibirMensaje(ok,rA1)
+      EnviarMensaje(eq,rF)
+    sino
+      RecibirMensaje(ok,rB1)
+      EnviarMensaje(eq,rF)
+    EnviarMensaje(cant,rF)
   fin
+
   robot fiscalizador
   variables
-    equipo,cantFA,cantFB,cant,bot,rG:numero
+    eq:numero
+    cantA:numero
+    cantB:numero
+    ok:boolean
   comenzar
-    cantFA:=0
-    cantFB:=0
-    identificar
-    repetir 4
-      RecibirMensaje(bot,*)
-      RecibirMensaje(equipo,*)
-      si(bot=1)&(equipo=11)
-        RecibirMensaje(cant,rA1)
-        cantFA:=cantFA+cant
+    asignarEquipos
+      
+    repetir 2
+      RecibirMensaje(eq,*)
+      si(eq = 1)
+        RecibirMensaje(cantA,rA2)
       sino
-        si(bot=2)&(equipo=11)
-          RecibirMensaje(cant,rA2)
-          cantFA:=cantFA+cant
-        sino
-          si(bot=1)&(equipo=22)
-            RecibirMensaje(cant,rB1)
-            cantFB:=cantFB+cant
-          sino
-            RecibirMensaje(cant,rB2)
-            cantFB:=cantFB+cant
-    si(cantFA>cantFB)
-      rG:=11
+        RecibirMensaje(cantB,rB2)
+    
+    si(cantA > cantB)
+      Informar(cantA)
     sino
-      rG:=22
-    Informar(rG)
+      Informar(cantB)
   fin
 variables
-  rA1,rB1:r1
-  rA2,rB2:r2
-  f:fiscalizador
+  rA1:robot1
+  rA2:robot2
+  rB1:robot1
+  rB2:robot2
+  rF:fiscalizador
 comenzar
-  AsignarArea(rA1,cA)
-  AsignarArea(rA2,cA)
-  AsignarArea(rB1,cB)
-  AsignarArea(rB2,cB)
+  AsignarArea(rA1,cuadradoA)
+  AsignarArea(rA2,cuadradoA)
+  AsignarArea(rB1,cuadradoB)
+  AsignarArea(rB2,cuadradoB)
   AsignarArea(rA1,a2020)
   AsignarArea(rA2,a2020)
   AsignarArea(rB1,a2020)
   AsignarArea(rB2,a2020)
-  AsignarArea(f,aF)
+  AsignarArea(rF,aF)
   Iniciar(rA1,1,1)
   Iniciar(rA2,11,10)
   Iniciar(rB1,13,1)
   Iniciar(rB2,23,10)
-  Iniciar(f,30,1)
+  Iniciar(rF,30,1)
 fin
