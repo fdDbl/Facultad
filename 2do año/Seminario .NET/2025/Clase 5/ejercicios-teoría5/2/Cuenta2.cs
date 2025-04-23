@@ -14,7 +14,7 @@ public class Cuenta2
 
     public static List<Cuenta2> Cuentas
     {
-        get => new(s_cuentas);
+        get => new(s_cuentas);      // Punto 3
     }
 
     private int _id;
