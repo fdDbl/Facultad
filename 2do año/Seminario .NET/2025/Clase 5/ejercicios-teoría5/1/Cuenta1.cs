@@ -1,6 +1,6 @@
 ﻿using System.Globalization;
 
-public class Cuenta
+public class Cuenta1
 {
     private static int s_idAct;
     private static int s_cantCuentas;
@@ -14,14 +14,14 @@ public class Cuenta
     private int _id;
     private double _saldo;
 
-    public Cuenta()
+    public Cuenta1()
     {
         _id = ++s_idAct;
         s_cantCuentas++;
         Console.WriteLine($"Se ha creado la cuenta con ID {_id}");
     }
 
-    public Cuenta Depositar(double d)
+    public Cuenta1 Depositar(double d)
     {
         _saldo += d;
         s_saldo += d;
@@ -31,7 +31,7 @@ public class Cuenta
         return this;
     }
 
-    public Cuenta Extraer(double d)
+    public Cuenta1 Extraer(double d)
     {
         if (_saldo >= d)
         {
@@ -55,7 +55,7 @@ public class Cuenta
         Console.WriteLine($"DEPÓSITOS:          {s_cantDepo}        -Total depositado:  ${s_totalDepo}");
         Console.WriteLine($"EXTRACCIONES:       {s_cantExt}        -Total extraído:    ${s_totalExt}");
         Console.WriteLine($"                             -Saldo:             ${s_saldo}");
-        if(s_cantExtDenegadas > 0)
+        if (s_cantExtDenegadas > 0)
             Console.WriteLine($"* Se denegaron {s_cantExtDenegadas} extracciones por falta de fondos");
     }
 }
