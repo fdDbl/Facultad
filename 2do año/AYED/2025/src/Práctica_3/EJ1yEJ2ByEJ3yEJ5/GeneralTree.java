@@ -1,4 +1,4 @@
-package Práctica_3.EJ1yEJ2ByEJ3yEJ5;
+package EJ1yEJ2ByEJ3yEJ5;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
