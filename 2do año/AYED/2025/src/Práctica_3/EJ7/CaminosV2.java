@@ -29,7 +29,7 @@ public class CaminosV2 {
     private void caminoAHojaMasLejana(GeneralTree<Integer> raiz, List<Integer> cM, List<Integer> cA) {
         cA.addLast(raiz.getData());
         if((raiz.isLeaf()) && (cA.size() > cM.size())) {
-            cM.removeAll(cM);
+            cM.clear();
             cM.addAll(cA);
         }
         for(GeneralTree<Integer> child : raiz.getChildren())
