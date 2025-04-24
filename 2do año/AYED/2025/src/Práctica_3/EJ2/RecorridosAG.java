@@ -1,9 +1,10 @@
-package Práctica_3.EJ2;
+package EJ2;
 
 import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
-import Práctica_1.EJ8.Queue;
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Queue;
 
 /**Dobal
  *
@@ -61,22 +62,22 @@ public class RecorridosAG {
 
     public List<Integer> numerosImparesMayoresQuePorNiveles(GeneralTree<Integer> a, Integer n) {
         List<Integer> lista = new ArrayList();
-        Queue<GeneralTree<Integer>> cola = new Queue<>();
-        cola.enqueue(a);
-        cola.enqueue(null);
+        Queue<GeneralTree<Integer>> cola = new LinkedList<>();
+        cola.add(a);
+        cola.add(null);
         GeneralTree<Integer> t;
         
         while(!cola.isEmpty()) {
-            t = cola.dequeue();
+            t = cola.remove();
             if (t != null){
                 if(t.getData() > n & t.getData() % 2 != 0)
                     lista.add(t.getData());
                 for(GeneralTree<Integer> hijo: t.getChildren())
-                    cola.enqueue(hijo);
+                    cola.add(hijo);
             }
             else
                 // incremento un nivel
-                cola.enqueue(null);
+                cola.add(null);
             
         }
         
