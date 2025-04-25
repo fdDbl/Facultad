@@ -12,7 +12,10 @@
         Console.WriteLine("4. f) Funciona.");
         Console.WriteLine("4. g) Le falta el readonly a la variable estática para que se asigne en tiempo de ejecución.");
         Console.WriteLine("4. h) Los campos const deben ser evaluables en tiempo de compilación");
-        
+        Console.WriteLine("4. i) Funciona.");
+        Console.WriteLine("4. j) No se puede asignar algo a una variable readonly.");
+        Console.WriteLine("4. k) Es válido.");
+        Console.WriteLine("4. l) Los indizadores no pueden ser estáticos.");
         
     }
     // 4. a)
@@ -92,5 +95,47 @@
     // class A {
     //     static double PI = 3.1416;
     //     const double DoblePI = 2*PI;
+    // }
+    
+    // 4. i)
+    // class A {
+    //     static readonly List<int> _lista;
+    //     static A() {
+    //         _lista = new List<int>();
+    //     }
+    //     public static void P(int i) {
+    //         _lista.Add(i);
+    //     }
+    // }
+    
+    // 4. j)
+    // class A {
+    //     static readonly List<int> _lista;
+    //     static A() {
+    //         _lista = new List<int>();
+    //     }
+    //     public static void P(List<int> li) {
+    //         _lista = li;
+    //     }
+    // }
+
+    // 4. k)
+    // class A
+    // {
+    //     static int[] vector = { 1, 2, 3 };
+    //     public int this[int i]
+    //     {
+    //         get { return vector[i]; }
+    //     }
+    // }
+
+    // 4. l)
+    // class A
+    // {
+    //     static int[] vector = { 1, 2, 3 };
+    //     public static int this[int i]
+    //     {
+    //         get { return vector[i]; }
+    //     }
     // }
 }
