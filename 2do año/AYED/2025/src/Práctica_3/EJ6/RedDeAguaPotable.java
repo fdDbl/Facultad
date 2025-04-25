@@ -6,7 +6,7 @@ import java.util.Stack;
  * @author Fede Dobal
  */
 public class RedDeAguaPotable {
-    private GeneralTree<Character> tree;
+    private final GeneralTree<Character> tree;
 
     public RedDeAguaPotable(GeneralTree<Character> tree) {
         this.tree = tree;

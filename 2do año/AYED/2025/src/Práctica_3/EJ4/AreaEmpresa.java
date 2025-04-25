@@ -4,8 +4,8 @@ package Práctica_3.EJ4;
  * @author Federico Dobal
  */
 public class AreaEmpresa {
-    private String id;
-    private int tardanza;
+    private final String id;
+    private final int tardanza;
 
     public AreaEmpresa(String id, int t) {
         this.id = id;

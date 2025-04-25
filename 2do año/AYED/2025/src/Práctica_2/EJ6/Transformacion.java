@@ -5,7 +5,7 @@ import Práctica_2.EJ1yEJ2.BinaryTree;
 
 /**
  *
- * @author Federico Dobal
+ * @author Federico Dobal>
  */
 public class Transformacion {
     private BinaryTree<Integer> tree;
