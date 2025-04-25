@@ -1,4 +1,4 @@
-package EJ8;
+package Práctica_1.EJ8;
 /**
  *
  * @author Federico Dobal

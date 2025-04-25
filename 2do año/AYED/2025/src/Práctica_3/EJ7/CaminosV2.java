@@ -1,4 +1,4 @@
-package EJ7;
+package Práctica_3.EJ7;
 
 import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 
