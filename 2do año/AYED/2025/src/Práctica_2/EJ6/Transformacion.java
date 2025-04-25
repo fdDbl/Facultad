@@ -1,6 +1,5 @@
 package Práctica_2.EJ6;
 
-import Práctica_1.EJ8.Queue;
 import Práctica_2.EJ1yEJ2.BinaryTree;
 
 /**
