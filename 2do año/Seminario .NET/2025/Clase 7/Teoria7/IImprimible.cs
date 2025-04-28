@@ -1,0 +1,4 @@
+﻿interface IImprimible
+{
+    void Imprimir();
+}
