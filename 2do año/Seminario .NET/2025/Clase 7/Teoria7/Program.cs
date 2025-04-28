@@ -1,17 +1,30 @@
-﻿using System.Text;
-
-object[] vector = [
+﻿IImprimible[] vector = [
     new Moto("Zanella"),
     new Empleado("Juan"),
-    new string("No soy imprimible"),
-    new Moto("Gilera"),
-    new StringBuilder("Yo tampoco soy imprimible")
+    new Moto("Gilera")
 ];
 
-foreach (object o in vector)
+foreach(IImprimible I in vector)
 {
-    if(o is IImprimible I) // porque puede haber un objeto no IImprimible
-        I.Imprimir();
+    I.Imprimir();
+}
+
+StreamReader? SR = null;
+StreamWriter? SW = null;
+try
+{
+    SR = new StreamReader("fuente.txt");
+    SW = new StreamWriter("destino.txt");
+    SW.Write(SR.ReadToEnd());
+}
+catch (Exception e)
+{
+    Console.WriteLine(e.Message);
+}
+finally
+{
+    SR?.Dispose();
+    SW?.Dispose();
 }
 
 Console.ReadKey();
