@@ -8,7 +8,7 @@ import java.util.Iterator;
  * @author Fede Dobal
  */
 public class ParcialArboles {
-    public static boolean esDeSeleccion (GeneralTree<Integer> arbol) {
+    public static boolean esDeSeleccionRec(GeneralTree<Integer> arbol) {
         boolean esDeSeleccion = false;
         if((arbol != null) && (!arbol.isEmpty())) {
             esDeSeleccion = esDeSeleccionRec(arbol,true);
@@ -27,6 +27,9 @@ public class ParcialArboles {
         }
         return seguir;
     }
+//    public static boolean esDeSeleccionIt(GeneralTree<Integer> arbol) {
+//
+//    }
 
     public static void main(String[] args) {
         GeneralTree<Integer> raiz = new GeneralTree<>(12);
