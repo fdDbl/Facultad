@@ -1,9 +1,6 @@
 package Práctica_3.EJ1yEJ2ByEJ3yEJ5;
 
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Queue;
+import java.util.*;
 
 public class GeneralTree<T>{
 
@@ -58,6 +55,28 @@ public class GeneralTree<T>{
     public void removeChild(GeneralTree<T> child) {
         if (this.hasChildren())
             children.remove(child);
+    }
+
+    public void porNiveles() {
+        if (this == null || this.isEmpty())
+            return;
+
+        Queue<GeneralTree<T>> cola = new LinkedList<>();
+        cola.add(this);
+        cola.add(null);
+        GeneralTree<T> t;
+
+        while (!cola.isEmpty()) {
+            t = cola.remove();
+            if (t != null) {
+                System.out.print(t.getData() + " ");
+                cola.addAll(t.getChildren());
+            } else if (!cola.isEmpty()) {
+                System.out.println();
+                cola.add(null);
+            }
+        }
+        System.out.println();
     }
     
     /* PUNTO 2B) Si ahora tuviera que implementar estos métodos en la clase GeneralTree<T>, ¿qué modificaciones
@@ -216,12 +235,10 @@ public class GeneralTree<T>{
     private GeneralTree<T> esAncestro(GeneralTree<T> nodo, T dato) {
         if(nodo.getData().equals(dato))
             return nodo;
-        int i = 0;
         GeneralTree<T> aux = null;
-        while(i < nodo.getChildren().size() && aux == null) {
-            aux = esAncestro(nodo.getChildren().get(i), dato);
-            i++;
-        }
+        Iterator<GeneralTree<T>> it = nodo.getChildren().iterator();
+        while(it.hasNext() && aux == null)
+            aux = esAncestro(it.next(), dato);
         return aux;
     }
     
