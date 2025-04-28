@@ -1,4 +1,3 @@
-holaaa
-soy
-una
-copia
+holaa
+soy una copia de:
+fuente.txt
