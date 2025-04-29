@@ -1,0 +1,3 @@
+18.- En un árbol general, la profundidad de un nodo n1 es...
+
+Res.: (a) La longitud del único camino que existe entre la raíz y el nodo n1.

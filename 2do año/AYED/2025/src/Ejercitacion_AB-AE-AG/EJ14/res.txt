@@ -1,0 +1,3 @@
+14.- En un árbol binario lleno, si hay L hojas, entonces el número total de nodos N es:
+
+Res.: (d) N = 2*L-1

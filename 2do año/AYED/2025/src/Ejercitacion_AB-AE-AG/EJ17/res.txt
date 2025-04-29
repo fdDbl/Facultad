@@ -1,0 +1,3 @@
+17.- El recorrido inorden en un árbol general visita:
+
+Res.: (d) Primero el subárbol hijo más izquierdo, luego la raíz y luego los restantes subárboles hijos.

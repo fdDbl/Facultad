@@ -1,0 +1,8 @@
+20.- ¿Cuál es la cantidad mínima de nodos en un árbol general completo de grado 3 y altura 4?
+
+Res.: (b) 41
+
+      (k^h + k-2) / (k-1)
+      (3^4 + 3-2) / (3-1)
+      (81 + 1) / 2
+      41

@@ -1,12 +1,9 @@
-package Práctica_3.EJ9;
+package EJ9;
 import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 
 import java.util.Iterator;
+/// @author Fede Dobal
 
-/**
- *
- * @author Fede Dobal
- */
 public class ParcialArboles {
     public static boolean esDeSeleccionRec(GeneralTree<Integer> arbol) {
         boolean esDeSeleccion = false;
@@ -18,11 +15,13 @@ public class ParcialArboles {
     private static boolean esDeSeleccionRec(GeneralTree<Integer> nodo, boolean seguir) {
         if(!nodo.isLeaf()) {
             int min = Integer.MAX_VALUE;
-            for (GeneralTree<Integer> hijo : nodo.getChildren()) min = Math.min(min, hijo.getData());
+            for (GeneralTree<Integer> hijo : nodo.getChildren())
+                min = Math.min(min, hijo.getData());
             if (!nodo.getData().equals(min)) seguir = false;
             else {
                 Iterator<GeneralTree<Integer>> I = nodo.getChildren().iterator();
-                while(I.hasNext() && seguir) seguir = esDeSeleccionRec(I.next(), seguir);
+                while(I.hasNext() && seguir)
+                    seguir = esDeSeleccionRec(I.next(), seguir);
             }
         }
         return seguir;
@@ -74,6 +73,6 @@ public class ParcialArboles {
 
         raiz.porNiveles();
 
-        System.out.println(esDeSeleccion(raiz));
+        System.out.println(esDeSeleccionRec(raiz));
     }
 }

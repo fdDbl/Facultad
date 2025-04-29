@@ -1,8 +1,7 @@
-package Práctica_3.EJ8;
+package EJ8;
 import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 
-import java.util.LinkedList;
-import java.util.List;
+import java.util.Iterator;
 
 public class Navidad {
     private GeneralTree<Integer> tree;
@@ -24,22 +23,14 @@ public class Navidad {
         }
     }
 
-
     private int charToInt(char c) {
         return c - '0';
     }
 
-    public void preOrder() {
-        if ((tree != null) && (!tree.isEmpty()))
-            imprimirRecursivo(tree);
+    public void porNiveles() {
+        tree.porNiveles();
     }
 
-    private void imprimirRecursivo(GeneralTree<Integer> nodo) {
-        System.out.println(nodo.getData());
-        for(GeneralTree<Integer> hijo : nodo.getChildren()) {
-            imprimirRecursivo(hijo);
-        }
-    }
     public String esAbetoNavidenio() {
         String ans = "No";
         if((tree != null) && (!tree.isEmpty()) && (esAbetoNavidenio(tree)))
@@ -50,10 +41,9 @@ public class Navidad {
     private boolean esAbetoNavidenio(GeneralTree<Integer> vertice) {
         if(vertice.hasChildren()) { // chequeo para el while
             int nHijosHojas = 0;
-            int i = 0;
-            while ((nHijosHojas < 3) && (i < vertice.getChildren().size())) { // while para que corte apenas hayan tres hijos hojas
-                if(vertice.getChildren().get(i).isLeaf()) nHijosHojas++;
-                i++;
+            Iterator<GeneralTree<Integer>> I = vertice.getChildren().iterator();
+            while ((nHijosHojas < 3) && (I.hasNext())) { // while para que corte apenas hayan tres hijos hojas
+                if(I.next().isLeaf()) nHijosHojas++;
             }
             if(nHijosHojas < 3) return false;
             for(GeneralTree<Integer> hijo : vertice.getChildren())
@@ -65,7 +55,7 @@ public class Navidad {
 
     public static void main(String[] args) {
         Navidad N = new Navidad("81111333"); // ingrese el input
-        N.preOrder();
+        N.porNiveles();
         System.out.println(N.esAbetoNavidenio());
     }
 }

@@ -1,0 +1,34 @@
+15.- La siguiente figura muestra un árbol general:
+                A
+             /  |  \
+           B    C    D
+         /  \      / | \
+        E    F    G  H  I
+           /|\    |    / \
+          J K L   M   N   O
+                 / \
+                P   Q
+
+(a) Complete los blancos de las sentencias con la terminología vista en clase:
+    i. "A" es la raíz del árbol.
+    ii. "A" es padre de B, C y D.
+    iii. "E" y "F" son hermanos, puesto que ambos son hijos de B.
+    iv. "E, J, K, L, C, P, Q, H, N y O" son las hojas del árbol.
+    v. El camino desde A a J es único, lo conforman los nodos "A, B, F y J" y es de largo "3".
+    vi. "G" es ancestro de P, y por lo tanto "G" es descendiente de D.
+    vii. L no es descendiente de C, puesto que no existe "ningún camino" desde C a L.
+    viii. La profundidad/nivel de C es "1", de F es "2" y de "Q" es 4.
+    ix. La altura de C es "3", de "M" es 1 y de D es "3"
+    x. La altura del árbol es 4 (largo del camino entre la "raíz" y "la hoja más lejana").
+
+(b) Aplique los recorridos:
+    i. en profundidad
+        a) preorden: [ A B E F J K L C D G M P Q H I N O ]
+        b) inorden: [ E B J F K L A C P M Q G D H N I O ]
+        c) postorden: [ E J K L F B C P Q M G H N O I D A ]
+    ii. por niveles:
+        [ A ]
+        [ B C D ]
+        [ E F G H I ]
+        [ J K L M N O ]
+        [ P Q ]
