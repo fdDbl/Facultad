@@ -1,12 +1,15 @@
-﻿public class Punto1
+﻿public class Punto2
 {
     public static void Run()
     {
-        Console.WriteLine("----- PUNTO 1 -----");
-        A[] vector = [new A(3),new B(5),new C(15),new D(41)];
+        Console.WriteLine("----- PUNTO 2 -----");
+        A[] vector = [ new C(1),new D(2),new B(3),new D(4),new B(5)];
         foreach (A a in vector)
         {
-            a.Imprimir();
+            // if(a is B b)
+            //     b.Imprimir();
+            if(a.GetType() == typeof(B))
+                a.Imprimir();
         }
     }
     
