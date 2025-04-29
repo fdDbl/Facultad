@@ -21,8 +21,7 @@ public class CaminosV2 {
     public List<Integer> caminoAHojaMasLejana () {
         List<Integer> maxCamino = new LinkedList<>();
         if ((tree != null) && !(tree.isEmpty())) {
-            List<Integer> caminoAct = new LinkedList<>();
-            caminoAHojaMasLejana(tree, maxCamino, caminoAct);
+            caminoAHojaMasLejana(tree, maxCamino, new LinkedList<>());
         }
         return maxCamino;
     }

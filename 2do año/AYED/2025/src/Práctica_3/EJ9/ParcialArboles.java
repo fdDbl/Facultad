@@ -1,4 +1,4 @@
-package EJ9;
+package Práctica_3.EJ9;
 import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 
 import java.util.Iterator;

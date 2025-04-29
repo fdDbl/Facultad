@@ -180,4 +180,5 @@ Punto4.Run();
         }
          (*) no se debe usar override porque Prop no es ni abstract ni virtual
 */
+Punto7.Run();
 Console.ReadKey();
