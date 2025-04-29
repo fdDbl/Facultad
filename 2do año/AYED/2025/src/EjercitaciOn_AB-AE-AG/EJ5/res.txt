@@ -1,0 +1,7 @@
+5.- Evalúe la siguiente expresión postfija y determine cuál es el resultado:
+    6 5 * 7 3 − 4 8 + * +
+
+Res.: luego de aplicar el algoritmo correspondiente, nos queda:
+    ((6 * 5) + ((7 - 3) * (4 + 8)))
+                    =
+                    78

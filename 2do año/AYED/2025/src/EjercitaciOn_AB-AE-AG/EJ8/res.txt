@@ -1,0 +1,11 @@
+8.- Construya el árbol de expresión correspondiente a la siguiente expresión postfija:
+    6 5 * 7 3 − 4 8 * + +
+
+Res.:
+             +
+           /   \
+          *     +
+         / \   / \
+        6   5 -   *
+             / \ / \
+            7  3 4  8

@@ -1,0 +1,10 @@
+6.- Elija la expresión algebraica almacenada en el siguiente árbol:
+                   [+]
+                  /   \
+               [/]     [*]
+               / \     / \
+             [-] [c] [d] [e]
+             / \
+           [a] [b]
+
+Res.: (c)   ((a - b) / c) + (d * e)

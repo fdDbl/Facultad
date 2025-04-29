@@ -1,0 +1,5 @@
+11.- Obtenga la expresión prefija de la siguiente expresión postfija:
+    A B C * D - E F / G / - *
+
+Res.: convirtiendo la expresión postfija a un árbol de expresión para recorrerlo en preorden, obtenemos:
+    * A - - * B C D / / E F G

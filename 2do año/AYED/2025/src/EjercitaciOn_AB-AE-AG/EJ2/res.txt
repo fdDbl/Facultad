@@ -1,0 +1,7 @@
+2.- Defina árbol binario completo y árbol binario lleno. Ejemplifique.
+¿Es verdad que todo árbol binario completo es lleno? ¿Y viceversa?
+
+Respuesta: un árbol binario lleno es aquel que posee 2^(h+1) - 1 cantidad de nodos, siendo h
+    su altura. Un árbol binario es completo si es lleno hasta su altura h-1, y el nivel h se
+    completa de izquierda a derecha.
+    Todo árbol binario lleno es completo, pero no al revés.

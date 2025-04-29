@@ -1,0 +1,14 @@
+1.- Dado un árbol binario T cuyo recorrido postorden es A G F E B J I H C D y su recorrido inorden es
+A B G E F D J H I C ¿cuántos son los descendientes del nodo “C”?
+
+Respuesta: el nodo 'C' tiene 3 descendientes.
+    D es la raíz del arbol entero. Su subárbol izquierdo es A B G E F, y su derecho es J H I C.
+    B es la raíz del subárbol izq. (descendientes: A G E F); C es la raíz del subárbol der. (descendientes: J H I)
+    ...
+                                               D
+                                           /       \
+                                          B         C
+                                         / \       /
+                                        A   E     H
+                                           / \   / \
+                                          G   F J   I
