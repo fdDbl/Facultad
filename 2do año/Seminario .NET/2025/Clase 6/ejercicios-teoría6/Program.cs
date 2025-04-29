@@ -93,5 +93,91 @@ Punto4.Run();
          protected override string M1() => "B.M1"; ERROR: (*)
         }
         (*) debe ser igual o más accesible que el método sobreescrito de su superclase (public)
+        
+    6.6)
+        class A
+        {
+         public static virtual string M1() => "A.M1"; ERROR: (*)
+        }
+        class B : A
+        {
+         public static override string M1() => "B.M1"; ERROR: (*)
+        }
+        (*) sólo se usan los modificadores virtual, override o abstract con miembros de instancia, no estáticos
+
+    6.7)
+        class A
+        {
+         virtual string M1() => "A.M1"; ERROR: (*)
+        }
+        class B : A
+        {
+         override string M1() => "B.M1";
+        }
+        (*) un método virtual no puede ser privado
+
+    6.8)
+        class A
+        {
+         protected A(int i) { }
+        }
+        class B : A
+        {
+         B() { } ERROR: (*)
+        }
+        (*) no se llama a base(int), y como A no tiene un constructor sin parámetros, 
+            esto genera un error de compilación
+
+    6.9)
+        class A
+        {
+         private int _id;
+         protected A(int i) => _id = i;
+        }
+        class B : A
+        {
+         B(int i):base(5) {
+             _id = i; ERROR: (*)
+         }
+        }
+        (*) _id es un atributo privado de A
+
+    6.10)
+        class A
+         {
+         private int Propiedad { set; public get; } ERROR: (*)
+         }
+         class B : A
+         {
+         }
+         (*) el accesor del get es más accesible que la propiedad
+
+    6.11)
+        abstract class A
+        {
+         public abstract int Prop {set; get;}
+        }
+        class B : A
+        {
+         public override int Prop // ERROR: (*)
+         {
+         get => 5;
+         }
+        }
+         (*) debe implementar el setter también
+         
+    6.12)
+        abstract class A
+        {
+         public int Prop {set; get;}
+        }
+        class B : A
+        {
+         public override int Prop { ERROR: (*)
+         get => 5;
+         set {}
+         }
+        }
+         (*) no se debe usar override porque Prop no es ni abstract ni virtual
 */
 Console.ReadKey();
