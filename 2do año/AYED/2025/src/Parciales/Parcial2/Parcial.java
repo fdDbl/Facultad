@@ -33,24 +33,20 @@ public class Parcial {
         BinaryTree<Integer> nodo1_hoja = new BinaryTree<>(1);
         BinaryTree<Integer> nodo3_hoja = new BinaryTree<>(3);
 
-        // Subárbol izquierdo
         BinaryTree<Integer> nodo4 = new BinaryTree<>(4);
-        nodo4.addRightChild(nodo1_hoja); // 4 -> 1
+        nodo4.addRightChild(nodo1_hoja);
         BinaryTree<Integer> nodo1_izq = new BinaryTree<>(1);
-        nodo1_izq.addLeftChild(nodo5);    // 1 -> 5
-        nodo1_izq.addRightChild(nodo4);   // 1 -> 4
+        nodo1_izq.addLeftChild(nodo5);
+        nodo1_izq.addRightChild(nodo4);
 
-        // Subárbol derecho
         BinaryTree<Integer> nodo1_der = new BinaryTree<>(1);
-        nodo1_der.addRightChild(nodo3_hoja);     // 1 -> 3
+        nodo1_der.addRightChild(nodo3_hoja);
         BinaryTree<Integer> nodo2_der = new BinaryTree<>(2);
-        nodo2_der.addRightChild(nodo1_der);      // 2 -> 1
+        nodo2_der.addRightChild(nodo1_der);
 
-        // Raíz
         BinaryTree<Integer> raiz = new BinaryTree<>(2);
-        raiz.addLeftChild(nodo1_izq);  // 2 -> 1 (izquierda)
-        raiz.addRightChild(nodo2_der); // 2 -> 2 (derecha)
-
+        raiz.addLeftChild(nodo1_izq);
+        raiz.addRightChild(nodo2_der);
         Parcial P = new Parcial(raiz);
         System.out.println(P.resolver(8));
     }
