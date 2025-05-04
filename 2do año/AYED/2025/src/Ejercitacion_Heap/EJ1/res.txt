@@ -1,6 +1,0 @@
-1.- A partir de una heap inicialmente vacía, inserte de a uno los siguientes valores:
-    6, 4, 15, 2, 10, 11, 8, 1, 13, 7, 9, 12, 5, 3, 14
-
-Res.:
-    [ 6 ]
-    [  ]

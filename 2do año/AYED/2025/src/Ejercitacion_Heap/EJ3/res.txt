@@ -1,0 +1,18 @@
+3.-
+Dados los siguientes árboles, indique si representan una heap. Justifique su respuesta.
+    a)      1
+          /   \
+        3       7
+               / \
+              8   9
+
+    b)      4
+          /   \
+        2       7
+       / \     / \
+      1   3   6   9
+
+Res.:
+    a) Sí. Representa una heap con la propiedad de orden correspondiente a una min-heap.
+    b) No. Este árbol no posee la propiedad de orden de una heap.
+        Por ejemplo, en el primer y segundo nivel: hijoIzq (2) < padre (4) < hijoDer (7) --> INCORRECTO para una heap.

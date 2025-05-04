@@ -1,0 +1,9 @@
+2.-
+a) ¿Cuántos elementos hay, al menos, en una heap de altura h?
+b) ¿Dónde se encuentra ubicado el elemento mínimo en una max-heap?
+c) ¿El siguiente arreglo es una max-heap : [23, 17, 14, 6, 13, 10, 1, 5, 7, 12] ?
+
+Res.:
+a) 2^h, siendo h la altura del árbol.
+b) Se ubica en el último elemento (de izquierda a derecha) de las hojas del árbol.
+c) No. 7 figura como hijo de 6 (n/2 = padre de n). Una max-heap determina que los hijos del padre deben ser menores al padre.
