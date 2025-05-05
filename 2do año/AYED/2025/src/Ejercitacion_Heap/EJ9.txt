@@ -1,0 +1,13 @@
+9.- Suponga que una heap que representa una cola de prioridades está almacenada en el arreglo A (se
+    comienza de la posición A[1]). Si insertamos la clave 16, ¿en qué posición quedará?
+
+    i:    1  2  3  4  5  6  7  8  9  10 11 12
+    A[i]: 11 21 27 37 36 34 32 43 44 42 51 62
+
+Res.: la clave 16, en un principio, se inserta en A[13].
+    Su padre sería A[13/2] = A[6] = 34 --> es más grande que 16
+    Al hacer percolate-up, 16 pasará a ser hijo de A[6/2] = A[3] = 27 --> sigue siendo más grande que 16
+    Al hacer percolate-up, 16 pasará a ser hijo de A[3/2] = A[1] = 11 --> OK. 16 es más grande que 11.
+
+    Por lo tanto, la clave 16 quedará en A[3] ya que 16 es más grande que A[1], y porque se venía haciendo el
+    percolate-up por A[13], A[6] y finalmente A[3] (por esta razón 16 no queda en A[2], que también es hijo de A[1]).

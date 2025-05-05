@@ -1,0 +1,10 @@
+13.- Un arreglo de 7 enteros se ordena ascendentemente usando el algoritmo HeapSort. Luego de la fase
+     inicial del algoritmo (la construcción de la heap), ¿cuál de los siguientes es un posible orden del arreglo?
+        (a) 85 78 45 51 53 47 49
+        (b) 85 49 78 45 47 51 53
+        (c) 85 78 49 45 47 51 53
+        (d) 45 85 78 53 51 49 47
+        (e) 85 51 78 53 49 47 45
+
+Res.:
+    El único posible orden del arreglo es (b), osea, la única max-heap.
