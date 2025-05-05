@@ -1,0 +1,5 @@
+21.- Construya una min-heap con las siguientes claves: 15, 25, 23, 13, 18, 2, 19, 20, 17 insertándolas una a
+     una. Indique en qué posiciones quedaron ubicadas las claves: 2, 18 y 25.
+
+Res.:
+    El 2 quedó en la posición 1, el 18 en la 5, y el 25 en la 8.
