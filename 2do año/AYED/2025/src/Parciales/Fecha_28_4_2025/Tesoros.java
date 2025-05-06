@@ -1,4 +1,4 @@
-package Parciales.Parcial_28_4_2025;
+package Parciales.Fecha_28_4_2025;
 
 import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 import java.util.LinkedList;

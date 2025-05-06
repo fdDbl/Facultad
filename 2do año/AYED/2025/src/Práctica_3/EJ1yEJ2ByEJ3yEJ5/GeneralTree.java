@@ -8,7 +8,7 @@ public class GeneralTree<T>{
     private List<GeneralTree<T>> children = new LinkedList<>();
     
     public GeneralTree() {	
-	super();
+	    super();
     }
     public GeneralTree(T data) {
         this.data = data;
@@ -16,7 +16,7 @@ public class GeneralTree<T>{
 
     public GeneralTree(T data, List<GeneralTree<T>> children) {
         this(data);
-	this.children = children;
+	    this.children = children;
     }	
     
     public T getData() {
