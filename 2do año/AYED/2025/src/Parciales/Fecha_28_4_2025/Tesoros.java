@@ -6,7 +6,7 @@ import java.util.LinkedList;
 public class Tesoros {
     public GeneralTree<String> tesoroAccesibleMasCercano(GeneralTree<String> camaras) {
         LinkedList<GeneralTree<String>> caminoMin = new LinkedList<>();
-        if((camaras != null) && (!camaras.isEmpty()))
+        if(camaras != null && !camaras.isEmpty() && !camaras.getData().equals("Bloqueo"))
             tesoroAccesibleMasCercano(camaras,caminoMin,new LinkedList<>());
         return caminoMin.isEmpty() ? new GeneralTree<>() : caminoMin.getLast();
     }
@@ -49,6 +49,7 @@ public class Tesoros {
         arbol.addChild(camaraA);
         arbol.addChild(bloqueo);
         arbol.addChild(pasajeX);
+
         Tesoros t = new Tesoros();
         System.out.println(t.tesoroAccesibleMasCercano(arbol).getData());
     }
