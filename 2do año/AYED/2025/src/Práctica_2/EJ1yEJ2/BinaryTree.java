@@ -1,5 +1,7 @@
 package Práctica_2.EJ1yEJ2;
 
+import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
+
 import java.util.LinkedList;
 import java.util.Queue;
 
@@ -133,6 +135,25 @@ public class BinaryTree<T> {
             System.out.print(this.getData().toString() + " ");
             if (this.hasRightChild()) 
                 this.getRightChild().inOrder();
+        }
+    }
+
+    public void porNiveles() {
+        Queue<BinaryTree<T>> cola = new LinkedList<>();
+        cola.add(this);
+        BinaryTree<T> aux;
+        int cantNodos;
+        while (!cola.isEmpty()) {
+            cantNodos = cola.size();
+            for(int i = 0; i < cantNodos; i++) {
+                aux = cola.remove();
+                System.out.print(aux.getData() + " ");
+                if(aux.hasLeftChild())
+                    cola.add(aux.getLeftChild());
+                if(aux.hasRightChild())
+                    cola.add(aux.getRightChild());
+            }
+            System.out.println();
         }
     }
 
