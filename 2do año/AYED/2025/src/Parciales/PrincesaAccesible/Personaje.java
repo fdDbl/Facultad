@@ -8,4 +8,9 @@ public class Personaje {
 
     public boolean esDragon() { return tipo.equals("Dragon"); }
     public boolean esPrincesa() { return tipo.equals("Princesa"); }
+
+    @Override
+    public String toString() {
+        return "Soy... " + tipo;
+    }
 }
