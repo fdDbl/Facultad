@@ -37,31 +37,29 @@ public class Estrategia {
     public List<Compuesto> mejorEstrategia(GeneralTree<Compuesto> arbol) {
         List<Compuesto> lista = new LinkedList<>();
         if(arbol != null && !arbol.isEmpty())
-            _mejorEstrategia(arbol,lista,new LinkedList<>());
+            _mejorEstrategia(arbol,lista,new LinkedList<>(), Double.MAX_VALUE);
         return lista;
     }
 
-    private void _mejorEstrategia(GeneralTree<Compuesto> nodo, List<Compuesto> caminoMejor, List<Compuesto> caminoActual) {
+    private double _mejorEstrategia(GeneralTree<Compuesto> nodo, List<Compuesto> caminoMejor, List<Compuesto> caminoActual, double sumaMejor) {
         caminoActual.add(nodo.getData());
         if(nodo.isLeaf()) {
             double sumaAct = 0;
             for(Compuesto c : caminoActual)
                 sumaAct += c.getVueltas() * c.getCompuesto();
-            double sumaMejor = 0;
-            for(Compuesto c : caminoMejor)
-                sumaMejor += c.getVueltas() * c.getCompuesto();
-            if(sumaAct > sumaMejor) {
+            sumaAct += (caminoActual.size() - 1) * 10;
+            if(sumaAct < sumaMejor) {
                 caminoMejor.clear();
-                caminoActual.removeFirst(); // elimino la raiz y su arista
-                caminoActual.removeFirst();
                 caminoMejor.addAll(caminoActual);
+                caminoMejor.removeFirst(); // elimino la raiz
+                return sumaAct;
             }
         }
         else for(GeneralTree<Compuesto> hijo : nodo.getChildren()) {
-            caminoActual.add(new Compuesto("Arista"));
-            _mejorEstrategia(hijo, caminoMejor, caminoActual);
+            sumaMejor = _mejorEstrategia(hijo, caminoMejor, caminoActual,sumaMejor);
         }
         caminoActual.removeLast();
+        return sumaMejor;
     }
 
     public static void main(String[] args) {
