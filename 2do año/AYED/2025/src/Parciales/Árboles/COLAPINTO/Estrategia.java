@@ -42,23 +42,30 @@ public class Estrategia {
     }
 
     private double _mejorEstrategia(GeneralTree<Compuesto> nodo, List<Compuesto> caminoMejor, List<Compuesto> caminoActual, double sumaMejor) {
-        caminoActual.add(nodo.getData());
+        boolean noEsRaiz = !nodo.getData().getTipo().equals("Raiz");
+        if(noEsRaiz)
+            caminoActual.add(nodo.getData());
         if(nodo.isLeaf()) {
             double sumaAct = 0;
-            for(Compuesto c : caminoActual)
-                sumaAct += c.getVueltas() * c.getCompuesto();
-            sumaAct += (caminoActual.size() - 1) * 10;
+            System.out.print("[ ");
+            for(Compuesto c : caminoActual) {
+                sumaAct += (double) c.getVueltas() * c.getCompuesto();
+                System.out.print((double) c.getVueltas() * c.getCompuesto() + " ");
+            }
+            System.out.println("]");
             if(sumaAct < sumaMejor) {
                 caminoMejor.clear();
                 caminoMejor.addAll(caminoActual);
-                caminoMejor.removeFirst(); // elimino la raiz
-                return sumaAct;
+                sumaMejor = sumaAct;
             }
         }
         else for(GeneralTree<Compuesto> hijo : nodo.getChildren()) {
+            if(noEsRaiz)
+                caminoActual.add(new Compuesto("Arista"));
             sumaMejor = _mejorEstrategia(hijo, caminoMejor, caminoActual,sumaMejor);
         }
-        caminoActual.removeLast();
+        if(noEsRaiz)
+            caminoActual.removeLast();
         return sumaMejor;
     }
 
@@ -95,6 +102,7 @@ public class Estrategia {
         // Conectar tercer nivel con sus padres
         node10Soft2.addChild(node30Hard2);
         node15Med.addChild(node15Med2);
+
         System.out.println(new Estrategia().mejorEstrategia(root));
     }
 }
