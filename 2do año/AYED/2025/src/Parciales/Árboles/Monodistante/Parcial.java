@@ -1,4 +1,4 @@
-package Parciales.Parcial2;
+package Parciales.Árboles.Monodistante;
 
 import Práctica_2.EJ1yEJ2.BinaryTree;
 
@@ -47,6 +47,8 @@ public class Parcial {
         BinaryTree<Integer> raiz = new BinaryTree<>(2);
         raiz.addLeftChild(nodo1_izq);
         raiz.addRightChild(nodo2_der);
+
+        raiz.porNiveles();
         Parcial P = new Parcial(raiz);
         System.out.println(P.resolver(8));
     }

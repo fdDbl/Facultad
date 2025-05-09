@@ -1,7 +1,6 @@
 package Práctica_2.EJ8;
 
 import Práctica_2.EJ1yEJ2.BinaryTree;
-import java.util.Objects;
 
 /**
  *
@@ -26,7 +25,7 @@ public class ParcialArboles {
                 return false;   // descarto todos los casos falsos
         
         boolean ok = true;
-        if(arbol1.hasLeftChild() && arbol2.hasLeftChild() && ok)
+        if(arbol1.hasLeftChild() && arbol2.hasLeftChild())
             ok = esPrefijoAux(arbol1.getLeftChild(),arbol2.getLeftChild());
         if(arbol1.hasRightChild() && arbol2.hasRightChild() && ok)
             ok = esPrefijoAux(arbol1.getRightChild(),arbol2.getRightChild());
@@ -37,12 +36,8 @@ public class ParcialArboles {
     }
     
     public static void main(String[] args) {
-        BinaryTree<Integer> arbol = new BinaryTree();
-        BinaryTree<Integer> arbolPRE = new BinaryTree();
-        
-        arbol.setData(8);
-        arbolPRE.setData(8);
-        
+        BinaryTree<Integer> arbol = new BinaryTree<>(8);
+        BinaryTree<Integer> arbolPRE = new BinaryTree<>(8);
         arbol.addRightChild(new BinaryTree<>(15));
         
         ParcialArboles p = new ParcialArboles();
