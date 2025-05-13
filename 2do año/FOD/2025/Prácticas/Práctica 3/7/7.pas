@@ -52,7 +52,7 @@ begin
     encontre := false;
     while(not eof(a) and not encontre) do begin
         read(a,av);
-        if(av.code = code) then begin
+        if(av.codigo = code) then begin
             encontre := true;
             av.descripcion := 'EXTINTA';
             seek(a,filepos(a)-1);
@@ -75,7 +75,7 @@ begin
     marcaBaja := 'EXTINTA';
     while(not eof(a)) do begin
         read(a,avAct);
-        while(not eof(a) and avAct.descripcion <> marcaBaja) do
+        while(not eof(a)) and (avAct.descripcion <> marcaBaja) do
             read(a,avAct);
         if(avAct.descripcion = marcaBaja) then begin
             posAct := filepos(a)-1;
@@ -95,13 +95,35 @@ begin
     truncate(a);
     close(a);
 end;
+procedure listarAves(var a: archivoAves);
+var
+    av: ave;
+begin
+    reset(a);
+    writeln('LISTADO DE AVES');
+    writeln('-------------------------------');
+    while not eof(a) do
+    begin
+        read(a, av);
+        writeln('Código: ', av.codigo);
+        writeln('Nombre: ', av.nombre);
+        writeln('Familia: ', av.familia);
+        writeln('Descripción: ', av.descripcion);
+        writeln('Zona Geográfica: ', av.zona_geografica);
+        writeln('-------------------------------');
+    end;
+    close(a);
+end;
 
 var
     a:archivoAves;
     codeAveExtint:integer;
 begin
     cargarAves(a);
+    listarAves(a);
     write('Ingrese codigo de ave a extinguir: '); readln(codeAveExtint);
     marcarExtinta(a,codeAveExtint);
+    listarAves(a);
     compactarArchivo(a);
-end;
+    listarAves(a);
+end.
