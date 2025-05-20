@@ -1,0 +1,3 @@
+3) Las operaciones size, isEmpty, get, set, iterator, y listIterator corren en tiempo constante porque no implican
+    recorrer la estructura, sino simplemente acceder a una posición con [] (internamente) o devolver atributos pre-
+    -definidos por la misma Colección (size, por ejemplo).
