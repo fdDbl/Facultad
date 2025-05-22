@@ -1,0 +1,7 @@
+4)
+    a) Falso. 3^n es de O(3^n).
+    b) Verdadero.
+    c) Verdadero. Para √n + 10^20, tenemos una función c * √n, cuya c satisface que (√n + 10^20) <= c*√n.
+    d) Falso.
+    e) Verdadero.
+    f) Verdadero.
