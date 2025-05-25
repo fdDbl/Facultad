@@ -1,0 +1,10 @@
+5)
+    a. Analizar si todos los algoritmos terminan o alguno puede quedar en loop infinito.
+        No, ningún algoritmo queda en un loop infinito.
+    b. Describa con palabras la cantidad de operaciones que realizan.
+        - randomUno realiza n operaciones por la cantidad de veces que tiene que generar numeros random, recorriendo
+        toda la estructura, hasta que determina que el numero generado no se encuentra en la misma.
+        - randomDos realiza n operaciones para marcar en false las n casillas del vector booleano, más n operaciones
+        para generar numeros random por la cantidad de evaluaciones de que este numero random se encuentre true en
+        el vector de booleanos.
+        - randomTres realiza n operaciones para llenar el vector a, más n-1 operaciones para intercambiar a[i] por a[j].
