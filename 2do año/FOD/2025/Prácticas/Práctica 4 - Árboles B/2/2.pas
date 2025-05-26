@@ -52,6 +52,6 @@ type
 {
     El problema es que, suponiendo que dicho rango (40M - 45M) se encuentra a lo largo 
     de un nivel entero horizontalmente, cada vez que se termine de leer uno de estos nodos
-    hay que volver al padre, y encontrar el padre de los otros nodos que se encontraban
-    al mismo nivel mencionado anteriormente.
+    hay que volver al padre, y encontrar como ir los otros nodos que se encontraban
+    al mismo nivel mencionado.
 }
