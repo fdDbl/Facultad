@@ -84,7 +84,6 @@ Console.WriteLine("PUNTO 3");
 
 Console.WriteLine("PUNTO 4");
 {
-    
     Del1 d1 = delegate (int x) { Console.WriteLine(x); };
     d1(10);
     Del2 d2 = x => Console.WriteLine(x.Length);
@@ -108,8 +107,52 @@ Console.WriteLine("PUNTO 4");
     }
 }
 
+Console.WriteLine("PUNTO 5");
+{
+    int i = 10;
+    Action a = delegate
+    {
+        Console.WriteLine(i);   // obtiene la variable por referencia
+    };
+    a.Invoke();
+    i = 20;
+    a.Invoke();
+}
+
+Console.WriteLine("PUNTO 6");
+{
+    Action[] acciones = new Action[10];
+    for (int i = 0; i < 10; i++)
+    {
+        acciones[i] = () => Console.Write(i + " ");
+    }
+    foreach     (var a in acciones)
+    { 
+        a.Invoke();
+    }
+}
+
+Console.WriteLine("\nPUNTO 7");
+{
+    int[] vector = [1, 2, 3, 4, 5];
+    vector.Print("Valores iniciales: ");
+    var vector2 = vector.Seleccionar(n => n * 3);
+    vector2.Print("Valores triplicados: ");
+    vector.Seleccionar(n => n * n).Print("Cuadrados: ");
+}
+
+Console.WriteLine("PUNTO 8");
+{
+    int[] vector =[1, 2, 3, 4, 5];
+    vector.Print("Valores iniciales: ");
+    vector.Donde(n => n % 2 == 0).Print("Pares: ");
+    vector.Donde(n => n % 2 == 1).Seleccionar(n => n * n).Print("Impares al cuadrado: ");
+}
+
 Console.ReadKey();
-    delegate void Del1(int x);
-    delegate void Del2(int[] x);
-    delegate int Del3(int x);
-    delegate bool Del4(string st);
+delegate bool Predicado(int n);
+delegate int FuncionEntera(int n);
+delegate void Del1(int x);
+delegate void Del2(int[] x);
+delegate int Del3(int x);
+delegate bool Del4(string st);
