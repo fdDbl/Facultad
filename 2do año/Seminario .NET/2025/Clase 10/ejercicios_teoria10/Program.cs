@@ -42,13 +42,9 @@ Console.WriteLine("PUNTO 2");
 {
     int[] vector = [1, 3, 4, 5, 9, 4, 3, 4, 5, 1, 1, 4, 9, 4, 3, 1];
     vector.GroupBy(n => n)
-        // 1. Proyectar cada grupo a un nuevo objeto con el número y su conteo.
         .Select(g => new { Numero = g.Key, Cantidad = g.Count() })
-        // 2. Ordenar los nuevos objetos por la cantidad de repeticiones.
         .OrderBy(obj => obj.Cantidad)
-        // 3. Convertir a una Lista para poder usar .ForEach (ver explicación abajo).
         .ToList()
-        // 4. Iterar sobre la lista final e imprimir cada objeto.
         .ForEach(obj => Console.WriteLine(obj));
 }
 
