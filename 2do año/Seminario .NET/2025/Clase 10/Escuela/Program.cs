@@ -15,20 +15,20 @@ using var context = new EscuelaContext();
 // context.Add(examen);
 // context.SaveChanges();
 
-//borramos de la tabla Alumnos el registro con Id=3
-// var alumnoBorrar = context.Alumnos.Where(a => a.Id == 3).SingleOrDefault();
-// if (alumnoBorrar != null)
-// {
-//     context.Remove(alumnoBorrar); //se borra realmente con el context.SaveChanges()
-// }
-// //La nota en Inglés del alumno id=1 es un 5. La cambiamos a 7.5
-// var examenModificar = context.Examenes.Where(
-//     e => e.AlumnoId == 1 && e.Materia == "Inglés").SingleOrDefault();
-// if (examenModificar != null)
-// {
-//     examenModificar.CambiarNota(7.5); //se modifica el registro en memoria
-// }
-// context.SaveChanges(); //actualiza la base de datos.
+// borramos de la tabla Alumnos el registro con Id=3
+ // var alumnoBorrar = context.Alumnos.Where(a => a.Id == 3).SingleOrDefault();
+ // if (alumnoBorrar != null)
+ // {
+ //     context.Remove(alumnoBorrar); //se borra realmente con el context.SaveChanges()
+ // }
+ // //La nota en Inglés del alumno id=1 es un 5. La cambiamos a 7.5
+ // var examenModificar = context.Examenes.Where(
+ //     e => e.AlumnoId == 1 && e.Materia == "Inglés").SingleOrDefault();
+ // if (examenModificar != null)
+ // {
+ //     examenModificar.CambiarNota(7.5); //se modifica el registro en memoria
+ // }
+ // context.SaveChanges(); //actualiza la base de datos.
 
 // Alumno nuevo = new Alumno("Andrés");
 // nuevo.Examenes = new List<Examen>() { //dejamos en 0 el AlumnoId porque va a ser ignorado

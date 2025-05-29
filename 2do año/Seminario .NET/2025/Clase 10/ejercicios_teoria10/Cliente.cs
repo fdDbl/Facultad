@@ -29,4 +29,6 @@ public class Cliente
     {
         return mail.Contains('@') && mail.Contains('.');
     }
+    public override String ToString() =>
+        $"Id: {Id}, DNI: {Dni}, Apellido y Nombre: {ApellidoYNombre}, Domicilio: {Direccion}, Mail: {Mail}, Tel: {Telefono}";
 }

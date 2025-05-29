@@ -13,4 +13,16 @@ public class CasaContext : DbContext
     {   
         optionsBuilder.UseSqlite("data source=Casa.sqlite");
     }
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        modelBuilder.Entity<Alquiler>().ToTable("Alquileres");
+        modelBuilder.Entity<Juego>().ToTable("Juegos");
+        modelBuilder.Entity<Cliente>()
+            .Property(c => c.Mail)
+            .HasColumnName("Mail").HasDefaultValue("no especificado");
+        modelBuilder.Entity<Cliente>()
+            .Property(c => c.Telefono)
+            .HasColumnName("Telefono").HasDefaultValue("no especificado");
+        modelBuilder.Entity<Cliente>().ToTable("Clientes");
+    }
 }

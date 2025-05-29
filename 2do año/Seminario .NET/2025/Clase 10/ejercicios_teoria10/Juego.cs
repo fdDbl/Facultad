@@ -22,4 +22,6 @@ public class Juego
         this.PrecioPorDía = p;
     }
     public Juego() { }
+    public override String ToString() =>
+        $"Id: {Id}, Nombre: {Nombre}, Descripción: {Descripción}, Estado: {Estado}, Precio por día: {PrecioPorDía}";
 }
