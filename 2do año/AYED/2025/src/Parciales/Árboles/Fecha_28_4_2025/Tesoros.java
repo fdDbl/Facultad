@@ -1,6 +1,6 @@
 package Parciales.Árboles.Fecha_28_4_2025;
 
-import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
+import Practica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 import java.util.LinkedList;
 
 public class Tesoros {

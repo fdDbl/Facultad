@@ -1,6 +1,6 @@
 package Parciales.Árboles.AYED_2022.Punto4;
 
-import Práctica_2.EJ1yEJ2.BinaryTree;
+import Practica_2.EJ1yEJ2.BinaryTree;
 
 import java.util.LinkedList;
 import java.util.List;

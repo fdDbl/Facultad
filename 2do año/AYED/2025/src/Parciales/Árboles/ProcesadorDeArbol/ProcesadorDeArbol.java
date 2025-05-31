@@ -1,6 +1,6 @@
 package Parciales.Árboles.ProcesadorDeArbol;
 
-import Práctica_2.EJ1yEJ2.BinaryTree;
+import Practica_2.EJ1yEJ2.BinaryTree;
 
 import java.util.LinkedList;
 import java.util.List;

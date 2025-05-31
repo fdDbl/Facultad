@@ -1,7 +1,7 @@
 package Parciales.Árboles.AYED_2022.Punto2;
 
 
-import Práctica_2.EJ1yEJ2.BinaryTree;
+import Practica_2.EJ1yEJ2.BinaryTree;
 
 public class Parcial {
     private BinaryTree<Personaje> tree;

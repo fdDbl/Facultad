@@ -1,6 +1,6 @@
 package Parciales.Árboles.Fecha_29_6_2024;
 
-import Práctica_2.EJ1yEJ2.BinaryTree;
+import Practica_2.EJ1yEJ2.BinaryTree;
 
 
 public class ParcialArboles {

@@ -1,7 +1,7 @@
 package Parciales.Árboles.COLAPINTO;
 
-import Práctica_1.EJ8.Queue;
-import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
+import Practica_1.EJ8.Queue;
+import Practica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 
 import java.util.LinkedList;
 import java.util.List;

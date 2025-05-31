@@ -1,6 +1,6 @@
 package Parciales.Árboles.Fecha_15_5_2024;
 
-import Práctica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
+import Practica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
 
 import java.util.Iterator;
 import java.util.LinkedList;

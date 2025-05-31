@@ -1,6 +1,6 @@
 package Parciales.Árboles.Monodistante;
 
-import Práctica_2.EJ1yEJ2.BinaryTree;
+import Practica_2.EJ1yEJ2.BinaryTree;
 
 public class Parcial {
     private BinaryTree<Integer> arbol;

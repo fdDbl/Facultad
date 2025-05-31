@@ -1,6 +1,6 @@
 package Parciales.Árboles.IsTwoTree;
 
-import Práctica_2.EJ1yEJ2.BinaryTree;
+import Practica_2.EJ1yEJ2.BinaryTree;
 
 public class ParcialArboles {
     private BinaryTree<Integer> tree;
