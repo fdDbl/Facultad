@@ -1,8 +1,5 @@
 package Practica_1.EJ7;
-/**
- *
- * @author Federico Dobal
- */
+
 import java.util.*;
 public class TestArrayList {
     public static void main(String[] args) {

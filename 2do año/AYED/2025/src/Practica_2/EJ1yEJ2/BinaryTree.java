@@ -1,7 +1,5 @@
 package Practica_2.EJ1yEJ2;
 
-import Practica_3.EJ1yEJ2ByEJ3yEJ5.GeneralTree;
-
 import java.util.LinkedList;
 import java.util.Queue;
 

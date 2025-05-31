@@ -11,7 +11,7 @@
     creados, con valores de ejemplo. En su computadora, ejecute el programa y verifique
     que se cumple con lo pedido.
  */
-package EJ1;
+package Practica_1.EJ1;
 
 /**
  *

@@ -5,7 +5,6 @@ import Practica_5.EJ1.Edge;
 import Practica_5.EJ1.Graph;
 import Practica_5.EJ1.Vertex;
 import Practica_5.EJ1.adjList.AdjListGraph;
-import Practica_5.EJ1.adjMatrix.AdjMatrixGraph;
 
 import java.util.LinkedList;
 import java.util.List;
