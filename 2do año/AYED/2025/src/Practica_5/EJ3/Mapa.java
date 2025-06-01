@@ -1,5 +1,6 @@
 package Practica_5.EJ3;
 
+import Practica_5.EJ1.Edge;
 import Practica_5.EJ1.Graph;
 import Practica_5.EJ1.Vertex;
 
@@ -12,21 +13,32 @@ public class Mapa {
 
     public List<String> devolverCamino(String ciudad1, String ciudad2) {
         List<String> ret = new LinkedList<>();
-        boolean[] marcas = new boolean[mapaCiudades.getSize()];
-
-        Iterator<Vertex<String>> it = mapaCiudades.getVertices().iterator();
-        Vertex<String> c1 = null;
-
-        while(it.hasNext() && c1 == null) {
-            int pos = it.next().getPosition();
-            if(!marcas[pos])
-                buscarCiudad(pos,mapaCiudades,marcas,ciudad1,c1);
+        if(!mapaCiudades.isEmpty()) {
+            Vertex<String> c1 = mapaCiudades.search(ciudad1);
+            Vertex<String> c2 = mapaCiudades.search(ciudad2);
+            if(c1 != null && c2 != null) {
+                boolean[] visitados = new boolean[mapaCiudades.getSize()];
+                devolverCamino(c1, c2, ret, visitados);
+            }
         }
         return ret;
     }
-    private boolean buscarCiudad(int i, Graph<String> grafo, boolean[] visitados, String cNom, Vertex<String> cV) {
-        visitados[i] = true;
-        Vertex<String> v = grafo.getVertex(i);
 
+    private boolean devolverCamino(Vertex<String> c1, Vertex<String> c2, List<String> camino, boolean[] visitados) {
+        boolean encontre = false;
+        camino.add(c1.getData());
+        visitados[c1.getPosition()] = true;
+        if(c1 == c2) encontre = true;
+        else {
+            List<Edge<String>> edges = mapaCiudades.getEdges(c1);
+            Iterator<Edge<String>> it = edges.iterator();
+            while(it.hasNext() && !encontre) {
+                Vertex<String> v = it.next().getTarget();
+                int targetPos = v.getPosition();
+                if(!visitados[targetPos]) encontre = devolverCamino(v, c2, camino, visitados);
+            }
+        }
+        if(!encontre) camino.removeLast(); // backtracking
+        return encontre;
     }
 }
