@@ -1,0 +1,57 @@
+@page "/listadoclientes"
+@rendermode InteractiveServer
+@inject ListarClientesUseCase ListarClientesUseCase
+@inject EliminarClienteUseCase EliminarClienteUseCase
+
+<DialogoConfirmacion @ref="dialogo" OnConfirmado="Eliminar"/>
+<table class="table">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>NOMBRE</th>
+        <th>APELLIDO</th>
+        <th>ACCIÓN</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var cli in _lista)
+    {
+        <tr>
+            <td>@cli.Id</td>
+            <td>@cli.Nombre</td>
+            <td>@cli.Apellido</td>
+            <td>
+                <button class="btn btn-primary">Editar</button>
+                <button class="btn btn-danger" @onclick="()=>ConfirmarEliminacion(cli)">
+                    Elliminar
+                </button>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@code {
+    List<Cliente> _lista = new List<Cliente>();
+    protected override void OnInitialized()
+    {
+        _lista = ListarClientesUseCase.Ejecutar();
+    }
+
+    DialogoConfirmacion dialogo = null!;
+    Cliente? _clienteParaEliminar = null;
+    private void ConfirmarEliminacion(Cliente cli)
+    {
+        _clienteParaEliminar = cli;
+        dialogo.Mensaje = $"¿Desea eliminar al cliente {cli.Nombre} {cli.Apellido}?";
+        dialogo.Mostrar();
+    }
+    private void Eliminar()
+    {
+        if (_clienteParaEliminar != null)
+        {
+            EliminarClienteUseCase.Ejecutar(_clienteParaEliminar.Id);
+            _lista = ListarClientesUseCase.Ejecutar(); //se actualiza la lista de clientes
+        }
+    }
+}

@@ -1,10 +1,22 @@
 using AL.UI.Components;
 
+using AL.Repositorios;
+using AL.Aplicacion.UseCases;
+using AL.Aplicacion.Interfaces;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorComponents()
     .AddInteractiveServerComponents();
+
+//agregamos estos servicios al contenedor DI
+builder.Services.AddTransient<AgregarClienteUseCase>();
+builder.Services.AddTransient<ListarClientesUseCase>();
+builder.Services.AddTransient<EliminarClienteUseCase>();
+builder.Services.AddTransient<ModificarClienteUseCase>();
+builder.Services.AddTransient<ObtenerClienteUseCase>();
+builder.Services.AddScoped<IRepositorioCliente, RepositorioClienteMock>();
 
 var app = builder.Build();
 
@@ -14,10 +26,9 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Error", createScopeForErrors: true);
 }
 
-
+app.UseStaticFiles();
 app.UseAntiforgery();
 
-app.MapStaticAssets();
 app.MapRazorComponents<App>()
     .AddInteractiveServerRenderMode();
 

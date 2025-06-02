@@ -1,0 +1,50 @@
+﻿@page "/cliente/{Id:int?}"
+@rendermode InteractiveServer
+@inject ObtenerClienteUseCase ObtenerClienteUseCase
+@inject ModificarClienteUseCase ModificarClienteUseCase
+@inject NavigationManager Navegador;
+@inject AgregarClienteUseCase AgregarClienteUseCase
+
+@if (_esNuevoCliente)
+{
+    <h3>Agregando un nuevo Cliente</h3>
+}
+else
+{
+    <h3>Modificando al Cliente "@_cliente.Nombre"</h3>
+} 
+
+<input placeholder="Nombre" @bind="_cliente.Nombre" class="form-control">
+<input placeholder="Apellido" @bind="_cliente.Apellido" class="form-control">
+<button class="btn btn-primary" @onclick="Aceptar">Aceptar</button>
+
+@code {
+    Cliente _cliente = new Cliente();
+    [Parameter] public int? Id { get; set; }
+    bool _esNuevoCliente = true;
+    protected override void OnParametersSet()
+    {
+        if (Id != null)
+        {
+            var cli_hallado = ObtenerClienteUseCase.Ejecutar(Id.Value);
+            if (cli_hallado != null)
+            {
+                _cliente = cli_hallado;
+                _esNuevoCliente = false;
+            }
+        }
+    }
+    void Aceptar()
+    {
+        if (_esNuevoCliente)
+        {
+            AgregarClienteUseCase.Ejecutar(_cliente);
+        }
+        else
+        {
+            ModificarClienteUseCase.Ejecutar(_cliente);
+        }
+        _cliente = new Cliente();
+        Navegador.NavigateTo("listadoclientes");
+    }  
+}

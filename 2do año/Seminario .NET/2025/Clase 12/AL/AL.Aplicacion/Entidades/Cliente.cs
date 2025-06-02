@@ -1,4 +1,6 @@
-﻿namespace AL.Aplicacion.Entidades;
+using System;
+
+namespace AL.Aplicacion.Entidades;
 
 public class Cliente
 {
