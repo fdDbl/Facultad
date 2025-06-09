@@ -1,7 +1,5 @@
 # Licenciatura en Informática - Trabajos y actividades varios
 ![...](https://www.info.unlp.edu.ar/wp-content/uploads/2018/01/logo-web.png "Logo de la Facultad de Informática de la UNLP")
->
-*Creado por __Federico Dobal__ [@fededobal](github.com/fededobal)*
 ---
 > Cualquier resolución está sujeta a ERRORES.
 
