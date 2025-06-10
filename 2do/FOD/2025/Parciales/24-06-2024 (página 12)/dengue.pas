@@ -32,14 +32,13 @@ begin
     else
         r.code = VALOR_ALTO;
 end;
-procedure minimo(var vD:vDetalles; var vR:vDetalles; var min:regDet);
+procedure minimo(var vD:vDetalles; var vR:vRegDet; var min:regDet);
 var
     i:integer;
     pop:integer;
 begin
     min.code := VALOR_ALTO;
     for i := 1 to DIMF do begin
-        leerDetalle(vD[i],vR[i]);
         if(vR[i].code < min.code) then begin
             pop := i;
             min := vR[i];
@@ -50,15 +49,17 @@ begin
 end;
 procedure actualizarMaestro(var aM:aMaestro; var vD:vDetalles);
 var
-    vR:vDetalles;
+    vR:vRegDet;
     min:regDet;
     rM:regMae;
     positivos:integer;
     i:integer;
 begin
     reset(aM);
-    for i := 1 to DIMF do
+    for i := 1 to DIMF do begin
         reset(vD[i]);
+        leerDetalle(vD[i],vR[i]);
+    end;
 
     minimo(vD,vR,min);
     while(min.code <> VALOR_ALTO) do begin
