@@ -147,8 +147,7 @@ public class AdjListGraph<T> implements Graph<T> {
 	public void printAdjacencies() {
 		System.out.println("Lista de adyacencias:");
 		for (int i = 0; i < getSize(); i++) {
-			int vAct = i + 1;
-			System.out.print("[" + vAct + "]");
+			System.out.print("[" + i + "]");
 			if (getEdges(getVertex(i)).isEmpty())
 				System.out.print(" -> null");
 			else for (Edge<T> e : getEdges(getVertex(i)))

@@ -10,24 +10,43 @@ import java.util.LinkedList;
 import java.util.List;
 
 public class Recorridos<T> {
-    public List<T> dfs(Graph<T> grafo) {
+    public List<T> dfsPostOrder(Graph<T> grafo) {
         List<T> ret = new LinkedList<>();
         boolean[] marcas = new boolean[grafo.getSize()];
         for(int i = 0; i < grafo.getSize(); i++) {
-            if(!marcas[i]) {
-                dfs(i,grafo,marcas,ret);
-            }
+            if(!marcas[i])
+                dfsPostOrder(i,grafo,marcas,ret);
         }
         return ret;
     }
-    private void dfs(int i, Graph<T> grafo, boolean[] marcas, List<T> lista) {
-        marcas[i] = true;
+    private void dfsPostOrder(int i, Graph<T> grafo, boolean[] marcas, List<T> lista) {
         Vertex<T> v = grafo.getVertex(i);
+        marcas[i] = true;
+        for(Edge<T> e : grafo.getEdges(v)) {
+            int targetPos = e.getTarget().getPosition();
+            if(!marcas[targetPos])
+                dfsPostOrder(targetPos,grafo,marcas,lista);
+        }
+        lista.add(v.getData());
+    }
+
+    public List<T> dfsPreOrder(Graph<T> grafo) {
+        List<T> ret = new LinkedList<>();
+        boolean[] marcas = new boolean[grafo.getSize()];
+        for(int i = 0; i < grafo.getSize(); i++) {
+            if(!marcas[i])
+                dfsPreOrder(i,grafo,marcas,ret);
+        }
+        return ret;
+    }
+    private void dfsPreOrder(int i, Graph<T> grafo, boolean[] marcas, List<T> lista) {
+        Vertex<T> v = grafo.getVertex(i);
+        marcas[i] = true;
         lista.add(v.getData());
         for(Edge<T> e : grafo.getEdges(v)) {
             int targetPos = e.getTarget().getPosition();
             if(!marcas[targetPos])
-                dfs(targetPos,grafo,marcas,lista);
+                dfsPreOrder(targetPos,grafo,marcas,lista);
         }
     }
 
@@ -61,6 +80,7 @@ public class Recorridos<T> {
     public static void main(String[] args) {
         Graph<Integer> grafo = new AdjListGraph<>();
 
+        Vertex<Integer> v0 = grafo.createVertex(0);
         Vertex<Integer> v1 = grafo.createVertex(1);
         Vertex<Integer> v2 = grafo.createVertex(2);
         Vertex<Integer> v3 = grafo.createVertex(3);
@@ -70,28 +90,36 @@ public class Recorridos<T> {
         Vertex<Integer> v7 = grafo.createVertex(7);
         Vertex<Integer> v8 = grafo.createVertex(8);
 
-        grafo.connect(v1,v5); // adyacentes de v1
+        grafo.connect(v0,v1); // adyacentes de v0
+        grafo.connect(v0,v6);
+        grafo.connect(v0,v7);
 
-        grafo.connect(v2,v1); // adyacentes de v2
-        grafo.connect(v2,v3);
-        grafo.connect(v2,v7);
+        grafo.connect(v1,v4); // adyacentes de v1
+        grafo.connect(v1,v6);
+
+        grafo.connect(v2,v0); // adyacentes de v2
+        grafo.connect(v2,v1);
+        grafo.connect(v2,v8);
 
         grafo.connect(v3,v4); // adyacentes de v3
-        grafo.connect(v3,v7);
+        grafo.connect(v3,v5);
 
-        grafo.connect(v4,v1); // adyacentes de v4
-        grafo.connect(v4,v6);
+        grafo.connect(v5,v4); // adyacentes de v5
 
-        grafo.connect(v5,v6); // adyacentes de v5
+        grafo.connect(v6,v3); // adyacentes de v6
+        grafo.connect(v6,v4);
 
-        grafo.connect(v6,v8); // adyacentes de v6
+        grafo.connect(v7,v3); // adyacentes de v7
+        grafo.connect(v7,v6);
 
-        grafo.connect(v8,v7); // adyacentes de v8
+        grafo.connect(v8,v0); // adyacentes de v8
+        grafo.connect(v8,v7);
 
         grafo.printAdjacencies();
 
         Recorridos<Integer> r = new Recorridos<>();
-        System.out.println("Recorrido en profundidad (DFS): " + r.dfs(grafo));
+        System.out.println("Recorrido en profundidad (DFS PreOrder): " + r.dfsPreOrder(grafo));
+        System.out.println("Recorrido en profundidad (DFS PostOrder): " + r.dfsPostOrder(grafo));
         System.out.println("Recorrido por niveles (BFS): " + r.bfs(grafo));
     }
 }

@@ -1,11 +1,12 @@
 package Practica_5.EJ1.adjList;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -135,9 +136,9 @@ public class GraphTest {
 	
 	@Test
 	public void testGetSetData() {
-		assertEquals(1, vert1.getData());
+		assertEquals(Optional.of(1), vert1.getData());
 		vert1.setData(5);
-		assertEquals(5, vert1.getData());
+		assertEquals(Optional.of(5), vert1.getData());
 	}
 	
 	@Test
